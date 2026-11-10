@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>document.documentElement.classList.add("js")</script>
+<title>AI models and prices · Keydex AI</title>
+<meta name="description" content="Every AI model on one Keydex AI key, with price per 1M tokens, context size and model IDs. Prices carry no markup from keyfo.">
+<link rel="canonical" href="https://keydex.ai/models">
+<meta name="kf-site" content="https://keydex.ai">
+<meta name="kf-model" content="openai/gpt-4.1-mini">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Keydex AI">
+<meta property="og:title" content="AI models and prices · Keydex AI">
+<meta property="og:description" content="Every AI model on one Keydex AI key, with price per 1M tokens, context size and model IDs. Prices carry no markup from keyfo.">
+<meta property="og:url" content="https://keydex.ai/models">
+<meta property="og:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI models and prices · Keydex AI">
+<meta name="twitter:description" content="Every AI model on one Keydex AI key, with price per 1M tokens, context size and model IDs. Prices carry no markup from keyfo.">
+<meta name="twitter:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta name="twitter:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="theme-color" content="#0f1013">
+<link rel="icon" href="/img/brand/favicon.svg?v=ba49f76b" type="image/svg+xml">
+<link rel="icon" href="/img/brand/favicon-32.png?v=7a31a482" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/img/brand/apple-touch-icon.png?v=7ccf5817">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/fonts/Inter-latin.woff2?v=c9407645" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/base.css?v=14960b84">
+<link rel="stylesheet" href="/css/pages.css?v=805645db">
+</head>
+<body data-page="models">
+
+<!--HDR-->
+<a class="skip" href="#main" data-slot="ui.skip">Skip to content</a>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+    <nav class="nav" aria-label="Main" data-slot="nav.main" data-slot-attr="aria-label">
+      <div class="dd" data-dd="product">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-product"><span data-slot="nav.product">Product</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-product">
+          <div class="ddp-list">
+            <a class="ddi" href="/tools" data-prev="tools"><span class="ddi-ic ddi-km"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="ddi-t"><b data-slot="nav.product.tools">Tools</b><small data-slot="nav.product.tools.sub">Tools for stock tokens on Solana</small></span></a>
+            <a class="ddi" href="/models" data-prev="models"><span class="ddi-ic"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="16" height="16" loading="lazy" decoding="async"></span><span class="ddi-t"><b data-slot="nav.product.models">Models</b><small data-slot="nav.product.models.sub">Prices, context sizes and model IDs</small></span></a>
+            <a class="ddi" href="/stocks" data-prev="stocks"><span class="ddi-ic" style="--c:var(--c-port)"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 11.5 6 8l2.5 2.5 5-5"/><path d="M10.5 5.5h3v3"/></svg></span><span class="ddi-t"><b data-slot="nav.product.stocks">Stocks</b><small data-slot="nav.product.stocks.sub">Stock tokens and ETFs, with pool prices</small></span></a>
+            <a class="ddi" href="/connect" data-prev="connect"><span class="ddi-ic" style="--c:var(--c-trade)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.5v3M10 2.5v3M4.5 5.5h7v2.5a3.5 3.5 0 0 1-7 0zM8 11.5v2"/></svg></span><span class="ddi-t"><b data-slot="nav.product.connect">Connect</b><small data-slot="nav.product.connect.sub">Claude, ChatGPT, Cursor, VS Code and REST</small></span></a>
+          </div>
+        </div>
+      </div>
+      <div class="dd" data-dd="dev">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-dev"><span data-slot="nav.developers">Developers</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-dev">
+          <div class="ddp-list">
+            <a class="ddi" href="/docs" data-prev="docs"><span class="ddi-ic" style="--c:var(--c-quote)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v10H4.5A1.5 1.5 0 0 0 3 13.5zM3 13.5A1.5 1.5 0 0 0 4.5 15H13v-3"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.docs">Docs</b><small data-slot="nav.developers.docs.sub">Quickstart, API, MCP and tool reference</small></span></a>
+            <a class="ddi" href="/status" data-prev="status"><span class="ddi-ic" style="--c:var(--ok-fg)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8.5h3l1.5-4 3 8 1.5-4h4"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.status">Status</b><small data-slot="nav.developers.status.sub">Current state of each Keydex AI service</small></span></a>
+            <a class="ddi" href="/changelog" data-prev="changelog"><span class="ddi-ic" style="--c:var(--c-fund)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5.5 4h8M5.5 8h8M5.5 12h8M2.5 4h.01M2.5 8h.01M2.5 12h.01"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.changelog">Changelog</b><small data-slot="nav.developers.changelog.sub">Every release, newest first</small></span></a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-a" href="/pricing" data-slot="nav.pricing">Pricing</a>
+      <a class="nav-a" href="/security" data-slot="nav.security">Security</a>
+      <a class="nav-a" href="/token"><span data-slot="nav.token">Token</span></a>
+    </nav>
+    <div class="hdr-cta">
+      
+      <a class="btn btn-2 btn-nav" href="/docs" data-slot="nav.docs">Docs</a>
+      <a class="btn btn-1 btn-nav" href="/app" data-slot="nav.app">Open app</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet" data-slot="nav.menu" data-slot-attr="aria-label" aria-label="Open menu"><span></span></button>
+    <span hidden id="s-menu-close" data-slot="nav.menu.close">Close menu</span>
+  </div>
+</header>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" data-slot="nav.sheet" data-slot-attr="aria-label" aria-label="Site menu">
+  <p class="sheet-h" data-slot="nav.product">Product</p>
+  <a href="/tools" data-slot="nav.product.tools">Tools</a>
+  <a href="/models" data-slot="nav.product.models">Models</a>
+  <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+  <a href="/connect" data-slot="nav.product.connect">Connect</a>
+  <p class="sheet-h" data-slot="nav.developers">Developers</p>
+  <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+  <a href="/status" data-slot="nav.developers.status">Status</a>
+  <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+  <p class="sheet-h" data-slot="nav.more">More</p>
+  <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+  <a href="/security" data-slot="nav.security">Security</a>
+  <a href="/token"><span data-slot="nav.token">Token</span></a>
+  <a class="btn btn-1 btn-block" href="/app" data-slot="nav.app">Open app</a>
+</div>
+<!--/HDR-->
+
+<main id="main" class="pg">
+  <section class="pg-hero wide">
+    <p class="pg-kicker mc"><span class="dot"></span><span>/v1/models</span></p>
+    <h1 class="pg-h1" data-slot="page.models.title">AI models</h1>
+    <p class="lead" data-slot="page.models.lead">Every model your key can call through the OpenAI-compatible API, with prices.</p>
+  </section>
+  <section class="wide pg-body">
+    <div class="mx-bar">
+      <label class="search"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="m10.5 10.5 3 3"/></svg><input id="mxQ" type="search" autocomplete="off" spellcheck="false" data-slot="page.models.search" data-slot-attr="placeholder" placeholder="Search models" aria-label="Search models"></label>
+      <label class="sel"><select id="mxSort" aria-label="Sort models" data-slot="page.models.sort" data-slot-attr="aria-label"><option value="featured" data-slot="page.models.sort.featured" selected>Featured</option><option value="name" data-slot="page.models.sort.name">Name A–Z</option><option value="price" data-slot="page.models.sort.price">Price: low to high</option><option value="ctx" data-slot="page.models.col.context">Context</option></select></label>
+      <span class="mx-count num" id="mxCount" hidden><span data-slot="page.models.count" data-hold data-tpl="{n} models">—</span></span><span hidden><span id="s-count-of" data-slot="page.models.count.of">{n} of {total}</span><span id="s-found" data-slot="page.models.found">{n} models found</span><span id="s-clear" data-slot="page.models.clear">Clear search</span><span id="s-in" data-slot="page.models.row.in">in</span><span id="s-out" data-slot="page.models.row.out">out</span><span id="s-unit" data-slot="page.models.row.unit">1M</span><span id="s-copy-n" data-slot="page.models.copy.aria">Copy ID of {name}</span><span id="s-pv-anthropic" data-slot="page.models.provider.anthropic">Anthropic</span><span id="s-pv-openai" data-slot="page.models.provider.openai">OpenAI</span><span id="s-pv-google" data-slot="page.models.provider.google">Google</span><span id="s-pv-x-ai" data-slot="page.models.provider.x_ai">xAI</span><span id="s-pv-deepseek" data-slot="page.models.provider.deepseek">DeepSeek</span><span id="s-pv-qwen" data-slot="page.models.provider.qwen">Qwen</span><span id="s-pv-meta" data-slot="page.models.provider.meta">Meta</span><span id="s-pv-mistralai" data-slot="page.models.provider.mistralai">Mistral</span><span id="s-pv-moonshotai" data-slot="page.models.provider.moonshotai">Moonshot AI</span><span id="s-pv-z-ai" data-slot="page.models.provider.z_ai">Z.ai</span><span id="s-pv-minimax" data-slot="page.models.provider.minimax">MiniMax</span><span id="s-pv-nvidia" data-slot="page.models.provider.nvidia">NVIDIA</span><span id="s-pv-cohere" data-slot="page.models.provider.cohere">Cohere</span><span id="s-pv-perplexity" data-slot="page.models.provider.perplexity">Perplexity</span><span id="s-pv-amazon" data-slot="page.models.provider.amazon">Amazon</span><span id="s-pv-microsoft" data-slot="page.models.provider.microsoft">Microsoft</span></span>
+    </div>
+    <div class="prov" id="mxProv" role="group" aria-label="Filter by provider" data-slot="page.models.providers" data-slot-attr="aria-label"><button type="button" aria-pressed="true" data-p="all"><span data-slot="page.models.filter.all">All providers</span><span class="n">370</span></button><button type="button" aria-pressed="false" data-p="anthropic"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="16" height="16"><span data-slot="page.models.provider.anthropic">Anthropic</span><span class="n">20</span></button><button type="button" aria-pressed="false" data-p="openai"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span><span data-slot="page.models.provider.openai">OpenAI</span><span class="n">63</span></button><button type="button" aria-pressed="false" data-p="google"><img src="/img/models/gemini-color.svg?v=8ab0a9ba" alt="" width="16" height="16"><span data-slot="page.models.provider.google">Google</span><span class="n">34</span></button><button type="button" aria-pressed="false" data-p="x-ai"><span class="i" style="--src:url(/img/models/grok.svg?v=9175fc90)"></span><span data-slot="page.models.provider.x_ai">xAI</span><span class="n">8</span></button><button type="button" aria-pressed="false" data-p="deepseek"><img src="/img/models/deepseek-color.svg?v=deba5f98" alt="" width="16" height="16"><span data-slot="page.models.provider.deepseek">DeepSeek</span><span class="n">17</span></button><button type="button" aria-pressed="false" data-p="qwen"><img src="/img/models/qwen-color.svg?v=a158a0e3" alt="" width="16" height="16"><span data-slot="page.models.provider.qwen">Qwen</span><span class="n">41</span></button><button type="button" aria-pressed="false" data-p="meta"><img src="/img/models/meta-color.svg?v=64a8f184" alt="" width="16" height="16"><span data-slot="page.models.provider.meta">Meta</span><span class="n">17</span></button><button type="button" aria-pressed="false" data-p="mistralai"><img src="/img/models/mistral-color.svg?v=722f74b2" alt="" width="16" height="16"><span data-slot="page.models.provider.mistralai">Mistral</span><span class="n">20</span></button><button type="button" aria-pressed="false" data-p="moonshotai"><span class="i" style="--src:url(/img/models/moonshot.svg?v=435f41b7)"></span><span data-slot="page.models.provider.moonshotai">Moonshot AI</span><span class="n">9</span></button><button type="button" aria-pressed="false" data-p="z-ai"><img src="/img/models/zhipu-color.svg?v=8174e65f" alt="" width="16" height="16"><span data-slot="page.models.provider.z_ai">Z.ai</span><span class="n">19</span></button><button type="button" aria-pressed="false" data-p="minimax"><img src="/img/models/minimax-color.svg?v=553256ae" alt="" width="16" height="16"><span data-slot="page.models.provider.minimax">MiniMax</span><span class="n">4</span></button><button type="button" aria-pressed="false" data-p="nvidia"><img src="/img/models/nvidia-color.svg?v=8c941e4e" alt="" width="16" height="16"><span data-slot="page.models.provider.nvidia">NVIDIA</span><span class="n">10</span></button><button type="button" aria-pressed="false" data-p="cohere"><img src="/img/models/cohere-color.svg?v=84d0ee3c" alt="" width="16" height="16"><span data-slot="page.models.provider.cohere">Cohere</span><span class="n">6</span></button><button type="button" aria-pressed="false" data-p="perplexity"><img src="/img/models/perplexity-color.svg?v=8353f3ab" alt="" width="16" height="16"><span data-slot="page.models.provider.perplexity">Perplexity</span><span class="n">5</span></button><button type="button" aria-pressed="false" data-p="amazon"><img src="/img/models/nova-color.svg?v=be29ee23" alt="" width="16" height="16"><span data-slot="page.models.provider.amazon">Amazon</span><span class="n">5</span></button><button type="button" aria-pressed="false" data-p="microsoft"><img src="/img/models/microsoft-color.svg?v=5cfb0ffa" alt="" width="16" height="16"><span data-slot="page.models.provider.microsoft">Microsoft</span><span class="n">1</span></button></div>
+    <div><span class="sr" id="mxCap" data-slot="page.models.caption">AI models with prices per 1M tokens</span>
+    <div class="mx-head" aria-hidden="true"><span data-slot="page.models.col.model">Model</span><span data-slot="page.models.col.context">Context</span><span data-slot="page.models.col.input">Input / 1M</span><span data-slot="page.models.col.output">Output / 1M</span></div>
+    <ul class="mx-list" id="mxList" aria-labelledby="mxCap" data-loading><li><span class="mx-m"><span class="mx-lg"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="18" height="18"></span><span class="mx-nm"><b>Claude Fable 5.2</b><span class="mx-id"><span>anthropic/claude-fable-5.2</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span></span><span class="mx-nm"><b>GPT-6.1 Terra Pro</b><span class="mx-id"><span>openai/gpt-6.1-terra-pro</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><img src="/img/models/gemini-color.svg?v=8ab0a9ba" alt="" width="18" height="18"></span><span class="mx-nm"><b>Gemini Omni 1.2 Flash</b><span class="mx-id"><span>google/gemini-omni-1.2-flash</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><span class="i" style="--src:url(/img/models/grok.svg?v=9175fc90)"></span></span><span class="mx-nm"><b>Grok 4.7</b><span class="mx-id"><span>x-ai/grok-4.7</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><img src="/img/models/deepseek-color.svg?v=deba5f98" alt="" width="18" height="18"></span><span class="mx-nm"><b>DeepSeek V4.1 Flash</b><span class="mx-id"><span>deepseek/deepseek-v4.1-flash</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><img src="/img/models/qwen-color.svg?v=a158a0e3" alt="" width="18" height="18"></span><span class="mx-nm"><b>Qwen3.8 Max Prime</b><span class="mx-id"><span>qwen/qwen3.8-max-prime</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><img src="/img/models/meta-color.svg?v=64a8f184" alt="" width="18" height="18"></span><span class="mx-nm"><b>Muse Ember</b><span class="mx-id"><span>meta/muse-ember</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><img src="/img/models/mistral-color.svg?v=722f74b2" alt="" width="18" height="18"></span><span class="mx-nm"><b>Mistral Large 4</b><span class="mx-id"><span>mistralai/mistral-large-4-0</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><span class="i" style="--src:url(/img/models/moonshot.svg?v=435f41b7)"></span></span><span class="mx-nm"><b>Kimi K3.1 Pro</b><span class="mx-id"><span>moonshotai/kimi-k3.1-pro</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><img src="/img/models/zhipu-color.svg?v=8174e65f" alt="" width="18" height="18"></span><span class="mx-nm"><b>GLM 5.3 FlashX Legal</b><span class="mx-id"><span>z-ai/glm-5.3-flashx-legal</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><img src="/img/models/minimax-color.svg?v=553256ae" alt="" width="18" height="18"></span><span class="mx-nm"><b>MiniMax M3.1 Flash</b><span class="mx-id"><span>minimax/minimax-m3.1-flash</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li><li><span class="mx-m"><span class="mx-lg"><img src="/img/models/nvidia-color.svg?v=8c941e4e" alt="" width="18" height="18"></span><span class="mx-nm"><b>Nemotron 3.5 Super VL</b><span class="mx-id"><span>nvidia/nemotron-3.5-super-vl</span></span></span></span><span class="mx-v c" aria-busy="true"></span><span class="mx-v in" aria-busy="true"></span><span class="mx-v o" aria-busy="true"></span></li></ul></div>
+    <div class="st-more" id="mxShow" hidden><button class="btn btn-md btn-2" type="button" id="mxShowBtn"><span data-slot="page.stocks.showall" data-hold data-tpl="Show all {n}">—</span></button></div>
+    <p class="pg-note"><span data-slot="page.models.note">Prices are per 1M tokens, and Keydex AI adds no markup.</span> <span data-slot="page.models.source">The same list your key gets from /v1/models.</span></p>
+  </section>
+  <div hidden id="pgStr"><span id="s-col-ctx" data-slot="page.models.col.context">Context</span><span id="s-col-in" data-slot="page.models.col.input">Input / 1M</span><span id="s-col-out" data-slot="page.models.col.output">Output / 1M</span><span id="s-empty" data-slot="page.models.empty">No models match “{query}”.</span><span id="s-err" data-slot="page.models.error">Couldn’t load models.</span><span id="s-retry" data-slot="page.models.retry">Try again</span><span id="s-copyid" data-slot="page.models.copy">Copy ID</span></div>
+</main>
+
+<!--FTR-->
+<footer class="ftr qrows">
+  <div class="wide">
+    <div class="ftr-grid">
+      <div class="ftr-col ftr-brand">
+        <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+        <p class="ftr-brandline" data-slot="footer.col.line">AI models and stock trading for your agent.</p>
+        <div class="ftr-ca" data-postlaunch>   <!-- owner 09.11: the contract line shows only once /health says launched -->
+          <span class="ftr-ca-h"><span class="tk keyfo" aria-hidden="true"></span><span data-slot="footer.ca.label">Token contract</span></span>
+          <span class="addr set" id="caAddr">live now on pump.fun</span>
+          <button class="btn btn-sm btn-2 copy" id="caCopy" type="button" data-copy-target="caAddr"><span data-slot="connect.copy">Copy</span></button>
+        </div>
+      </div>
+      <nav class="ftr-col" aria-labelledby="fh-product">
+        <p class="ftr-h" id="fh-product" data-slot="footer.col.product.title">Product</p>
+        <a href="/tools" data-slot="nav.product.tools">Tools</a>
+        <a href="/models" data-slot="nav.product.models">Models</a>
+        <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+        <a href="/connect" data-slot="nav.product.connect">Connect</a>
+        <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-developers">
+        <p class="ftr-h" id="fh-developers" data-slot="footer.col.developers.title">Developers</p>
+        <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+        <a href="/status" data-slot="nav.developers.status">Status</a>
+        <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+        <a href="/app" data-slot="nav.app">Open app</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-trust">
+        <p class="ftr-h" id="fh-trust" data-slot="footer.col.trust.title">Trust</p>
+        <a href="/security" data-slot="nav.security">Security</a>
+        <a href="/privacy" data-slot="page.privacy.title">Privacy</a>
+        <a href="/terms" data-slot="page.terms.title">Terms</a>
+        <a href="/risks" data-slot="footer.risks">Risks</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-community" data-x-link>
+        <p class="ftr-h" id="fh-community" data-slot="footer.col.community.title">Community</p>
+        <a class="ftr-x" href="https://x.com/keydexai" data-x-link target="_blank" rel="noopener" data-slot="footer.links.x" data-slot-attr="aria-label" aria-label="Keydex AI on X"><span class="i" style="--src:url(/img/brand/x.svg?v=be03adbf)"></span></a>
+      </nav>
+    </div>
+    <div class="ftr-meta">
+      <span data-slot="footer.copy">© 2026 Keydex AI</span>
+      <span class="ftr-live" data-state="checking"><i></i><a href="/status" id="ftrLive" data-slot="page.status.all.checking">Checking…</a></span>
+    </div>
+    <p class="ftr-disc" data-slot="footer.disclaimer">Independent project built on Solana. Stock tokens are not available to US persons and are restricted in Canada, the UK, Switzerland and other countries. This service shows data and builds transactions. It does not sell stock tokens. Nothing on Keydex AI is investment advice.</p>
+    <!--F:credits--><p class="ftr-disc ftr-credit" data-slot="footer.photos">Archive photos: NASA, Library of Congress, U.S. Army.</p><!--/F:credits-->
+  </div>
+</footer>
+<div class="sr" aria-live="polite" id="kfLive"></div>
+<div class="toasts" id="kfToasts" aria-live="polite"></div>
+<!--/FTR-->
+
+<div hidden id="str"><span id="s-code-region" data-slot="ui.code.region">{label} code</span><span id="s-copy" data-slot="connect.copy">Copy</span><span id="s-copied" data-slot="connect.copied">Copied</span><span id="s-error" data-slot="demo.error">The request didn’t go through.</span><span id="s-block" data-slot="hero.facts">Latest block {n}</span><span id="s-trial-limit-h" data-slot="connect.trial.limit.h">You’ve had 3 trial keys in 24 hours. Next one in {h} h.</span><span id="s-trial-limit-n" data-slot="connect.trial.limit.n">You’ve had 3 trial keys in 24 hours. Next one in {n} min.</span><span id="s-ftr-ok" data-slot="page.status.all.ok">All systems operational</span><span id="s-ftr-deg" data-slot="page.status.all.degraded">Partially degraded service</span><span id="s-ftr-down" data-slot="page.status.all.down">Some systems down</span><span id="s-ftr-chk" data-slot="page.status.all.checking">Checking…</span><span id="s-ftr-routes" data-slot="page.status.all.routes">Routes busy, everything else operational</span></div>
+<script src="/js/common.js?v=644ec142"></script>
+<script src="/js/pages.js?v=76356316"></script>
+</body>
+</html>

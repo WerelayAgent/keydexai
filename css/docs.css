@@ -1,0 +1,181 @@
+/* /docs — nav 240 · text 720 · code 480; shell on the header edge (P1-13): .dx and .hdr-in share --docs */
+.is-docs .hdr-in{max-width:var(--docs)}
+.is-docs .ftr .wide{max-width:var(--docs)}   /* V1-52 (P8-F6): the footer on the docs header's edge */
+.dx{display:grid;grid-template-columns:240px minmax(0,1fr);max-width:var(--docs);margin:0 auto;padding:var(--hdr) var(--gut) 0}
+.dnav{position:sticky;top:var(--hdr);align-self:start;height:calc(100svh - var(--hdr));overflow:auto;padding:var(--s-10) var(--s-4) var(--s-10) 0;display:flex;flex-direction:column;gap:var(--sh-2)}
+.dnav a{height:var(--h-tab);display:flex;align-items:center;gap:var(--s-2);padding:0 var(--s-3);border-radius:var(--r-sm);font:var(--t-ui);color:var(--text-2)}
+.dnav a.sub{padding-left:var(--s-6);font:var(--t-sm);font-family:var(--font-mono);color:var(--muted);height:var(--h-sm)}
+.dnav a.sub::before{content:"";width:6px;height:6px;border-radius:var(--r-pill);background:var(--c,var(--muted));flex:none}
+.dnav a:hover{background:var(--raise);color:var(--text)}
+.dnav a.on{background:var(--ctl);color:var(--accent-fg)}
+.dpick{display:none}
+.dmain{min-width:0;padding:var(--s-10) 0 var(--s-16) var(--s-8);border-left:1px solid var(--line)}
+.dhead{max-width:720px;margin-bottom:var(--s-6)}
+.dhead .lead{margin-top:var(--s-4);max-width:640px}
+html:has(.dx){scroll-padding-top:0}   /* P3-F2: one offset, not base 80 px + scroll-margin */
+.ds{display:grid;grid-template-columns:minmax(0,600px) minmax(480px,1fr);gap:var(--s-10);padding:var(--s-12) 0;border-top:1px solid var(--line);scroll-margin-top:calc(var(--hdr) + var(--s-6) - var(--s-12))}   /* the heading lands 24 px under the header */
+.ds [id]{scroll-margin-top:calc(var(--hdr) + var(--s-6))}
+.dt > p{margin:var(--s-4) 0 0;color:var(--text-2);font:var(--t-body);max-width:34em}
+.dt ul{margin:var(--s-4) 0 0;padding-left:var(--s-5);display:flex;flex-direction:column;gap:var(--s-2);color:var(--text-2)}
+.dt h2 a,.dt h3 a{position:relative}
+.dt h2 a::before,.dt h3 a::before{content:"";position:absolute;inset:calc(-1 * var(--s-3)) 0}
+.dt h2 a:hover::after,.dt h3 a:hover::after{content:"#";position:absolute;left:calc(100% + 8px);color:var(--muted)}
+.dt h3.h4{display:flex;align-items:center;gap:var(--s-2);font:var(--t-title);font-family:var(--font-mono)}
+.ds.tool h3::before{content:"";width:8px;height:8px;border-radius:var(--r-pill);background:var(--c);flex:none}
+.tn{color:var(--c);font-family:var(--font-mono)}
+.dc{display:flex;flex-direction:column;gap:var(--s-3);position:sticky;top:88px;align-self:start;min-width:0}
+.dc:empty{display:none}
+.ep{display:flex;align-items:center;gap:var(--sh-10);flex-wrap:wrap}
+.ep .m{height:24px;padding:0 var(--s-2);border-radius:var(--r-xs);background:var(--ctl);font:var(--t-label);display:inline-flex;align-items:center;color:var(--text)}
+.ep .mono{font:var(--t-code);color:var(--text);word-break:break-all}
+.code.resp .code-l{color:var(--muted)}
+.code.resp pre{white-space:pre-wrap;overflow-wrap:anywhere}   /* P3-N4: a reply is read, not scrolled; Copy takes the text unchanged */
+@media (max-width:767px){.code.resp:not(.sse) pre{white-space:pre;overflow-wrap:normal}}   /* P3 R3-2: on a phone JSON keeps its indents and scrolls */
+.clients .i,.clients .ic{width:14px;height:14px}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font:var(--t-ui);margin-top:var(--s-5)}
+.dmain .tbl{table-layout:fixed}
+.dmain .tbl.params th:first-child{width:200px}
+.tbl th{height:var(--h-nav);padding:0 var(--s-3);text-align:left;font:var(--t-label);letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+.tbl td{padding:var(--s-2) var(--s-3);border-bottom:1px solid var(--line);vertical-align:top}
+.tbl .r{text-align:right}
+.tbl .mono{font:var(--t-code)}
+.tbl .grp td{padding-top:var(--s-6);font:var(--t-label);letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--muted)}
+.tbl.errs th:first-child{width:200px}.tbl.errs th:nth-child(2){width:96px}
+.mtable{margin-top:var(--s-2);overflow-x:auto;overscroll-behavior-x:contain}
+.mtable .tbl td{vertical-align:middle;height:var(--h-nav)}
+.mtable .tbl th:nth-child(2){width:46%}.mtable .tbl th:nth-child(3){width:96px}
+.mtable .tbl td[aria-busy]{color:transparent}
+.m-err td{height:var(--h-nav);color:var(--muted)}
+.m-err td > span{display:flex;align-items:center;gap:var(--s-3)}
+.mrow-n{display:flex;align-items:center;gap:var(--sh-10);min-width:0}
+.mrow-n > span:last-child{text-wrap:balance}   /* audit R1 м-6: at 768 a version number never stands alone on its line */
+.mrow-n .i,.mrow-n .ic,.mrow-n img{width:16px;height:16px;flex:none}
+.mrow-n .mx-nl{color:var(--muted)}
+.mrow-n span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mcount{margin:var(--s-3) 0 0;font:var(--t-sm);color:var(--muted);font-variant-numeric:tabular-nums}
+.callout{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s-2);margin-top:var(--s-4)!important;padding:var(--sh-14) var(--s-4);border-radius:var(--r-md);box-shadow:inset 0 0 0 1px var(--line);background:var(--raise)}   /* P3-F19: a neutral fact, not a warning */
+.route .mk{display:inline-flex;align-items:baseline}
+.route .mk img{height:14px;width:auto;align-self:center}
+.dt > p.note,.note{font:var(--t-ui);color:var(--muted);max-width:36em}
+.chainrow{display:flex;flex-wrap:wrap;gap:var(--sh-6);margin-top:var(--s-4)}
+.chainrow img{width:20px;height:20px;border-radius:var(--r-pill)}
+.dt .route{justify-content:flex-start;margin-top:var(--s-3)!important;font:var(--t-sm)}
+@media (max-width:1559px){
+  .ds{grid-template-columns:minmax(0,720px);gap:var(--s-5);max-width:720px}
+  .dc{position:static}
+}
+@media (max-width:767px){
+  .dx{grid-template-columns:minmax(0,1fr);padding-top:var(--hdr)}
+  .dnav{display:none}
+  .dpick{display:block;position:sticky;top:var(--hdr);z-index:10;background:var(--bg);padding:var(--s-3) 0;border-bottom:1px solid var(--line)}
+  .dpick select{width:100%;height:var(--h-lg);border-radius:var(--r-pill);background:var(--raise);border:0;padding:0 var(--s-4);font:var(--t-body);color:var(--text);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%238a8f98' stroke-width='1.5'%3E%3Cpath d='M3 4.5 6 7.5l3-3'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:12px}
+  .dmain{padding:var(--s-8) 0 var(--s-12);border-left:0}
+  .ds{padding:var(--s-8) 0;scroll-margin-top:calc(var(--hdr) + var(--s-3) * 2 + var(--h-lg) + 1px + var(--s-6) - var(--s-8))}   /* the heading lands 24 px under the picker */
+  .ds [id]{scroll-margin-top:calc(var(--hdr) + var(--s-3) * 2 + var(--h-lg) + 1px + var(--s-6))}
+  .tbl th,.tbl td{padding-left:var(--s-2);padding-right:var(--s-2)}
+  .dmain .tbl.params th:first-child{width:128px}
+  /* errors table → stacked rows: code · HTTP on one line, meaning full width under them (PLAN-v2 W0-2, Stripe docs 4eb4e827) */
+  .tbl.errs,.tbl.errs tbody,.tbl.errs tr,.tbl.errs td{display:block;width:auto}
+  .tbl.errs thead{display:none}
+  .tbl.errs tr{padding:var(--s-4) 0;border-bottom:1px solid var(--line)}
+  .tbl.errs td{padding:0;border-bottom:0}
+  .tbl.errs tr:not(.grp) td:nth-child(1),.tbl.errs tr:not(.grp) td:nth-child(2){display:inline}
+  .tbl.errs tr:not(.grp) td:nth-child(2)::before{content:" · ";color:var(--ink-2)}
+  .tbl.errs tr:not(.grp) td:nth-child(3){margin-top:var(--s-1)}
+  .tbl.errs .grp{padding:var(--s-6) 0 var(--s-1);border-bottom:0}
+  .tbl.errs .grp td{padding:0;font:var(--t-label)}
+  .mtable .tbl{min-width:0}
+  .mtable .tbl td.mono{word-break:break-word}
+  .mtable .tbl th:nth-child(2),.mtable .tbl td:nth-child(2){display:none}
+}
+/* W1-12: «Add the tools» step under the quickstart */
+.ds-step{border-top:0;padding-top:0;scroll-margin-top:calc(var(--hdr) + var(--s-6))}
+.dnav a.sub.step{font-family:var(--font-sans)}
+.dnav a.sub.step::before{background:var(--muted)}
+.dc .link-more{display:inline-flex;align-items:center;gap:var(--s-1);align-self:flex-start;min-height:var(--h-lg);font:var(--t-ui);color:var(--text-2)}
+.dc .link-more:hover{color:var(--text)}
+.dc .link-more::after{content:"→"}
+/* W1-6: third column «On this page» on 1280–1559 (≥1560 the code column holds the right third) */
+.dtoc{display:none}
+@media (min-width:1280px) and (max-width:1559px){
+  .dx{grid-template-columns:240px minmax(0,1fr) 200px}
+  .dtoc{display:flex;flex-direction:column;gap:var(--sh-2);position:sticky;top:calc(var(--hdr) + var(--s-8));align-self:start;margin-top:var(--s-10);padding-left:var(--s-8)}
+}
+.dtoc-h{margin:0 0 var(--s-2);font:var(--t-label);letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--muted)}
+.dtoc a{display:flex;align-items:center;min-height:var(--h-sm);font:var(--t-sm);color:var(--muted);transition:color var(--dur-1) var(--ease-std)}
+.dtoc a:hover{color:var(--text-2)}
+.dtoc a:active{color:var(--muted)}
+.dtoc a.on{color:var(--accent-fg)}
+.dtoc a.sub{padding-left:var(--s-3);border-left:1px solid var(--line)}
+
+@media (max-width:767px){.ds-step{scroll-margin-top:calc(var(--hdr) + var(--s-3) * 2 + var(--h-lg) + 1px + var(--s-6))}}
+/* V0-11: the quickstart key block (the same .cx-key as /connect) */
+.dt .dq-key{max-width:none}   /* P3-N3: one right edge with the callout and the code */
+.dt > p.callout{max-width:none}
+@media (max-width:767px){.dt .dq-key .cx-need{flex-direction:column;align-items:stretch}.dt .dq-key .cx-need-act{align-items:stretch}}
+/* V1-22 (P3-F6): the stacked error rows (W0-2) up to 1023 — 768 no longer squeezes three columns */
+@media (max-width:1023px){
+  .tbl.errs,.tbl.errs tbody,.tbl.errs tr,.tbl.errs td{display:block;width:auto}
+  .tbl.errs thead{display:none}
+  .tbl.errs tr{padding:var(--s-4) 0;border-bottom:1px solid var(--line)}
+  .tbl.errs td{padding:0;border-bottom:0}
+  .tbl.errs tr:not(.grp) td:nth-child(1),.tbl.errs tr:not(.grp) td:nth-child(2){display:inline}
+  .tbl.errs tr:not(.grp) td:nth-child(2)::before{content:" · ";color:var(--ink-2)}
+  .tbl.errs tr:not(.grp) td:nth-child(3){margin-top:var(--s-1)}
+  .tbl.errs .grp{padding:var(--s-6) 0 var(--s-1);border-bottom:0}
+  .tbl.errs .grp td{padding:0;font:var(--t-label)}
+}
+.dmain .tbl td{hyphens:manual;text-wrap:pretty}
+/* V1-23 (P3-F7): parameters as a list — name · type · required chip, then what it is (Revolut 71ecc237, Enode 4e943da9) */
+.params{margin-top:var(--s-5);border-top:1px solid var(--line)}
+.prm{padding:var(--sh-14) 0;border-bottom:1px solid var(--line)}
+.prm-h{margin:0;display:flex;align-items:center;flex-wrap:wrap;gap:var(--s-2) var(--s-3)}
+.prm-h code{font:var(--t-code);color:var(--text)}
+.prm-t{font:var(--t-xs);font-family:var(--font-mono);font-weight:var(--fw-4);color:var(--muted)}
+.prm-d{margin:var(--s-1) 0 0;font:var(--t-ui);color:var(--text-2);max-width:36em}
+.dt ul.chainrow{list-style:none;margin-top:var(--s-3);padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-2) var(--s-4)}   /* P3-N1: .dt ul used to win, the grid never applied */
+.chainrow li{display:flex;align-items:center;gap:var(--s-2);min-width:0}
+.chainrow .mono{font:var(--t-sm);font-family:var(--font-mono);color:var(--text-2)}
+.chainrow .ph-l{width:20px;height:20px;border-radius:var(--r-pill)}
+@media (max-width:767px){.dt ul.chainrow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.code.install{margin-bottom:0}
+.code-file{margin-left:auto;margin-right:var(--s-2);font:var(--t-label);color:var(--muted)}
+
+/* круг 2 */
+.dt h3.sub-h{margin-top:var(--s-8);font-family:var(--font-sans)}   /* P3-N2, X4-N2: a heading, not a tool name */
+.dt h3.sub-h:first-child{margin-top:0}
+.ic-code{font:var(--t-code);line-height:var(--lh-1);color:var(--text);white-space:nowrap}   /* P3-N6: identifiers in text */
+.cx-keycode{margin-top:var(--sh-10)}
+.cx-keycode .cx-keyline{margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cx-keyline [data-keyval]{min-height:0}
+.dtoc a.sub.on{color:var(--accent-fg)}
+.mcount.wait{visibility:hidden}
+.code.inline{display:flex;align-items:center;gap:var(--s-2);min-height:var(--h-lg);padding:0 var(--s-2) 0 0}   /* P3 R3-1: /docs has no pages.css */
+.code.inline pre{flex:1;min-width:0;padding:var(--s-3) var(--s-4)}
+.code.inline .copy{flex:none}
+.dt > p.callout > span:not(.chip){max-width:64ch}
+.http2 span{display:block}
+@media (max-width:1023px){.http2 span{display:inline}.http2 span + span::before{content:" · ";color:var(--ink-2)}}
+.ds:not(.tool) .dt > h3.h4{font-family:var(--font-sans)}   /* mono is for tool names only */
+.nw{white-space:nowrap}
+@media (min-width:1560px){#errors.ds{grid-template-columns:minmax(0,1fr)}#errors .dc{max-width:720px}}   /* G3 С2: the 24-row table takes the full width, the JSON stands under it */
+.chainrow img{box-shadow:0 0 0 1px var(--line-ctl)}   /* G3 М2: marks drawn on a black disc keep their edge on --bg */
+.tbl.errs td{text-wrap:balance}   /* PD М5 */
+@media (min-width:768px) and (max-width:1023px){.mrow-n > span:last-child{white-space:normal}}   /* PD М8: model names wrap instead of an ellipsis */
+
+.dt .note + .note{margin-top:var(--s-2)!important}   /* two captions under one example read as one block */
+.sign-steps{margin-top:var(--s-4)}
+.sign-cap{margin:0 0 var(--s-3)}   /* the caption stands over the snippet */
+.sign-steps code.sf{font:var(--t-code);line-height:var(--lh-1);color:var(--text)}   /* PM: the fields of calls[] as code */
+.code[data-group=mcpc]:has(#p-mcpc-claude[hidden]) + .mcpc-claude{visibility:hidden}   /* the claude mcp hint belongs to the Claude Code tab; its place is kept */
+.run-note{margin-top:var(--s-3)}
+/* Arcom-plan D4 (behind build flags): Prompts — name in code, what it does beside it; one column on a phone */
+.pr-list{display:flex;flex-direction:column;margin:var(--s-4) 0 0}
+.pr-r{display:grid;grid-template-columns:minmax(0,176px) minmax(0,1fr);column-gap:var(--s-4);padding:var(--s-3) 0;border-top:1px solid var(--line)}
+.pr-r dt{font:var(--t-code);color:var(--text)}
+.pr-r dd{margin:0;font:var(--t-sm);color:var(--muted)}
+@media (max-width:767px){.pr-r{grid-template-columns:minmax(0,1fr);row-gap:var(--s-1)}}
+
+/* ═══ Q1 docs (owner 09.11): the current section is white, not blue ═══ */
+.dnav a.on{background:var(--tint);color:var(--text)}
+.dtoc a.on,.dtoc a.sub.on{color:var(--text)}

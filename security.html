@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>document.documentElement.classList.add("js")</script>
+<title>Security · Keydex AI</title>
+<meta name="description" content="Your agent signs and holds its own private keys. API keys are stored as salted hashes, prompts are not stored, and every model call draws from an allowance.">
+<link rel="canonical" href="https://keydex.ai/security">
+<meta name="kf-site" content="https://keydex.ai">
+<meta name="kf-model" content="openai/gpt-4.1-mini">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Keydex AI">
+<meta property="og:title" content="Security · Keydex AI">
+<meta property="og:description" content="Your agent signs and holds its own private keys. API keys are stored as salted hashes, prompts are not stored, and every model call draws from an allowance.">
+<meta property="og:url" content="https://keydex.ai/security">
+<meta property="og:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Security · Keydex AI">
+<meta name="twitter:description" content="Your agent signs and holds its own private keys. API keys are stored as salted hashes, prompts are not stored, and every model call draws from an allowance.">
+<meta name="twitter:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta name="twitter:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="theme-color" content="#0f1013">
+<link rel="icon" href="/img/brand/favicon.svg?v=ba49f76b" type="image/svg+xml">
+<link rel="icon" href="/img/brand/favicon-32.png?v=7a31a482" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/img/brand/apple-touch-icon.png?v=7ccf5817">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/fonts/Inter-latin.woff2?v=c9407645" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/base.css?v=14960b84">
+<link rel="stylesheet" href="/css/pages.css?v=805645db">
+</head>
+<body data-page="security">
+
+<!--HDR-->
+<a class="skip" href="#main" data-slot="ui.skip">Skip to content</a>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+    <nav class="nav" aria-label="Main" data-slot="nav.main" data-slot-attr="aria-label">
+      <div class="dd" data-dd="product">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-product"><span data-slot="nav.product">Product</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-product">
+          <div class="ddp-list">
+            <a class="ddi" href="/tools" data-prev="tools"><span class="ddi-ic ddi-km"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="ddi-t"><b data-slot="nav.product.tools">Tools</b><small data-slot="nav.product.tools.sub">Tools for stock tokens on Solana</small></span></a>
+            <a class="ddi" href="/models" data-prev="models"><span class="ddi-ic"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="16" height="16" loading="lazy" decoding="async"></span><span class="ddi-t"><b data-slot="nav.product.models">Models</b><small data-slot="nav.product.models.sub">Prices, context sizes and model IDs</small></span></a>
+            <a class="ddi" href="/stocks" data-prev="stocks"><span class="ddi-ic" style="--c:var(--c-port)"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 11.5 6 8l2.5 2.5 5-5"/><path d="M10.5 5.5h3v3"/></svg></span><span class="ddi-t"><b data-slot="nav.product.stocks">Stocks</b><small data-slot="nav.product.stocks.sub">Stock tokens and ETFs, with pool prices</small></span></a>
+            <a class="ddi" href="/connect" data-prev="connect"><span class="ddi-ic" style="--c:var(--c-trade)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.5v3M10 2.5v3M4.5 5.5h7v2.5a3.5 3.5 0 0 1-7 0zM8 11.5v2"/></svg></span><span class="ddi-t"><b data-slot="nav.product.connect">Connect</b><small data-slot="nav.product.connect.sub">Claude, ChatGPT, Cursor, VS Code and REST</small></span></a>
+          </div>
+        </div>
+      </div>
+      <div class="dd" data-dd="dev">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-dev"><span data-slot="nav.developers">Developers</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-dev">
+          <div class="ddp-list">
+            <a class="ddi" href="/docs" data-prev="docs"><span class="ddi-ic" style="--c:var(--c-quote)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v10H4.5A1.5 1.5 0 0 0 3 13.5zM3 13.5A1.5 1.5 0 0 0 4.5 15H13v-3"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.docs">Docs</b><small data-slot="nav.developers.docs.sub">Quickstart, API, MCP and tool reference</small></span></a>
+            <a class="ddi" href="/status" data-prev="status"><span class="ddi-ic" style="--c:var(--ok-fg)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8.5h3l1.5-4 3 8 1.5-4h4"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.status">Status</b><small data-slot="nav.developers.status.sub">Current state of each Keydex AI service</small></span></a>
+            <a class="ddi" href="/changelog" data-prev="changelog"><span class="ddi-ic" style="--c:var(--c-fund)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5.5 4h8M5.5 8h8M5.5 12h8M2.5 4h.01M2.5 8h.01M2.5 12h.01"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.changelog">Changelog</b><small data-slot="nav.developers.changelog.sub">Every release, newest first</small></span></a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-a" href="/pricing" data-slot="nav.pricing">Pricing</a>
+      <a class="nav-a" href="/security" data-slot="nav.security">Security</a>
+      <a class="nav-a" href="/token"><span data-slot="nav.token">Token</span></a>
+    </nav>
+    <div class="hdr-cta">
+      
+      <a class="btn btn-2 btn-nav" href="/docs" data-slot="nav.docs">Docs</a>
+      <a class="btn btn-1 btn-nav" href="/app" data-slot="nav.app">Open app</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet" data-slot="nav.menu" data-slot-attr="aria-label" aria-label="Open menu"><span></span></button>
+    <span hidden id="s-menu-close" data-slot="nav.menu.close">Close menu</span>
+  </div>
+</header>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" data-slot="nav.sheet" data-slot-attr="aria-label" aria-label="Site menu">
+  <p class="sheet-h" data-slot="nav.product">Product</p>
+  <a href="/tools" data-slot="nav.product.tools">Tools</a>
+  <a href="/models" data-slot="nav.product.models">Models</a>
+  <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+  <a href="/connect" data-slot="nav.product.connect">Connect</a>
+  <p class="sheet-h" data-slot="nav.developers">Developers</p>
+  <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+  <a href="/status" data-slot="nav.developers.status">Status</a>
+  <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+  <p class="sheet-h" data-slot="nav.more">More</p>
+  <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+  <a href="/security" data-slot="nav.security">Security</a>
+  <a href="/token"><span data-slot="nav.token">Token</span></a>
+  <a class="btn btn-1 btn-block" href="/app" data-slot="nav.app">Open app</a>
+</div>
+<!--/HDR-->
+
+<main id="main" class="pg">
+  <section class="pg-hero wide">
+    <p class="pg-kicker"><span class="dot"></span><span data-slot="page.security.kicker">Trust</span></p>
+    <h1 class="pg-h1" data-slot="page.security.title">Security</h1>
+    <p class="lead" data-slot="page.security.lead">How Keydex AI handles keys, signing and data.</p>
+  </section>
+  <section class="wide pg-body">
+    <!-- W1-11: three checkable facts with a picture, the rest as a plain list (Linear security 7035f422, Vercel ab9e4aee, Resend 0e0e2987) -->
+    <div class="sx-facts">
+      <article class="sx-f">
+        <div class="sx-step" aria-hidden="true"><div class="sx-ui"><span class="sx-k"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="mono">build_trade → unsigned</span></div></div>
+        <div class="sx-ft"><p class="h3" data-slot="page.security.wallet.title">Your agent signs every transaction</p><p class="muted" data-slot="page.security.wallet.text">Trades come back unsigned. Your agent signs them and holds its own private keys. No Keydex AI API or MCP tool takes one.</p></div>
+      </article>
+      <article class="sx-f">
+        <div class="sx-step" aria-hidden="true"><div class="sx-ui"><span class="sx-sig"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg></span><span class="mono">sha256(salt+kf_live_…)</span></div></div>
+        <div class="sx-ft"><p class="h3" data-slot="page.security.apikey.title">Your own API keys are shown once</p><p class="muted" data-slot="page.security.apikey.text">We show a new key once and store only a salted SHA‑256 hash, so we can’t show it again. Keys sent in a URL are cut from our server logs.</p></div>
+      </article>
+      <article class="sx-f">
+        <div class="sx-step" aria-hidden="true"><div class="sx-ui"><span class="sx-ok"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 6.5 11.5 12.5 5"/></svg></span><span class="mono">"resets_at": "00:00 UTC"</span></div></div>
+        <div class="sx-ft"><p class="h3" data-slot="page.security.limit.title">Model calls have a daily cap</p><p class="muted" data-slot="page.security.limit.text">All keys of a wallet share its daily allowance, and a trial key uses the visitor’s free one. Both reset at 00:00 UTC. Revoke a key in the app at any time.</p></div>
+      </article>
+    </div>
+    <ul class="sx-list">
+      <li class="sx-r"><p class="sx-rt" data-slot="page.security.signin.title">Sign-in without a transaction</p><p class="muted" data-slot="page.security.signin.text">You sign a message with your wallet. No transaction and no gas.</p></li>
+      <li class="sx-r"><p class="sx-rt" data-slot="page.security.logs.title">We don’t store prompts</p><p class="muted" data-slot="page.security.logs.text">Prompts and replies are not stored. For each call we log the time, key, model or tool, tokens, cost and status.</p><p class="muted sm" data-slot="page.security.logs.provider">To answer, a request passes through a model routing service to the provider of the model you pick. Each of them handles it under its own policies.</p></li>
+      <li class="sx-r"><p class="sx-rt" data-slot="page.security.mcp.title">A connector URL carries your key</p><p class="muted" data-slot="page.security.mcp.text">A connector URL with your key works like the key. Revoke the key in the app if its URL leaks.</p></li>
+      <li class="sx-r"><p class="sx-rt" data-slot="page.security.trial.title">Trial keys stay in your tab</p><p class="muted" data-slot="page.security.trial.text">A trial key is kept in this browser tab so the setup steps can use it. It expires after 24 hours.</p></li>
+      <li class="sx-r"><p class="sx-rt" data-slot="page.security.deposits.title">No deposits</p><p class="muted" data-slot="page.security.deposits.text">There is nothing to deposit. The token stays in your wallet, and we only read its balance.</p></li>
+    </ul>
+    <!-- W1-11: Verify — only when /health gives the addresses -->
+    <section class="sx-verify" id="sxVerify" hidden>
+      <h2 class="h3" data-slot="page.security.verify.title">Verify addresses</h2>
+      <p class="muted" data-slot="page.security.verify.text">Compare any address you’re given with these before you send anything.</p>
+      <ul class="sx-addr">
+        <li data-addr="token" hidden><span class="sx-al"><span class="tk keyfo xs" aria-hidden="true"></span><span data-slot="page.security.verify.token">Token contract</span></span><span class="addr mono" id="sxToken"></span><button class="btn btn-sm btn-2 copy" type="button" data-copy-target="sxToken"><span data-slot="connect.copy">Copy</span></button><a class="sx-ex" target="_blank" rel="noopener" data-slot="page.security.verify.explorer">View on explorer</a></li>
+      </ul>
+    </section>
+    <!-- W1-11 / §В-4: report a vulnerability — rendered only with a contact (X handle or e-mail) -->
+    <section class="sx-report"><h2 class="h3" data-slot="page.security.report.title">Report a vulnerability</h2><p class="muted" data-contact><span data-slot="page.security.report.lead">Report security issues privately:</span> <span data-x-link data-slot="page.security.report.xpart">DM <a href="https://x.com/keydexai" target="_blank" rel="noopener">keydexai</a> on X</span><span data-x-link data-email> </span><span data-x-link data-email data-slot="page.contact.or">or</span><span data-x-link data-email> </span><span data-email data-slot="page.security.report.mailpart">write to <a href="mailto:support@keydex.ai">support@keydex.ai</a></span>.</p></section>
+  </section>
+</main>
+
+<!--FTR-->
+<footer class="ftr qrows">
+  <div class="wide">
+    <div class="ftr-grid">
+      <div class="ftr-col ftr-brand">
+        <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+        <p class="ftr-brandline" data-slot="footer.col.line">AI models and stock trading for your agent.</p>
+        <div class="ftr-ca" data-postlaunch>   <!-- owner 09.11: the contract line shows only once /health says launched -->
+          <span class="ftr-ca-h"><span class="tk keyfo" aria-hidden="true"></span><span data-slot="footer.ca.label">Token contract</span></span>
+          <span class="addr set" id="caAddr">live now on pump.fun</span>
+          <button class="btn btn-sm btn-2 copy" id="caCopy" type="button" data-copy-target="caAddr"><span data-slot="connect.copy">Copy</span></button>
+        </div>
+      </div>
+      <nav class="ftr-col" aria-labelledby="fh-product">
+        <p class="ftr-h" id="fh-product" data-slot="footer.col.product.title">Product</p>
+        <a href="/tools" data-slot="nav.product.tools">Tools</a>
+        <a href="/models" data-slot="nav.product.models">Models</a>
+        <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+        <a href="/connect" data-slot="nav.product.connect">Connect</a>
+        <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-developers">
+        <p class="ftr-h" id="fh-developers" data-slot="footer.col.developers.title">Developers</p>
+        <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+        <a href="/status" data-slot="nav.developers.status">Status</a>
+        <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+        <a href="/app" data-slot="nav.app">Open app</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-trust">
+        <p class="ftr-h" id="fh-trust" data-slot="footer.col.trust.title">Trust</p>
+        <a href="/security" data-slot="nav.security">Security</a>
+        <a href="/privacy" data-slot="page.privacy.title">Privacy</a>
+        <a href="/terms" data-slot="page.terms.title">Terms</a>
+        <a href="/risks" data-slot="footer.risks">Risks</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-community" data-x-link>
+        <p class="ftr-h" id="fh-community" data-slot="footer.col.community.title">Community</p>
+        <a class="ftr-x" href="https://x.com/keydexai" data-x-link target="_blank" rel="noopener" data-slot="footer.links.x" data-slot-attr="aria-label" aria-label="Keydex AI on X"><span class="i" style="--src:url(/img/brand/x.svg?v=be03adbf)"></span></a>
+      </nav>
+    </div>
+    <div class="ftr-meta">
+      <span data-slot="footer.copy">© 2026 Keydex AI</span>
+      <span class="ftr-live" data-state="checking"><i></i><a href="/status" id="ftrLive" data-slot="page.status.all.checking">Checking…</a></span>
+    </div>
+    <p class="ftr-disc" data-slot="footer.disclaimer">Independent project built on Solana. Stock tokens are not available to US persons and are restricted in Canada, the UK, Switzerland and other countries. This service shows data and builds transactions. It does not sell stock tokens. Nothing on Keydex AI is investment advice.</p>
+    <!--F:credits--><p class="ftr-disc ftr-credit" data-slot="footer.photos">Archive photos: NASA, Library of Congress, U.S. Army.</p><!--/F:credits-->
+  </div>
+</footer>
+<div class="sr" aria-live="polite" id="kfLive"></div>
+<div class="toasts" id="kfToasts" aria-live="polite"></div>
+<!--/FTR-->
+
+<div hidden id="str"><span id="s-code-region" data-slot="ui.code.region">{label} code</span><span id="s-copy" data-slot="connect.copy">Copy</span><span id="s-copied" data-slot="connect.copied">Copied</span><span id="s-error" data-slot="demo.error">The request didn’t go through.</span><span id="s-block" data-slot="hero.facts">Latest block {n}</span><span id="s-trial-limit-h" data-slot="connect.trial.limit.h">You’ve had 3 trial keys in 24 hours. Next one in {h} h.</span><span id="s-trial-limit-n" data-slot="connect.trial.limit.n">You’ve had 3 trial keys in 24 hours. Next one in {n} min.</span><span id="s-ftr-ok" data-slot="page.status.all.ok">All systems operational</span><span id="s-ftr-deg" data-slot="page.status.all.degraded">Partially degraded service</span><span id="s-ftr-down" data-slot="page.status.all.down">Some systems down</span><span id="s-ftr-chk" data-slot="page.status.all.checking">Checking…</span><span id="s-ftr-routes" data-slot="page.status.all.routes">Routes busy, everything else operational</span></div>
+<script src="/js/common.js?v=644ec142"></script>
+<script src="/js/pages.js?v=76356316"></script>
+</body>
+</html>

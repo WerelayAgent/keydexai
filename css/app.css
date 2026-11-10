@@ -1,0 +1,448 @@
+/* /app — wallet sign-in, keys, balance, usage. Shell on the header edge (P0-5): brand x = 24 over the sidebar icons, H1 y = first .side-a */
+.is-app .hdr-in{max-width:none}
+.is-app .hdr-cta .btn-1{display:none}
+.shell{padding-top:var(--hdr);min-height:100svh}
+.state[hidden]{display:none!important}
+.center-card{width:min(480px,calc(100% - 32px));min-height:196px;margin:min(18vh,calc(var(--s-16) * 2 + var(--s-8))) auto var(--s-16);padding:var(--s-8);border-radius:var(--r-in);background:var(--card);display:flex;flex-direction:column;align-items:center;text-align:center;justify-content:center}
+.center-card .h3{margin-top:var(--s-5)}
+.center-card > .muted{margin:var(--s-2) 0 var(--s-6);font:var(--t-ui)}
+.center-card .btn + .btn{margin-top:var(--sh-10)}
+.center-card.ld{gap:var(--s-4)}
+.center-card.ld .muted{margin:0}
+.kmark-lg{width:56px;height:56px;color:var(--text);display:grid;place-items:center}
+.kmark-lg svg{width:56px;height:56px}
+.kmark-lg .kmc{width:56px;height:56px}
+.kmark-lg{--km-fg:var(--text);--km-eye:var(--card)}
+.kmark-md{width:40px;height:40px;border-radius:var(--r-pill);background:var(--k-field);color:var(--text);display:block}
+.err-ic{width:44px;height:44px;border-radius:var(--r-pill);display:grid;place-items:center;color:var(--err-fg);background:color-mix(in srgb,var(--err) 14%,transparent)}
+.err-ic svg{width:24px;height:24px}
+.center{text-align:center;justify-content:center}
+.small{font:var(--t-sm);margin:0}
+.wait-t{color:var(--wait)}
+
+/* wallet pill */
+.wallet{position:relative}
+.wallet-btn{height:var(--h-nav);display:inline-flex;align-items:center;gap:var(--s-2);padding:0 var(--s-3) 0 var(--sh-6);border-radius:var(--r-pill);background:var(--raise);font:var(--t-sm);transition:background-color var(--dur-1) var(--ease-std),transform var(--dur-1) var(--ease-std)}
+.wallet-btn:hover{background:var(--ctl)}
+.wallet-btn:active{transform:scale(.98)}
+.wallet-ic{width:28px;height:28px;border-radius:var(--r-pill);background:var(--ctl);display:grid;place-items:center;overflow:hidden;flex:none}
+/* W1-2: avatar from the address — 4 quadrants of 2 tool colours chosen by the address hash (no conic, no image) */
+.wallet-ic.av{background:linear-gradient(var(--qa),var(--qa)) 0 0/50% 50% no-repeat,linear-gradient(var(--qb),var(--qb)) 100% 0/50% 50% no-repeat,linear-gradient(var(--qb),var(--qb)) 0 100%/50% 50% no-repeat,linear-gradient(var(--qa),var(--qa)) 100% 100%/50% 50% no-repeat}
+.wallet-btn .mono{font:var(--t-code)}
+/* W1-2: console header — Docs ↗, status dot (→ /status), wallet */
+.hdr-cta .btn-nav .ext{width:12px;height:12px;color:var(--muted)}
+.app-st{position:relative;width:var(--h-lg);height:var(--h-lg);display:grid;place-items:center;border-radius:var(--r-pill)}
+.app-st i{width:8px;height:8px;border-radius:var(--r-pill);background:var(--st,var(--muted));transition:transform var(--dur-1) var(--ease-std)}
+.app-st:hover i{transform:scale(1.25)}
+.app-st:active i{transform:scale(1)}
+.app-st[hidden]{display:none}
+.app-st-l{display:none}
+@media (min-width:1024px){   /* F4-F12: the dot says what it is */
+  .app-st{width:auto;display:inline-flex;align-items:center;gap:var(--s-2);padding:0 var(--s-3);font:var(--t-sm);font-weight:var(--fw-5);color:var(--text-2);transition:color var(--dur-1) var(--ease-std)}
+  .app-st:hover{color:var(--text)}
+  .app-st-l{display:inline}
+}
+/* W1-2: the console's footer line, left edge = the content column */
+.app-ftr{margin-top:var(--s-16);padding-top:var(--s-6);border-top:1px solid var(--line);display:flex;flex-direction:column;gap:var(--s-2);font:var(--t-xs);font-weight:var(--fw-4);color:var(--muted)}
+.app-ftr p{margin:0;max-width:860px}
+.app-ftr a{color:var(--text-2);transition:color var(--dur-1) var(--ease-std)}
+.app-ftr a:hover{color:var(--text)}
+.app-ftr a:active{color:var(--muted)}
+.btn-md{height:var(--h-item);padding:0 var(--s-4);font:var(--t-ui);font-weight:var(--fw-5)}
+.wallet-ic img{width:100%;height:100%;object-fit:cover}
+.wallet-ic.lg{width:56px;height:56px}
+.wallet .chev{width:12px;height:12px;color:var(--muted)}
+.menu{position:absolute;right:0;top:calc(100% + 8px);min-width:180px;padding:var(--s-1);border-radius:var(--r-md);background:var(--panel);box-shadow:0 0 0 1px var(--line);display:flex;flex-direction:column;z-index:50}
+.menu[hidden]{display:none}
+.menu button{height:var(--h-item);padding:0 var(--s-3);border-radius:var(--r-sm);text-align:left;font:var(--t-ui);white-space:nowrap}
+.menu button:hover{background:var(--raise);outline:0}
+.menu button:focus-visible{background:var(--raise);outline:2px solid var(--focus);outline-offset:-2px}   /* V1-59 (X1-F9) */
+.menu button.danger{color:var(--err-fg)}
+
+/* shell */
+.dash{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:calc(100svh - var(--hdr))}
+.side{background:var(--card);border-right:1px solid var(--line);padding:var(--s-5) var(--s-3);display:flex;flex-direction:column;gap:var(--sh-2);position:sticky;top:var(--hdr);height:calc(100svh - var(--hdr))}
+.side-a{position:relative;flex:none;height:var(--h-item);display:flex;align-items:center;gap:var(--sh-10);padding:0 var(--s-3);border-radius:var(--r-sm);font:var(--t-ui);color:var(--text-2);text-align:left;width:100%}
+.side-a svg{width:16px;height:16px;flex:none;color:var(--muted)}
+.side-a:hover{background:var(--raise);color:var(--text)}
+.side-a:active{background:var(--ctl);transform:scale(.98)}
+.side-a[aria-current=page]{background:var(--ctl);color:var(--text);box-shadow:inset 0 0 0 1px var(--accent-fg)}   /* X1-N5 */
+.side-a[aria-current=page] svg{color:var(--accent-fg)}
+.side-a .ext{margin-left:auto;width:12px;height:12px;color:var(--muted)}
+.content{min-width:0;display:flex;flex-direction:column;min-height:calc(100dvh - var(--hdr));padding:var(--s-5) var(--gut) var(--s-16) clamp(var(--s-8),4vw,var(--s-24))}   /* V1-15 (P2-F9): the content's right edge = the wallet's right edge */
+@media (min-width:1728px){
+  .content{width:100%;max-width:1440px;margin-inline:auto;padding-left:var(--s-8)}
+  .is-app .hdr-in{padding-right:calc((100vw - 1660px) / 2 + var(--gut))}
+}
+.pane[hidden]{display:none}
+#assetTabs .tab[aria-checked=true]{background:var(--ctl);color:var(--text)}   /* the ring only: Send from wallet is the one blue action of this card */
+.content>.pane:not([hidden]){margin-bottom:var(--s-16)}
+.content>.app-ftr{margin-top:auto}   /* G1 С4: the footer stands on the bottom edge of a short pane */
+.pane-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);min-height:var(--h-item);margin-bottom:var(--s-6)}
+.pane-head .h3{margin:0;display:flex;align-items:center;min-height:var(--h-item)}
+.pane-head{align-items:flex-start;gap:var(--s-3)}
+@media (max-width:1023px){
+  .dash{grid-template-columns:minmax(0,1fr);align-content:start}
+  .side{position:sticky;top:var(--hdr);z-index:20;height:auto;flex-direction:row;padding:var(--s-2) var(--gut);border-right:0;border-bottom:1px solid var(--line);background:var(--bg);overflow-x:auto;scrollbar-width:none}
+  .side::-webkit-scrollbar{display:none}
+  .side-a{width:auto;border-radius:var(--r-pill);height:var(--h-tab)}
+  .content{padding:var(--s-6) var(--gut) var(--s-16)}
+}
+@media (max-width:767px){.side-a::after{content:"";position:absolute;inset:calc(-1 * var(--sh-6)) 0}
+  .side{overflow:visible;gap:var(--s-1)}
+  .side-a{flex:1;justify-content:center;padding:0 var(--s-2);min-width:0}   /* W1-2: 4 tabs share the bar, nothing cut */
+  .side-a .ext{margin-left:0}}
+
+/* blocks, tables */
+.block{border-radius:var(--r-in);background:var(--card);overflow:hidden}
+.block.has-menu{overflow:visible}
+.tbl{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;font:var(--t-ui)}
+.tbl th{height:var(--h-lg);padding:0 var(--s-4);text-align:left;font:var(--t-label);letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbl td{height:52px;padding:0 var(--s-4);border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle;overflow:hidden;text-overflow:ellipsis}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .mono{font:var(--t-code)}
+.tbl .num,.tbl td{font-variant-numeric:tabular-nums}
+.tbl tbody tr{animation:rowin var(--dur-2) var(--ease-entry) backwards}   /* P2-F1: «both» kept a transform → every row its own stacking context, the ⋯ menu went under the next row */
+.tbl tbody tr:has(.menu:not([hidden])){position:relative;z-index:3}
+@keyframes rowin{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.tbl .r{text-align:right}
+.tbl td.first{font-weight:var(--fw-5)}
+.tbl td.act{overflow:visible}
+.keys-tbl th:nth-child(2){width:150px}.keys-tbl th:nth-child(3){width:128px}.keys-tbl th:nth-child(4){width:152px}.keys-tbl th:nth-child(5){width:96px}.keys-tbl th:nth-child(6){width:152px}.keys-tbl th:nth-child(3){text-align:right}.keys-tbl th:nth-child(7){width:56px}   /* the $KEYFO holder model: no «Daily limit» column (owner 07.11) */
+.keys-tbl td.first{max-width:280px}
+.keys-tbl td.mono{padding-top:var(--sh-2)}   /* W2-2: Geist Mono 13 sits 1 px higher than Geist 14 in a centred 52 px cell */
+.usage-tbl th:nth-child(1){width:128px}.usage-tbl th:nth-child(2){width:18%}.usage-tbl th:nth-child(4){width:120px}.usage-tbl th:nth-child(5){width:120px}.usage-tbl th:nth-child(6){width:104px}.usage-tbl th:nth-child(7){width:128px}
+.ust{display:grid;justify-items:start;gap:var(--sh-2);min-width:0}   /* V0-7: status in words, the machine code under it (mono, --muted) */
+@media (min-width:768px){.ust .ucode{display:none}}   /* P2 R-M5: the code is in title; rows stay one line */
+.ust .ucode{max-width:100%;font:var(--t-xs);font-family:var(--font-mono);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* W0-7: the number is the only in-flow content (baseline = its neighbours); the bar hangs under it out of flow */
+/* V1-14 (P2-F6): «Spent today» on the right edge like its neighbours; a 56×4 bar under the number; ≥80 % --wait, at the limit --err-fg */
+.spent{position:relative;display:inline-block;font-variant-numeric:tabular-nums}
+.spent .bar{position:absolute;right:0;top:calc(100% + var(--sh-2));width:56px;height:4px;background:var(--ctl)}
+.spent .bar i{background:var(--accent)}
+.spent.near .bar i{background:var(--wait);border-right-color:var(--wait)}
+.spent.full > span:first-child{color:var(--err-fg)}
+.spent.full .bar i{background:var(--err-fg);border-right-color:var(--err-fg)}
+.kcell{display:flex;align-items:center;gap:var(--s-2);min-width:0}
+.kcell:has(.lim-chip) .kname{max-width:100%}   /* P2 M-1 */
+.keys-tbl .kname{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kcell:has(.lim-chip){flex-direction:column;align-items:flex-start;gap:var(--sh-2)}   /* P2 R-2: the name stays, the state sits under it */
+.lim-chip{display:block;max-width:100%;font:var(--t-xs);color:var(--err-fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar{height:6px;border-radius:var(--r-pill);background:var(--ctl);overflow:hidden}
+.bar i{display:block;height:100%;box-sizing:border-box;border-radius:var(--r-pill);border-right:2px solid var(--accent-fg);background:var(--accent);transition:width var(--dur-4) var(--ease-entry)}
+.row-menu{position:relative;display:flex;justify-content:flex-end}
+.dots-btn{position:relative;width:var(--h-item);height:var(--h-item);border-radius:var(--r-pill);display:grid;place-items:center;color:var(--muted)}
+.dots-btn::after{content:"";position:absolute;inset:calc(-1 * var(--s-1))}
+.dots-btn:hover,.dots-btn[aria-expanded=true]{background:var(--ctl);color:var(--text)}
+.dots-btn:active{transform:scale(.98)}
+.dots-btn svg{width:16px;height:16px}
+.row-menu .menu{top:calc(100% + 4px)}
+.keys-note{margin:var(--s-3) 0 0;font:var(--t-sm);color:var(--muted)}
+.empty{display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);padding:var(--s-6)}
+.empty .muted{margin:var(--sh-2) 0 0;font:var(--t-ui)}
+.empty[hidden]{display:none}
+.empty-line{padding:var(--s-8) var(--s-4);margin:0;text-align:center;font:var(--t-ui)}
+.tn{color:var(--c,var(--text));font-family:var(--font-mono)}
+.mcell{display:flex;align-items:center;gap:var(--s-2);min-width:0;max-width:100%}
+.mcell span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.mcell .i,.mcell img{width:14px;height:14px;flex:none}
+/* V1-15 (P2-F8): 768–1100 stays a table — the secondary columns go (keys: Created, Last used; usage: Key, Tokens out) */
+@media (min-width:768px) and (max-width:1279px){
+  .keys-tbl th:nth-child(2){width:128px}
+  .lim-t{display:none}   /* P2 M-2: the time is in title */
+  .keys-tbl th:nth-child(5),.keys-tbl td:nth-child(5),.keys-tbl th:nth-child(6),.keys-tbl td:nth-child(6){display:none}
+  .usage-tbl th:nth-child(2),.usage-tbl td:nth-child(2),.usage-tbl th:nth-child(5),.usage-tbl td:nth-child(5){display:none}
+  .usage-tbl th:nth-child(3){width:auto}
+}
+@media (max-width:767px){
+  .tbl thead{display:none}
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+  .tbl{table-layout:auto}
+  .tbl tr{position:relative;padding:var(--s-4);border-bottom:1px solid var(--line)}
+  .tbl tr:last-child{border-bottom:0}
+  .tbl td{height:auto;padding:var(--s-1) 0;border:0;white-space:normal;display:flex;justify-content:space-between;align-items:center;gap:var(--s-4);font:var(--t-sm);font-variant-numeric:tabular-nums}
+  .tbl td::before{content:attr(data-l);color:var(--muted);flex:none}
+  .tbl td.first{font:var(--t-ui);font-weight:var(--fw-5);padding-right:var(--s-12);max-width:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+  .tbl td.first::before{content:none}
+  .tbl td:has(.spent){align-items:baseline}
+  .tbl td.act{position:absolute;top:var(--s-3);right:var(--s-2);width:auto;padding:0}
+  .tbl td.act::before{content:none}
+  .spent{display:inline-grid;justify-items:end;gap:var(--s-1);max-width:120px;text-align:right}
+  .spent .bar{position:static}
+  .empty{flex-direction:column;align-items:flex-start}
+}
+
+/* balance */
+.cards2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4)}
+.card{background:var(--card);border-radius:var(--r-in);padding:var(--s-6)}
+.card-l{margin:0 0 var(--s-3);display:flex;align-items:center;gap:var(--s-2);font:var(--t-ui);font-weight:var(--fw-5);color:var(--muted)}
+.big{margin:0;font:var(--t-h2);letter-spacing:var(--tr-tight);font-variant-numeric:tabular-nums}
+.quota-n{margin:0 0 var(--s-3);font:var(--t-h2);letter-spacing:var(--tr-tight);font-variant-numeric:tabular-nums}
+.quota-n .muted{font:var(--t-lead)}
+.card .bar + .small{margin-top:var(--s-3)}
+.topup{margin-top:var(--s-4)}
+.topup-head{margin-bottom:var(--s-5)}
+.topup-soon{display:flex;align-items:center;gap:var(--sh-10);font:var(--t-ui);color:var(--text-2)}
+.topup-soon .tk{margin-right:calc(-1 * var(--s-1))}
+.topup-closed{margin:var(--s-3) 0 0;font:var(--t-ui);color:var(--muted)}
+.topup-wait{display:flex;align-items:center;gap:var(--s-3);height:var(--h-lg);color:var(--muted);font:var(--t-ui)}
+.topup-row{display:flex;gap:var(--s-3);align-items:center;flex-wrap:wrap}
+.amt{position:relative;flex:1;min-width:180px}
+.amt .input{padding-right:var(--s-16);padding-left:var(--s-5)}
+.amt-sym{position:absolute;right:16px;top:50%;transform:translateY(-50%);font:var(--t-sm);color:var(--muted)}
+.manual{margin-top:var(--s-6);padding-top:var(--s-5);border-top:1px solid var(--line);display:flex;flex-direction:column;gap:var(--s-3)}
+.addr-row{display:flex;align-items:center;gap:var(--sh-10);flex-wrap:wrap;padding:var(--s-2) var(--s-2) var(--s-2) var(--sh-14);border-radius:var(--r-md);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line)}
+.addr{font:var(--t-code);word-break:break-all;flex:1;min-width:200px}
+.warn{display:flex;gap:var(--sh-10);align-items:flex-start;margin:0;font:var(--t-sm);color:var(--text-2)}
+.warn .chip{width:20px;justify-content:center;padding:0;flex:none}
+.warn .chip svg{width:12px;height:12px}
+.claim-row{display:flex;gap:var(--s-2)}
+.claim-row input{flex:1 1 auto;min-width:0}   /* G1 С5: the whole 66-character hash is readable */
+.claim-row .btn{flex:none}
+.steps{list-style:none;margin:var(--s-5) 0 0;padding:var(--s-4);border-radius:var(--r-md);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column;gap:var(--s-3);font:var(--t-ui);min-height:124px}
+.steps[hidden]{display:none}
+.steps li{display:flex;align-items:center;gap:var(--s-3);height:24px}
+.stp{width:20px;height:20px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1.5px var(--ctl);flex:none;display:grid;place-items:center}
+.stp.done{background:var(--ok);box-shadow:none}
+.stp.done::after{content:"";width:10px;height:10px;background:var(--text);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5'/%3E%3C/svg%3E") center/contain no-repeat}
+.stp.run{box-shadow:none;border:2px solid var(--line-ctl);border-top-color:var(--accent-fg);animation:spin var(--dur-spin) var(--ease-lin) infinite}
+.stp.fail{background:var(--err);box-shadow:none}
+.stp.fail::after{content:"";width:10px;height:10px;background:var(--text);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M3 3l8 8M11 3 3 11'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M3 3l8 8M11 3 3 11'/%3E%3C/svg%3E") center/contain no-repeat}
+@media (max-width:767px){.cards2{grid-template-columns:minmax(0,1fr)}.topup-row .btn{width:100%}.card{padding:var(--s-5)}.claim-row{flex-direction:column}}
+
+/* usage */
+.chart-card{margin-bottom:var(--s-4);padding:var(--s-5) var(--s-5) var(--s-3)}
+.chart-w{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:var(--s-3)}
+.chart-y{height:240px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;font:var(--t-label);color:var(--muted);font-variant-numeric:tabular-nums}
+.chart-y span{line-height:var(--lh-1)}
+.chart-y span:first-child{transform:translateY(-50%)}.chart-y span:last-child{transform:translateY(50%)}   /* F4-F10: each number on its own line */
+.chart{position:relative;height:240px;display:grid;grid-template-columns:repeat(var(--n,7),minmax(0,1fr));align-items:end;column-gap:var(--bar-gap,var(--sh-6));border-bottom:1px solid var(--line);background:linear-gradient(var(--line),var(--line)) 0 0/100% 1px no-repeat,linear-gradient(var(--line),var(--line)) 0 50%/100% 1px no-repeat}
+/* V1-13: a bar is a button the full height of the chart (hit zone), the column inside it; --muted bars (5.6:1), zero days --line, the selected day --text */
+.chart .bar{height:100%;display:flex;align-items:flex-end;padding:0;background:none;border:0;border-radius:var(--r-xs) var(--r-xs) 0 0;min-width:0;cursor:pointer}
+.chart .bar i{display:block;width:100%;max-width:56px;margin-inline:auto;height:2px;background:var(--muted);border-radius:var(--r-xs) var(--r-xs) 0 0;transform-origin:bottom;transition:background-color var(--dur-1) var(--ease-std)}
+.chart.on .bar i{transition:height var(--dur-4) var(--ease-out),background-color var(--dur-1) var(--ease-std)}
+
+.chart .bar i{background:var(--accent);border-right:0;border-top:1px solid var(--accent-fg)}   /* the fill alone is 2.2:1 on the card, the cap carries the value at 7.3:1 */
+.chart .bar.zero i{background:var(--line);border-top:0}
+.chart.has-sel .bar:not(.sel):not(.zero) i{background:var(--accent)}   /* P2 R-12: with a day selected the others step down, selected : other = 3.25:1 */
+.chart .bar:hover i,.chart .bar.sel i{background:var(--accent-fg)}
+.chart .bar:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.u-err{display:flex;align-items:center;gap:var(--s-3);flex-wrap:wrap;margin:0 0 var(--s-4);padding:var(--s-5);border-radius:var(--r-card);background:var(--card);color:var(--text-2);font:var(--t-ui)}
+.u-err p{margin:0}
+.chart-y{min-width:48px}
+.chart-x{display:grid;grid-template-columns:repeat(var(--n,7),minmax(0,1fr));column-gap:var(--bar-gap,var(--sh-6));font:var(--t-label);color:var(--muted);margin-top:var(--s-2)}
+.chart-x span{justify-self:center;white-space:nowrap}   /* F4-F3: the same tracks as the bars, each date centred under its own bar */
+/* W1-3 KPI row + filters */
+.u-bar{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s-6);flex-wrap:wrap;margin-bottom:var(--s-2)}
+.u-kpis{display:grid;grid-template-columns:repeat(3,auto);gap:var(--s-10)}
+.kpi p{margin:0}
+.kpi-l{font:var(--t-sm);color:var(--muted)}
+.kpi-v{margin-top:var(--s-1);font:var(--t-h2);white-space:nowrap;letter-spacing:var(--tr-tight);font-variant-numeric:tabular-nums}
+.u-filt{display:flex;align-items:center;gap:var(--s-2);flex-wrap:wrap}
+.upill select{height:var(--h-tab);max-width:220px;padding:0 var(--s-8) 0 var(--sh-14);border:0;border-radius:var(--r-pill);background:var(--raise) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2.5 4 5 6.5 7.5 4' fill='none' stroke='%238a8f98' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") right var(--sh-10) center/10px no-repeat;color:var(--text-2);font:var(--t-sm);font-weight:var(--fw-5);appearance:none;text-overflow:ellipsis;transition:background-color var(--dur-1) var(--ease-std)}
+.upill select:hover{background-color:var(--ctl);color:var(--text)}
+.upill select:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.useg{display:flex;gap:var(--sh-2);padding:var(--sh-2);border-radius:var(--r-pill);background:var(--raise)}
+.useg button{position:relative;height:calc(var(--h-tab) - 4px);padding:0 var(--s-3);border-radius:var(--r-pill);font:var(--t-sm);font-weight:var(--fw-5);color:var(--text-2);transition:background-color var(--dur-1) var(--ease-std),color var(--dur-1) var(--ease-std)}
+.useg button:hover{color:var(--text)}
+.useg button:active{transform:scale(.98)}
+.useg button[aria-pressed=true]{background:var(--ctl);color:var(--text);box-shadow:inset 0 0 0 1px var(--accent-fg)}   /* G3 С1 */
+.u-scope{display:flex;align-items:center;gap:var(--s-2);min-height:var(--h-chip);margin:0 0 var(--s-4);font:var(--t-xs);font-weight:var(--fw-4);color:var(--muted)}
+.ukind{width:14px;height:14px;flex:none;display:inline-grid;place-items:center}
+.ukind.tool::before{content:"";width:8px;height:8px;border-radius:var(--r-pill);background:var(--c)}
+@media (max-width:767px){
+  .chart-w{padding-right:var(--s-2)}   /* the last date is centred under a thin bar: it needs air to the card edge */
+  .u-kpis{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);width:100%}   /* t-h2 (30/36 on a phone): three numbers fit 343 px; t-num 36 did not */
+  .useg button::after,.upill::after{content:"";position:absolute;inset:calc(-1 * var(--sh-6)) 0}
+  .upill{position:relative}
+}
+
+/* modals */
+.wlist{list-style:none;margin:var(--s-4) 0 0;padding:0;display:flex;flex-direction:column;gap:var(--sh-6)}
+.wlist a,.wlist button{width:100%;height:52px;display:flex;align-items:center;gap:var(--s-3);padding:0 var(--sh-14);border-radius:var(--r-md);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);font:var(--t-ui);text-align:left}
+.wlist a:hover,.wlist button:hover{box-shadow:inset 0 0 0 1px var(--line-ctl);background:var(--panel)}
+.wlist img{width:28px;height:28px;border-radius:var(--r-sm)}
+.wlist .chip{margin-left:auto}
+.wsign-ic{position:relative;width:72px;height:72px;margin:var(--s-2) auto var(--s-4);display:grid;place-items:center}
+.wsign-ic .ring{position:absolute;inset:0;border-radius:var(--r-pill);border:2px solid var(--line);border-top-color:var(--text);animation:spin var(--dur-spin) var(--ease-lin) infinite}
+.wsign-ic.err .ring{animation:none;border-color:var(--err)}
+.msg{margin:var(--s-4) 0 var(--s-3);padding:var(--sh-14) var(--s-4);border-radius:var(--r-md);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);font:var(--t-xs);font-family:var(--font-mono);font-weight:var(--fw-4);color:var(--text-2);white-space:pre-wrap;word-break:break-all;max-height:180px;overflow:auto;text-align:left}
+.usd{position:relative;display:block}
+.usd i{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-style:normal;color:var(--muted);font:var(--t-ui)}
+.usd .input{padding-left:var(--s-8)}
+.once-key{margin-top:var(--s-4)}
+.once-key pre{color:var(--text)}
+.once-l{display:flex;align-items:center;gap:var(--s-2)}
+.once-key + .code{margin-top:var(--s-3)}
+.once-l .ic{width:14px;height:14px}
+#mOnce .modal-title{flex-wrap:wrap}
+.revoke-name{color:var(--text);margin:var(--s-1) 0 var(--s-2)}
+[data-wl] img{width:28px;height:28px;object-fit:contain}
+.q-err{display:flex;align-items:center;gap:var(--s-3);flex-wrap:wrap;color:var(--text-2)}
+.q-err p{margin:0}
+.card-l .chip{margin-left:auto}
+.soon-tab{display:inline-flex;align-items:center;gap:var(--s-2);color:var(--muted);cursor:default;pointer-events:none}
+.soon-tab .tk{width:14px;height:14px}
+.once-chip{margin:0 0 var(--s-2)}
+#onceCli{white-space:pre-wrap;word-break:normal;overflow-wrap:anywhere}
+.once-key{margin-top:var(--s-4)}
+.code.inline{display:flex;align-items:center;gap:var(--s-2);min-height:var(--h-lg);padding:0 var(--s-2) 0 0}
+.code.inline pre{flex:1;min-width:0;padding:var(--s-3) var(--s-4);white-space:pre-wrap;word-break:break-all}
+.code.inline .copy{flex:none}
+
+/* V2-2 */
+#assetTabs .tab{height:var(--h-lg)}   /* P2-F23: one 44 px line with the field and the button */
+.field + .help{display:block;margin-top:calc(-1 * var(--s-2))}
+.keys-count{margin-left:auto;align-self:center;font:var(--t-sm);color:var(--muted);font-variant-numeric:tabular-nums}
+@media (max-width:374px){.side-a svg{display:none}}
+@media (max-width:399px){.side-a{padding:0 var(--s-1);gap:var(--s-1)}}   /* P2 R-M2 */   /* P2-F26 */
+
+/* owner-eye: №22 the sign-in card in the middle of the area, no stray pixel; the header's right edge without a wallet */
+.shell{min-height:100dvh;box-sizing:border-box}
+#stSignin,#stPre,#stError,#stLoading{min-height:calc(100dvh - var(--hdr));display:grid;place-content:center}
+#stSignin[hidden],#stPre[hidden],#stError[hidden],#stLoading[hidden]{display:none}
+#stSignin .center-card,#stPre .center-card,#stError .center-card,#stLoading .center-card{width:min(480px,calc(100vw - 32px));margin:0}
+@media (min-width:1728px){.is-app:has(#wallet[hidden]) .hdr-in{padding-right:var(--gut)}}
+@media (max-width:767px){.upill{width:100%}.upill select{width:100%;max-width:none}}
+
+/* круг 2 */
+.usage-tbl .tn{min-width:0}
+.ukind .mx-nl{color:var(--muted)}
+#mOnce .modal-box{max-width:560px}   /* P2 R-M3: a 52-character key in one line */
+@media (min-width:768px){.pane-head .btn .ic{width:17px;height:17px}}   /* ICON N4, M1 */
+.u-show{display:flex;justify-content:center;padding:var(--s-3)}
+.u-show[hidden]{display:none}
+@media (max-width:767px){
+  #assetTabs{width:100%}
+  #assetTabs .tab{flex:1 1 0;justify-content:center;padding-inline:var(--s-2);min-width:0}
+  #assetTabs .soon-tab>span:not(.tk):not(.chip){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}   /* P2 R-9, EYE М-2: mark + Soon in the tab, the name stays for a screen reader */
+}
+#stLoading .center-card{min-height:322px}   /* P2 R-M8: the loading card = the sign-in card, no 63 px jump */
+.u-day{display:inline-flex;align-items:center;gap:var(--s-1);height:var(--h-chip);padding:0 var(--sh-6) 0 var(--s-2);border-radius:var(--r-pill);background:var(--tint);font:var(--t-xs);color:var(--text-2)}   /* P2 M-4: which day the KPI show, and the way back */
+.u-day[hidden]{display:none}
+.u-day:hover{color:var(--text)}
+.u-day svg{width:10px;height:10px}
+/* the $KEYFO holder model: «Buy $KEYFO» disabled with its «Soon» beside it (before launch, and until the buy window ships) */
+.buy-row{display:flex;align-items:center;gap:var(--s-3);margin-top:var(--s-3)}
+.center-card .buy-row{display:grid;grid-template-columns:minmax(0,1fr) auto;width:100%;margin-top:var(--s-3)}
+/* Buy $KEYFO (flag buy): «You pay» with the coin and its network, «You receive» in $KEYFO, the route — the Quoro swap card in keyfo's look */
+.bx-f{position:relative;margin-top:var(--s-4);padding:var(--s-3) var(--s-4);border-radius:var(--r-md);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line-ctl)}
+.bx-l{margin:0;font:var(--t-sm);color:var(--muted)}
+.bx-v{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-2) var(--s-3);margin-top:var(--s-1)}   /* a narrow window: the network button goes under the amount, the amount keeps its digits */
+.bx-amt{flex:1 1 128px;min-width:0;border:0;background:none;padding:0;font:var(--t-h3);color:var(--text);outline:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bx-amt.dim{color:var(--muted)}
+.bx-f:focus-within{box-shadow:inset 0 0 0 1px var(--focus)}
+.bx-tok{flex:none;display:inline-flex;align-items:center;gap:var(--s-2);height:var(--h-item);padding:0 var(--s-3) 0 var(--s-2);border-radius:var(--r-pill);background:var(--raise);font:var(--t-ui);font-weight:var(--fw-5);color:var(--text);white-space:nowrap}
+button.bx-tok:hover{background:var(--ctl)}
+.bx-tok .tk{width:20px;height:20px}
+.bx-coin{position:relative;width:20px;height:20px;flex:none}
+.bx-coin > img{width:20px;height:20px;border-radius:var(--r-pill);display:block}
+.bx-coin .bx-ch{position:absolute;right:-4px;bottom:-4px;width:12px;height:12px;border-radius:var(--r-xs);background:var(--raise);box-shadow:0 0 0 1.5px var(--raise)}
+.bx-tok .chev{width:10px;height:10px;color:var(--muted)}
+.bx-list{position:absolute;z-index:5;right:var(--s-2);top:calc(100% + var(--s-1));width:min(280px,calc(100% - var(--s-4)));max-height:300px;overflow:auto;margin:0;padding:var(--s-1);list-style:none;border-radius:var(--r-md);background:var(--raise);box-shadow:inset 0 0 0 1px var(--line-ctl)}
+.bx-list li{display:flex;align-items:center;gap:var(--s-3);height:var(--h-item);padding:0 var(--s-3);border-radius:var(--r-sm);font:var(--t-ui);color:var(--text-2);cursor:pointer}
+.bx-list li:hover,.bx-list li.act,.bx-list li[aria-selected=true]{background:var(--ctl);color:var(--text)}
+.bx-min{margin:var(--s-1) 0 0;min-height:20px;font:var(--t-sm);color:var(--muted)}
+.bx-route{margin:var(--s-4) 0 0;display:flex;flex-direction:column;gap:var(--s-2);font:var(--t-sm)}
+.bx-route div{display:flex;justify-content:space-between;gap:var(--s-3)}
+.bx-route dt{color:var(--muted)}
+.bx-route dd{margin:0;color:var(--text-2);display:inline-flex;align-items:center;gap:var(--s-2)}
+.bx-route .mark-in{height:12px;width:auto}
+.bx-note{margin:var(--s-3) 0 0;min-height:20px;font:var(--t-sm);color:var(--muted)}
+
+/* ═══ Q1 console (owner 09.11): frames on the canvas, square corners ═══ */
+.center-card,.block,.card,.u-err{background:var(--bg);box-shadow:inset 0 0 0 1px var(--line)}
+.side{background:var(--bg)}
+@media (min-width:1024px){.is-app .hdr-cta{position:relative}.is-app .hdr-cta .wallet{position:absolute;right:calc(100% + var(--s-2));top:50%;transform:translateY(-50%);width:max-content;white-space:nowrap}}   /* Q1 CLS: the wallet appears after /api/me left of Docs and Status, out of the flow — nothing that already stands moves */
+.side-a[aria-current=page],.useg button[aria-pressed=true]{box-shadow:inset 0 0 0 1px var(--text-2)}
+.side-a[aria-current=page] svg{color:var(--text)}
+.big,.quota-n,.kpi-v{font:var(--t-app-num);letter-spacing:var(--tr-display)}
+/* §78 before launch (html without data-launched="1", set from /health by common.js): no amounts anywhere in the account — no token balance,
+   no «Spent» columns or KPI, no cost column; the chart counts requests (app.js) */
+html:not([data-launched="1"]) :is(#kfBal,#keysNote,.kpi:has(#kSpent),.keys-tbl th:nth-child(3),.keys-tbl td:nth-child(3),.keys-tbl th:nth-child(4),.keys-tbl td:nth-child(4),.usage-tbl th:nth-child(6),.usage-tbl td:nth-child(6)){display:none!important}
+@media (max-width:767px){.side-a{flex:1 1 auto}}   /* «Allowance» (§70.8, was «Balance») is the widest label: the tabs share the bar by their content, nothing runs into a neighbour */
+@media (max-width:419px){.side-a svg{display:none}}
+/* data loading without shifts (owner 09.11 «загрузка данных… ни скачков»): the filters keep their width while their options arrive,
+   and a pane is at least a screen tall, so the console footer stays below the fold while rows load */
+@media (min-width:768px){#fKey{width:160px;max-width:none}#fModel{width:220px;max-width:none}}
+.pane{min-height:calc(100svh - var(--hdr) - var(--s-16))}
+.chart-y{align-items:stretch}.chart-y span{text-align:right}   /* the axis numbers change inside fixed boxes (no shift when the data arrives) */
+.chart-x{min-height:var(--s-4)}   /* the date row holds its line before the dates arrive */
+@media (min-width:1728px){.is-app:has(#wallet[hidden]) .hdr-in{padding-right:calc((100vw - 1660px) / 2 + var(--gut))}}   /* the header keeps the content's right edge signed in or out — /api/me never moves it */
+/* PD «Прод 1.12.2»: the key in «Your trial key» stays one piece — one line, it scrolls (with the fade) where it is wider than the box;
+   the Claude Code command wraps only at spaces, each line under its own hanging indent */
+#onceKey{white-space:pre;word-break:normal;overflow-wrap:normal;overflow-x:auto;min-width:0}
+#onceCli{white-space:pre-wrap;word-break:normal;overflow-wrap:normal}
+#onceCli .ln{display:block;padding-left:calc(var(--in) * 1ch);text-indent:calc(var(--in) * -1ch)}
+
+/* /sign/<id> (server 1.13.0): the signing card — the Buy $KEYFO window's parts (bx-f, bx-route, steps, wallet list) on a page of its own; one white pill */
+.sg{min-height:calc(100dvh - var(--s-16));box-sizing:border-box;padding:calc(var(--hdr) + var(--s-10)) var(--s-4) var(--s-16);display:flex;justify-content:center;align-items:flex-start}
+.sg-card{width:min(520px,100%);box-sizing:border-box;padding:var(--s-8);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);min-height:196px}
+.sg-card[aria-busy=true]{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s-4);text-align:center}
+.sg-card[aria-busy=true] .sg-title{font:var(--t-ui);color:var(--muted)}
+.sg-load[hidden],.sg-card [hidden]{display:none!important}
+.sg-card .err-ic{margin-bottom:var(--s-5)}
+.sg-kick.off{visibility:hidden}   /* A1 С-4: the line keeps its place on done and on errors — nothing moves */
+.sg-kick{margin:0 0 var(--s-3);font:var(--t-label);color:var(--muted);text-transform:uppercase}
+.sg-title{overflow-wrap:anywhere}
+.sg-lead{margin:var(--s-2) 0 0;font:var(--t-ui);color:var(--text-2)}
+.sg-val{margin:var(--s-1) 0 0;font:var(--t-title);color:var(--text);overflow-wrap:anywhere}
+.sg-min{display:flex;justify-content:space-between;align-items:baseline;gap:var(--s-3);margin-top:var(--s-3);padding-top:var(--s-3);border-top:1px solid var(--line-ctl);font:var(--t-sm);color:var(--text-2)}
+.sg-min > span:last-child{text-align:right;overflow-wrap:anywhere}
+.sg-note{margin:var(--s-2) 0 0;font:var(--t-sm);color:var(--muted)}
+.sg-dl{margin-top:var(--s-5)}
+.sg-dl dd{text-align:right;justify-content:flex-end;flex-wrap:wrap;overflow-wrap:anywhere;min-width:0}
+.sg-dl dt{flex:none}
+.sg-data{margin-top:var(--s-4);font:var(--t-sm)}
+.sg-data summary{cursor:pointer;color:var(--text-2);width:max-content;max-width:100%}
+.sg-data summary:hover{color:var(--text)}
+.sg-data .msg{margin:var(--s-2) 0 0;white-space:pre-wrap;word-break:break-all;max-height:240px;overflow:auto}
+.sg-steps{min-height:0}
+/* A1 С-1: a step is one grid on every width — mark | name (its count above) | status and the explorer link; narrow, the status goes under the name, never under the mark */
+.sg-steps li{display:grid;grid-template-columns:20px minmax(0,1fr) max-content;column-gap:var(--s-3);row-gap:var(--s-1);align-items:start;height:auto;min-height:24px}
+.sg-steps .stp{grid-column:1}
+.sg-sl{grid-column:2;min-width:0;display:flex;flex-direction:column;overflow-wrap:anywhere}
+.sg-sc{font:var(--t-xs)}
+.sg-sr{grid-column:3;display:flex;flex-direction:column;align-items:flex-end;gap:var(--s-1);text-align:right}
+.sg-sr:has(.sg-ss:empty):has(.sg-x[hidden]){display:none}
+@media (max-width:767px){.sg-steps li{grid-template-columns:20px minmax(0,1fr)}.sg-sr{grid-column:2;flex-direction:row;flex-wrap:wrap;align-items:baseline;justify-content:space-between;text-align:left}}
+.sg-msg{margin-top:var(--s-5);padding:var(--s-4);background:var(--card);box-shadow:inset 0 0 0 1px var(--line-ctl)}
+.sg-msg-x,.sg-lead,.sg-note,.sg-fine{text-wrap:pretty}   /* A1 М-14 */
+.sg-msg-x{margin:var(--s-1) 0 0;font:var(--t-ui);color:var(--text-2);overflow-wrap:anywhere}
+.sg-msg .h4 + .sg-msg-x{margin-top:var(--s-1)}
+.sg-msg .h4:only-child,.sg-msg-x:first-child{margin-top:0}
+.sg-msg.sg-chg{margin:var(--s-5) 0 0;color:var(--text)}
+.sg-act{margin-top:var(--s-5);display:flex;flex-direction:column;gap:var(--s-3)}
+.sg-conn{margin:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s-2)}
+.sg-conn .chip{background:var(--tint);color:var(--text-2)}
+.sg-fine{margin:0;font:var(--t-sm);color:var(--muted);text-align:center}
+.sg-again{margin-top:var(--s-5)}
+.sg-rabby{display:flex;gap:var(--s-3);align-items:flex-start;margin-top:var(--s-4);padding:0 calc(var(--sh-14) + 1px)}   /* A1 М-10: on the axis of the wallet rows */
+.sg-rabby img{width:28px;height:28px;flex:none}
+.sg-rabby .modal-text{margin:0}
+#sgCopy{margin-top:var(--s-3)}
+@media (max-width:767px){.sg{padding:calc(var(--hdr) + var(--s-5)) var(--s-4) var(--s-12)}.sg-card{padding:var(--s-5)}}
+.sg .tkr .tk{width:var(--ic);height:var(--ic)}   /* A1 С-2: a fallback disc at the size of every other mark */
+.sg .tkr .tk.sg-fb{font-size:inherit;line-height:var(--ic);padding:0;display:inline-grid;place-items:center}   /* A2 С2-2: 1.2em of the line, like the images */
+.sg .tk.sg-fb i{font-style:normal;font-size:calc(var(--ic) * .46);line-height:var(--lh-1);font-weight:var(--fw-6)}
+.sg .tkr .tk.sg-fb{transform:translateY(calc(var(--tk-txt-y) * 1.5))}   /* A3: on the capitals' centre like the images (the site's −1.5 px left it 0.5–0.9 px low) */
+@media (prefers-reduced-motion:reduce){.sg .btn[aria-busy=true]::after{animation:none!important}.sg .stp.run{animation:none}}   /* A3: no spinning on /sign; the ring stays as a still mark */
+/* §79.13: the outcome under the title — the title from the receipt, the hash with its copy button and explorer link, one quiet line; the same hash row in each step */
+.sg-lead .sg-ln{display:block}
+.sg-hrow,.sg-hx{display:inline-flex;align-items:center;flex-wrap:wrap;column-gap:var(--sh-6);row-gap:var(--s-1)}
+.sg-hx[hidden]{display:none}
+.sg-hs{font:var(--t-code);color:var(--text-2)}
+.icon-btn.sg-cp{width:var(--s-5);height:var(--s-5);color:var(--muted)}   /* the row keeps the 20 px line: the outcome takes the lead's height */
+.icon-btn.sg-cp:hover{color:var(--text);background:var(--tint)}
+.icon-btn.sg-cp svg{width:14px;height:14px}
+.sg-sr .sg-hx{justify-content:flex-end}
+@media (max-width:767px){.sg-sr .sg-hx{justify-content:flex-start}}
+.sg-hrow{min-height:var(--s-5)}
+.sg-lead .sg-hrow{display:flex}
+/* A4: the hash row of a step on its own row under the name (the name keeps the width); the outcome's hash in one line; the quiet lines in the button's place */
+.sg-steps li > .sg-hx{grid-column:2 / -1;justify-content:flex-start}
+.sg-head{position:relative}
+.sg-lead .sg-hrow{flex-wrap:nowrap;white-space:nowrap}
+.sg-after{margin:0;display:flex;flex-direction:column;gap:var(--s-1);font:var(--t-ui);color:var(--text-2);text-align:center}
+.sg-after[hidden]{display:none}
+@media (max-width:420px){.sg-hrow .sg-hl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}}   /* a phone: «Transaction» is read, not shown — the hash, copy and explorer keep one line */

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>document.documentElement.classList.add("js")</script>
+<title>Connect · Keydex AI</title>
+<meta name="description" content="Connect Keydex AI to Claude, Claude Code, ChatGPT, the OpenAI API, Cursor, VS Code or REST with one key.">
+<link rel="canonical" href="https://keydex.ai/connect">
+<meta name="kf-site" content="https://keydex.ai">
+<meta name="kf-model" content="openai/gpt-4.1-mini">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Keydex AI">
+<meta property="og:title" content="Connect · Keydex AI">
+<meta property="og:description" content="Connect Keydex AI to Claude, Claude Code, ChatGPT, the OpenAI API, Cursor, VS Code or REST with one key.">
+<meta property="og:url" content="https://keydex.ai/connect">
+<meta property="og:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Connect · Keydex AI">
+<meta name="twitter:description" content="Connect Keydex AI to Claude, Claude Code, ChatGPT, the OpenAI API, Cursor, VS Code or REST with one key.">
+<meta name="twitter:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta name="twitter:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="theme-color" content="#0f1013">
+<link rel="icon" href="/img/brand/favicon.svg?v=ba49f76b" type="image/svg+xml">
+<link rel="icon" href="/img/brand/favicon-32.png?v=7a31a482" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/img/brand/apple-touch-icon.png?v=7ccf5817">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/fonts/Inter-latin.woff2?v=c9407645" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/base.css?v=14960b84">
+<link rel="stylesheet" href="/css/pages.css?v=805645db">
+</head>
+<body data-page="connect">
+
+<!--HDR-->
+<a class="skip" href="#main" data-slot="ui.skip">Skip to content</a>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+    <nav class="nav" aria-label="Main" data-slot="nav.main" data-slot-attr="aria-label">
+      <div class="dd" data-dd="product">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-product"><span data-slot="nav.product">Product</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-product">
+          <div class="ddp-list">
+            <a class="ddi" href="/tools" data-prev="tools"><span class="ddi-ic ddi-km"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="ddi-t"><b data-slot="nav.product.tools">Tools</b><small data-slot="nav.product.tools.sub">Tools for stock tokens on Solana</small></span></a>
+            <a class="ddi" href="/models" data-prev="models"><span class="ddi-ic"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="16" height="16" loading="lazy" decoding="async"></span><span class="ddi-t"><b data-slot="nav.product.models">Models</b><small data-slot="nav.product.models.sub">Prices, context sizes and model IDs</small></span></a>
+            <a class="ddi" href="/stocks" data-prev="stocks"><span class="ddi-ic" style="--c:var(--c-port)"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 11.5 6 8l2.5 2.5 5-5"/><path d="M10.5 5.5h3v3"/></svg></span><span class="ddi-t"><b data-slot="nav.product.stocks">Stocks</b><small data-slot="nav.product.stocks.sub">Stock tokens and ETFs, with pool prices</small></span></a>
+            <a class="ddi" href="/connect" data-prev="connect"><span class="ddi-ic" style="--c:var(--c-trade)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.5v3M10 2.5v3M4.5 5.5h7v2.5a3.5 3.5 0 0 1-7 0zM8 11.5v2"/></svg></span><span class="ddi-t"><b data-slot="nav.product.connect">Connect</b><small data-slot="nav.product.connect.sub">Claude, ChatGPT, Cursor, VS Code and REST</small></span></a>
+          </div>
+        </div>
+      </div>
+      <div class="dd" data-dd="dev">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-dev"><span data-slot="nav.developers">Developers</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-dev">
+          <div class="ddp-list">
+            <a class="ddi" href="/docs" data-prev="docs"><span class="ddi-ic" style="--c:var(--c-quote)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v10H4.5A1.5 1.5 0 0 0 3 13.5zM3 13.5A1.5 1.5 0 0 0 4.5 15H13v-3"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.docs">Docs</b><small data-slot="nav.developers.docs.sub">Quickstart, API, MCP and tool reference</small></span></a>
+            <a class="ddi" href="/status" data-prev="status"><span class="ddi-ic" style="--c:var(--ok-fg)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8.5h3l1.5-4 3 8 1.5-4h4"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.status">Status</b><small data-slot="nav.developers.status.sub">Current state of each Keydex AI service</small></span></a>
+            <a class="ddi" href="/changelog" data-prev="changelog"><span class="ddi-ic" style="--c:var(--c-fund)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5.5 4h8M5.5 8h8M5.5 12h8M2.5 4h.01M2.5 8h.01M2.5 12h.01"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.changelog">Changelog</b><small data-slot="nav.developers.changelog.sub">Every release, newest first</small></span></a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-a" href="/pricing" data-slot="nav.pricing">Pricing</a>
+      <a class="nav-a" href="/security" data-slot="nav.security">Security</a>
+      <a class="nav-a" href="/token"><span data-slot="nav.token">Token</span></a>
+    </nav>
+    <div class="hdr-cta">
+      
+      <a class="btn btn-2 btn-nav" href="/docs" data-slot="nav.docs">Docs</a>
+      <a class="btn btn-1 btn-nav" href="/app" data-slot="nav.app">Open app</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet" data-slot="nav.menu" data-slot-attr="aria-label" aria-label="Open menu"><span></span></button>
+    <span hidden id="s-menu-close" data-slot="nav.menu.close">Close menu</span>
+  </div>
+</header>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" data-slot="nav.sheet" data-slot-attr="aria-label" aria-label="Site menu">
+  <p class="sheet-h" data-slot="nav.product">Product</p>
+  <a href="/tools" data-slot="nav.product.tools">Tools</a>
+  <a href="/models" data-slot="nav.product.models">Models</a>
+  <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+  <a href="/connect" data-slot="nav.product.connect">Connect</a>
+  <p class="sheet-h" data-slot="nav.developers">Developers</p>
+  <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+  <a href="/status" data-slot="nav.developers.status">Status</a>
+  <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+  <p class="sheet-h" data-slot="nav.more">More</p>
+  <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+  <a href="/security" data-slot="nav.security">Security</a>
+  <a href="/token"><span data-slot="nav.token">Token</span></a>
+  <a class="btn btn-1 btn-block" href="/app" data-slot="nav.app">Open app</a>
+</div>
+<!--/HDR-->
+
+<main id="main" class="pg">
+  <section class="pg-hero wide">
+    <p class="pg-kicker mc"><span class="dot"></span><span>/mcp</span></p>
+    <h1 class="pg-h1" data-slot="page.connect.title">Connect your agent</h1>
+    <p class="lead" data-slot="page.connect.lead">Add Keydex AI to your AI app or your code. Every option uses the same key.</p>
+  </section>
+  <section class="wide pg-body"><div class="cn">
+    <!-- W1-7: the live trial-key block, the same .cx-key as in the connect modals (place of WOW-03); ≥1280 it stands right of the steps -->
+    <div class="cn-side">
+      <div class="cx-key" id="cnKey">
+        <div class="cx-need" data-need>
+          <div class="cx-need-txt"><p class="h4" data-slot="page.connect.key.title">First, get a key</p><p class="modal-text" data-slot="page.connect.key.text">It goes into every step on this page.</p></div>
+          <div class="cx-need-act"><button class="btn btn-sm btn-1" type="button" data-trial><span data-slot="page.connect.key.cta">Get a trial key</span></button><a class="cx-signin" href="/app" data-slot="page.connect.key.signin">or sign in and create your own</a><a class="btn btn-sm btn-1 cx-signin-btn" href="/app" data-slot="page.connect.key.signin.cta" hidden>Sign in to create a key</a></div>
+        </div>
+        <div class="cx-have" data-have hidden>
+          <p class="cx-ready"><svg aria-hidden="true" class="ok-ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.5 12 13 4.5"/></svg><span data-slot="page.connect.key.ready">Key added to every step.</span><span class="chip dim num" data-keyexp data-slot="connect.trial.expires" data-hold data-tpl="Expires {time} UTC">—</span></p><p class="cx-keep muted" data-slot="connect.key.keep">Copy it now. Only this tab keeps it. Closing the tab removes it from this browser, but the key works until it expires.</p>
+          <div class="code inline cx-keycode"><pre class="cx-keyline"><span data-keyval id="cnKeyVal"></span></pre><button class="btn btn-sm btn-2 copy" type="button" data-copy-target="cnKeyVal" data-slot="app.key.copy" data-slot-attr="aria-label" aria-label="Copy key"><span data-slot="connect.copy">Copy</span></button></div>
+        </div>
+        <p class="cx-err" data-err role="alert" hidden></p><span hidden id="s-trial-cap" data-slot="page.connect.key.cap">No trial keys are left for now. Try again later.</span><span hidden id="s-trial-limit" data-slot="page.connect.key.limit">You’ve had 3 trial keys in the last 24 hours.</span><span hidden id="s-key-ready-sr" data-slot="connect.trial.ready.sr">Trial key ready and added to every step. Expires {time} UTC.</span>
+      </div>
+    </div>
+    <div class="cn-main">
+    <p class="cx-warn"><span class="chip wait"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg></span><span data-slot="page.connect.warning">Your key works like a password. Don’t share the URL, command or config.</span></p>
+    <div class="tabs cn-tabs" role="tablist" aria-label="Ways to connect" data-slot="page.connect.tabs" data-slot-attr="aria-label">
+      <button class="tab" type="button" role="tab" aria-selected="true" data-tab="claude"><img class="ic" src="/img/models/claude-color.svg?v=a3101f30" alt="" width="14" height="14"><span data-slot="page.connect.claude.title">Claude app</span></button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="code"><img class="ic" src="/img/models/claudecode-color.svg?v=670b3d8d" alt="" width="14" height="14"><span data-slot="page.connect.claudecode.title">Claude Code</span></button>
+      <!--FX:cli:<button class="tab" type="button" role="tab" aria-selected="false" data-tab="codex"><span class="i" style="--src:url(/img/models/codex.svg?v=d08b4e82)"></span><span data-slot="page.connect.codex.title">Codex</span></button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="gemini"><img class="ic" src="/img/models/gemini-color.svg?v=8ab0a9ba" alt="" width="14" height="14"><span data-slot="page.connect.gemini.title">Gemini CLI</span></button>:FX-->
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="chatgpt"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span><span data-slot="page.connect.chatgpt.title">ChatGPT</span></button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="api"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span><span data-slot="page.connect.openai.title">OpenAI API</span></button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="cursor"><span class="i" style="--src:url(/img/models/cursor.svg?v=0cb51bdd)"></span><span data-slot="page.connect.cursor.title">Cursor</span></button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="vscode"><span class="i" style="--src:url(/img/brand/vscode.png?v=9a751a97)"></span><span data-slot="page.connect.vscode.title">VS Code</span></button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="rest"><svg aria-hidden="true" class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 4 2 8l3.5 4M10.5 4 14 8l-3.5 4"/></svg><span data-slot="page.connect.rest.title">REST</span></button>
+    </div>
+    <div class="cn-panels">
+      <div class="cn-p" data-panel="claude"><ol class="cx-steps"><li data-slot="page.connect.claude.step1">Open Customize → Connectors.</li><li data-slot="page.connect.claude.step2">Choose + Add, then Add custom connector.</li><li data-slot="page.connect.claude.step3">Name it Keydex AI, paste this URL and choose Add.</li></ol><div class="code"><div class="code-h"><span class="code-l"><span data-slot="docs.code.mcpurl">MCP URL</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="url"></pre></div><ol class="cx-steps" start="4"><li data-slot="page.connect.claude.step4">In a chat, turn on Keydex AI under + → Connectors.</li></ol><p class="cx-note"><span data-slot="page.connect.claude.sub">claude.ai and Claude Desktop</span><span aria-hidden="true"> · </span><span data-slot="page.connect.claude.plan">Works where your Claude plan allows custom connectors.</span></p><div class="cx-done"><p class="muted" data-slot="page.connect.done">Then ask your agent:</p>
+      <button class="cx-prompt mono" type="button" data-copy-text><span data-slot="page.connect.done.prompt">What is NVDA trading at on Solana?</span><span class="cx-prompt-copy" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span></button></div></div>
+      <div class="cn-p" data-panel="code" hidden><!--F:nokey--><div class="cx-nokey"><p class="h4" data-slot="page.connect.nokey.title">Try it without a key</p><p class="cx-note" data-slot="page.connect.nokey.text">Read tools work without a key, 30 calls an hour. Trades and models need one.</p><div class="code"><div class="code-h"><span class="code-l"><span class="mono">claude mcp add</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="clinokey"></pre></div></div><!--/F:nokey--><ol class="cx-steps"><li data-slot="page.connect.claudecode.step1">Run this in your terminal.</li></ol><div class="code"><div class="code-h"><span class="code-l"><span class="mono">claude mcp add</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="cli"></pre></div><ol class="cx-steps" start="2"><li data-slot="page.connect.claudecode.step2">Start a new session in any folder. Tools are ready.</li></ol><p class="cx-note cx-hint"><span data-slot="page.connect.claudecode.refresh">New key? Run <code class="sf">claude mcp remove Keydex AI -s user</code> first.</span> <span data-slot="page.connect.claudecode.check">Check with <code class="sf">claude mcp list</code>: Keydex AI shows Connected.</span></p><div class="cx-done"><p class="muted" data-slot="page.connect.done">Then ask your agent:</p>
+      <button class="cx-prompt mono" type="button" data-copy-text><span data-slot="page.connect.done.prompt">What is NVDA trading at on Solana?</span><span class="cx-prompt-copy" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span></button></div></div>
+      <!--FX:cli:<div class="cn-p" data-panel="codex" hidden><ol class="cx-steps"><li data-slot="page.connect.codex.step1">Open your Codex config, ~/.codex/config.toml.</li><li data-slot="page.connect.codex.step2">Add Keydex AI with this URL and your key in the header.</li></ol><div class="code"><div class="code-h"><span class="code-l"><span class="mono">config.toml</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="codex"></pre></div><ol class="cx-steps" start="3"><li data-slot="page.connect.codex.step3">Save and start a new session. Tools are ready.</li></ol><p class="cx-note cx-hint" data-slot="page.connect.codex.note">Check with <code class="sf">codex mcp list</code>.</p><!~~FON:nokey~~><p class="cx-note cx-nk" data-slot="page.connect.codex.nokey">No key yet? Run <code class="sf">codex mcp add Keydex AI --url https://keydex.ai/mcp</code>. Reading works without one.</p><!~~/F:nokey~~><div class="cx-done"><p class="muted" data-slot="page.connect.done">Then ask your agent:</p>
+      <button class="cx-prompt mono" type="button" data-copy-text><span data-slot="page.connect.done.prompt">What is NVDA trading at on Solana?</span><span class="cx-prompt-copy" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span></button></div></div>
+      <div class="cn-p" data-panel="gemini" hidden><ol class="cx-steps"><li data-slot="page.connect.gemini.step1">Run this in your terminal.</li></ol><div class="code"><div class="code-h"><span class="code-l"><span class="mono">gemini mcp add</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="gemini"></pre></div><ol class="cx-steps" start="2"><li class="cx-hint" data-slot="page.connect.gemini.step2">Check with <code class="sf">gemini mcp list</code>.</li><li data-slot="page.connect.gemini.step3">Start Gemini in any folder. Tools are ready.</li></ol><div class="cx-done"><p class="muted" data-slot="page.connect.done">Then ask your agent:</p>
+      <button class="cx-prompt mono" type="button" data-copy-text><span data-slot="page.connect.done.prompt">What is NVDA trading at on Solana?</span><span class="cx-prompt-copy" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span></button></div></div>:FX-->
+      <div class="cn-p" data-panel="chatgpt" hidden><ol class="cx-steps"><li data-slot="page.connect.chatgpt.step1">Open Settings → Apps → Advanced settings.</li><li data-slot="page.connect.chatgpt.step2">Turn on Developer mode.</li><li data-slot="page.connect.chatgpt.step3">Choose Create app, name it Keydex AI and paste this URL.</li></ol><div class="code"><div class="code-h"><span class="code-l"><span data-slot="docs.code.mcpurl">MCP URL</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="url"></pre></div><ol class="cx-steps" start="4"><li data-slot="page.connect.chatgpt.step4">Choose no authentication, confirm and create.</li><li data-slot="page.connect.chatgpt.step5">In a chat, pick Developer mode from the + menu and turn on keyfo.</li></ol><p class="cx-note" data-slot="page.connect.chatgpt.plan">Works where your ChatGPT plan allows developer mode.</p><div class="cx-done"><p class="muted" data-slot="page.connect.done">Then ask your agent:</p>
+      <button class="cx-prompt mono" type="button" data-copy-text><span data-slot="page.connect.done.prompt">What is NVDA trading at on Solana?</span><span class="cx-prompt-copy" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span></button></div></div>
+      <div class="cn-p" data-panel="api" hidden><ol class="cx-steps"><li data-slot="page.connect.openai.step1">Add Keydex AI as an MCP tool in the Responses API.</li></ol><div class="code"><div class="code-h"><span class="code-l"><span class="mono">tools[ ]</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="json"></pre></div><ol class="cx-steps" start="2"><li data-slot="page.connect.openai.step2">Your key goes in the Authorization header. Keep it on your server.</li></ol></div>
+      <div class="cn-p" data-panel="cursor" hidden><ol class="cx-steps"><li data-slot="page.connect.cursor.step1">Open your MCP config in Cursor.</li><li data-slot="page.connect.cursor.step2">Add Keydex AI with this URL and your key in the header.</li></ol><div class="code"><div class="code-h"><span class="code-l"><span class="mono">~/.cursor/mcp.json</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="cursor"></pre></div><ol class="cx-steps" start="3"><li data-slot="page.connect.cursor.step3">Save. Cursor lists the Keydex AI tools.</li></ol><div class="cx-done"><p class="muted" data-slot="page.connect.done">Then ask your agent:</p>
+      <button class="cx-prompt mono" type="button" data-copy-text><span data-slot="page.connect.done.prompt">What is NVDA trading at on Solana?</span><span class="cx-prompt-copy" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span></button></div></div>
+      <div class="cn-p" data-panel="vscode" hidden><ol class="cx-steps"><li data-slot="page.connect.vscode.step1">Open your MCP config in VS Code.</li><li data-slot="page.connect.vscode.step2">Add Keydex AI with this URL and your key in the header.</li></ol><div class="code"><div class="code-h"><span class="code-l"><span class="mono">.vscode/mcp.json</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="vscode"></pre></div><ol class="cx-steps" start="3"><li data-slot="page.connect.vscode.step3">Save. VS Code lists the Keydex AI tools.</li></ol><div class="cx-done"><p class="muted" data-slot="page.connect.done">Then ask your agent:</p>
+      <button class="cx-prompt mono" type="button" data-copy-text><span data-slot="page.connect.done.prompt">What is NVDA trading at on Solana?</span><span class="cx-prompt-copy" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span></button></div></div>
+      <div class="cn-p" data-panel="rest" hidden><ol class="cx-steps"><li data-slot="page.connect.rest.step1">Call models at /v1/chat/completions with any OpenAI SDK.</li></ol><div class="code"><div class="code-h"><span class="code-l"><span data-slot="docs.code.curl">cURL</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="chat"></pre></div><ol class="cx-steps" start="2"><li><a class="link" href="/docs#tools" data-slot="page.connect.rest.step2">Call any tool at /v1/tools/{name} with the same key.</a></li></ol><div class="code"><div class="code-h"><span class="code-l"><span data-slot="docs.code.curl">cURL</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="rest"></pre></div></div>
+    </div>
+    <!--F:prompts--><div class="cn-tasks" id="cnTasks"><h2 class="h4" id="cnTasksT" data-slot="page.connect.prompts.title">Ready-made prompts</h2><p class="cx-note" data-slot="page.connect.prompts.lead">Copy one into your agent’s chat. Apps that list MCP prompts also show them as ready-made commands.</p>
+      <div class="cn-chips" role="group" aria-labelledby="cnTasksT"><button type="button" aria-pressed="true"><span data-slot="page.connect.prompt.buy_stock">Buy a stock</span><span hidden data-slot="page.connect.prompt.buy_stock.text">Quote TSLA, then build a $50 buy for my wallet and wait for my OK.</span></button><button type="button" aria-pressed="false"><span data-slot="page.connect.prompt.portfolio_checkup">Portfolio check-up</span><span hidden data-slot="page.connect.prompt.portfolio_checkup.text">Check my stock portfolio and show each position’s price and 24h change.</span></button><button type="button" aria-pressed="false"><span data-slot="page.connect.prompt.rebalance">Rebalance</span><span hidden data-slot="page.connect.prompt.rebalance.text">Rebalance my portfolio to 50% SPY and 50% QQQ. Show the trades first.</span></button><button type="button" aria-pressed="false"><span data-slot="page.connect.prompt.fund_my_agent">Fund my agent</span><span hidden data-slot="page.connect.prompt.fund_my_agent.text">Fund my agent wallet with <span class="nw">0.05 <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span></span> from Base.</span></button><button type="button" aria-pressed="false"><span data-slot="page.connect.prompt.market_now">Market now</span><span hidden data-slot="page.connect.prompt.market_now.text">What is moving today? Show the biggest movers and where SPY and QQQ stand.</span></button><button type="button" aria-pressed="false" data-feature="morpho"><span data-slot="page.connect.prompt.usdg_vault">Find <span class="nw">a <span class="tkr"><img src="/img/tokens/usdg.png?v=a4bd50f0" alt="" width="20" height="20" loading="lazy">USDG</span></span> vault</span><span hidden data-slot="page.connect.prompt.usdg_vault.text">Compare the <span class="nw">Morpho <span class="tkr"><img src="/img/tokens/usdg.png?v=a4bd50f0" alt="" width="20" height="20" loading="lazy">USDG</span></span> vaults for my wallet and build a deposit for the one I pick.</span></button><button type="button" aria-pressed="false" data-feature="models"><span data-slot="page.connect.prompt.cheapest_model">Cheapest model</span><span hidden data-slot="page.connect.prompt.cheapest_model.text">Find the cheapest model that can summarize a long article, and tell me what a call costs.</span></button><button type="button" aria-pressed="false" data-feature="wallet"><span data-slot="page.connect.prompt.check_approvals">Check approvals</span><span hidden data-slot="page.connect.prompt.check_approvals.text">Which token approvals does my wallet still have open? Show them and build the revokes I pick.</span></button><button type="button" aria-pressed="false" data-feature="rhj"><span data-slot="page.connect.prompt.dividends_ahead">Dividends ahead</span><span hidden data-slot="page.connect.prompt.dividends_ahead.text">Which of my stocks have a dividend or split coming up?</span></button></div>
+      <button class="cx-prompt mono" type="button" data-copy-text aria-live="polite"><span data-slot="page.connect.prompt.buy_stock.text">Quote TSLA, then build a $50 buy for my wallet and wait for my OK.</span><span class="cx-prompt-copy" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span></button>
+      <p class="cx-note" data-slot="page.connect.prompts.hint">If Claude can’t see the Keydex AI tools, ask it to load them, then repeat the task.</p>
+    </div><!--/F:prompts-->
+    </div>
+  </div></section>
+</main>
+
+<!--FTR-->
+<footer class="ftr qrows">
+  <div class="wide">
+    <div class="ftr-grid">
+      <div class="ftr-col ftr-brand">
+        <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+        <p class="ftr-brandline" data-slot="footer.col.line">AI models and stock trading for your agent.</p>
+        <div class="ftr-ca" data-postlaunch>   <!-- owner 09.11: the contract line shows only once /health says launched -->
+          <span class="ftr-ca-h"><span class="tk keyfo" aria-hidden="true"></span><span data-slot="footer.ca.label">Token contract</span></span>
+          <span class="addr set" id="caAddr">live now on pump.fun</span>
+          <button class="btn btn-sm btn-2 copy" id="caCopy" type="button" data-copy-target="caAddr"><span data-slot="connect.copy">Copy</span></button>
+        </div>
+      </div>
+      <nav class="ftr-col" aria-labelledby="fh-product">
+        <p class="ftr-h" id="fh-product" data-slot="footer.col.product.title">Product</p>
+        <a href="/tools" data-slot="nav.product.tools">Tools</a>
+        <a href="/models" data-slot="nav.product.models">Models</a>
+        <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+        <a href="/connect" data-slot="nav.product.connect">Connect</a>
+        <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-developers">
+        <p class="ftr-h" id="fh-developers" data-slot="footer.col.developers.title">Developers</p>
+        <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+        <a href="/status" data-slot="nav.developers.status">Status</a>
+        <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+        <a href="/app" data-slot="nav.app">Open app</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-trust">
+        <p class="ftr-h" id="fh-trust" data-slot="footer.col.trust.title">Trust</p>
+        <a href="/security" data-slot="nav.security">Security</a>
+        <a href="/privacy" data-slot="page.privacy.title">Privacy</a>
+        <a href="/terms" data-slot="page.terms.title">Terms</a>
+        <a href="/risks" data-slot="footer.risks">Risks</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-community" data-x-link>
+        <p class="ftr-h" id="fh-community" data-slot="footer.col.community.title">Community</p>
+        <a class="ftr-x" href="https://x.com/keydexai" data-x-link target="_blank" rel="noopener" data-slot="footer.links.x" data-slot-attr="aria-label" aria-label="Keydex AI on X"><span class="i" style="--src:url(/img/brand/x.svg?v=be03adbf)"></span></a>
+      </nav>
+    </div>
+    <div class="ftr-meta">
+      <span data-slot="footer.copy">© 2026 Keydex AI</span>
+      <span class="ftr-live" data-state="checking"><i></i><a href="/status" id="ftrLive" data-slot="page.status.all.checking">Checking…</a></span>
+    </div>
+    <p class="ftr-disc" data-slot="footer.disclaimer">Independent project built on Solana. Stock tokens are not available to US persons and are restricted in Canada, the UK, Switzerland and other countries. This service shows data and builds transactions. It does not sell stock tokens. Nothing on Keydex AI is investment advice.</p>
+    <!--F:credits--><p class="ftr-disc ftr-credit" data-slot="footer.photos">Archive photos: NASA, Library of Congress, U.S. Army.</p><!--/F:credits-->
+  </div>
+</footer>
+<div class="sr" aria-live="polite" id="kfLive"></div>
+<div class="toasts" id="kfToasts" aria-live="polite"></div>
+<!--/FTR-->
+
+<div hidden id="str"><span id="s-code-region" data-slot="ui.code.region">{label} code</span><span id="s-copy" data-slot="connect.copy">Copy</span><span id="s-copied" data-slot="connect.copied">Copied</span><span id="s-error" data-slot="demo.error">The request didn’t go through.</span><span id="s-block" data-slot="hero.facts">Latest block {n}</span><span id="s-trial-limit-h" data-slot="connect.trial.limit.h">You’ve had 3 trial keys in 24 hours. Next one in {h} h.</span><span id="s-trial-limit-n" data-slot="connect.trial.limit.n">You’ve had 3 trial keys in 24 hours. Next one in {n} min.</span><span id="s-ftr-ok" data-slot="page.status.all.ok">All systems operational</span><span id="s-ftr-deg" data-slot="page.status.all.degraded">Partially degraded service</span><span id="s-ftr-down" data-slot="page.status.all.down">Some systems down</span><span id="s-ftr-chk" data-slot="page.status.all.checking">Checking…</span><span id="s-ftr-routes" data-slot="page.status.all.routes">Routes busy, everything else operational</span></div>
+<script src="/js/common.js?v=644ec142"></script>
+<script src="/js/pages.js?v=76356316"></script>
+</body>
+</html>

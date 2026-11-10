@@ -1,0 +1,769 @@
+/* Keyfo — tokens and shared components. research/premium/PLAN.md §1.2 (one source of truth; lint: site/build/lint.py) */
+@font-face{font-family:"Geist";src:url(/fonts/Geist-Variable.woff2?v=184d71e1) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Inter";src:url(/fonts/Inter-latin.woff2?v=c9407645) format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0000-002C,U+002E-2010,U+2012-FFFF}   /* OFL 1.1 (fonts/OFL-Inter.txt); Inter draws the hyphen 0.65 em wide («sign - in»): U+002D and U+2011 come from Geist */
+@font-face{font-family:"Instrument Serif";src:url(/fonts/InstrumentSerif-Italic-latin.woff2?v=6ee678c3) format("woff2");font-style:italic;font-weight:400;font-display:swap}   /* OFL 1.1 (fonts/OFL-InstrumentSerif.txt) */
+@font-face{font-family:"Geist Mono";src:url(/fonts/GeistMono-Variable.woff2?v=6c16fc51) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Fallback";src:local("Arial");size-adjust:105.5%;ascent-override:88.9%;descent-override:21.3%;line-gap-override:9.7%}
+@font-face{font-family:"Geist Mono Fallback";src:local("Menlo"),local("Consolas"),local("Courier New");size-adjust:100%;ascent-override:95.5%;descent-override:24.5%}
+
+:root{
+  color-scheme:dark;
+  /* ── surfaces: brightness steps, no shadows ── */
+  --bg:#0f1013; --panel:#0b0c0f; --disc:#1b1c1f; --card:#16171b; --raise:#1b1c1f; --ctl:#232323; --ctl-h:#2b2c30; --paper:#ecece8;
+  /* ── Q1 (QFEX language, owner 09.11; next/ref-qfex/DESIGN.md §3): the white pill is the one main action, boards are 85 % with a hairline ── */
+  --inverse:#fff; --inverse-h:rgba(255,255,255,.9); --on-inverse:#0f1013; --on-inverse-2:#2f323a; --board:rgba(9,11,12,.85); --board-solid:#0c0d10; --line-board:rgba(255,255,255,.18); --bar-hi:rgba(255,255,255,.92); --bar-lo:rgba(255,255,255,.65);
+  /* archive photos (DESIGN §2.2): darkening only where the text stands */
+  --ph-shade:linear-gradient(180deg,rgba(0,0,0,.10) 30%,rgba(0,0,0,.20) 55%,rgba(0,0,0,.9));
+  --ph-shade-hero:linear-gradient(180deg,rgba(15,16,19,.58),rgba(15,16,19,.70) 62%,#0f1013);
+  --ph-shade-text:linear-gradient(180deg,rgba(0,0,0,.06) 12%,rgba(0,0,0,.58) 42%,rgba(9,11,12,.94) 66%);
+  --ph-shade-card:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.30) 60%,rgba(0,0,0,.62));
+  /* ── brand accent: fills carry white text, 8.0:1. --accent-fg = small text, lines and rings on dark: 8.3:1 on --bg, 7.3:1 on --card, 5.9:1 on --ctl, 3.4:1 against --accent (research/x-source/refs.md) ── */
+  --fs-code-in:.95em;   /* code inside running text: a step under the text size */
+  --accent:#1A2DEB; --accent-h:#2E41F5; --accent-a:#1524C2; --accent-fg:#95A1FF; --on-accent:#fff; --k-field:var(--accent);
+  --tint:rgba(255,255,255,.06); --glass:rgba(12,13,16,.94); --scrim:rgba(0,0,0,.72);
+  /* ── text ── */
+  --text:#fff; --text-h:#e6e6e6; --text-2:#c3c3c5; --muted:#b6b6b7; --fine:#8d8d90; --ink-2:#62625d;
+  /* ── lines ── */
+  --line:#39383a; --line-ctl:rgba(255,255,255,.15); --decor:rgba(255,255,255,.34); --focus:var(--accent-fg); --line-input:#6e6e6e;
+  /* ── status ── */
+  --ok:#1f8a65; --ok-fg:#3fcf8e; --err:#cf2d56; --err-fg:#f0567c; --wait:#e8a33d; --wait-ink:#8a5a12;
+  /* ── code ── */
+  --code-fg:#e1e4e8; --code-kw:var(--text); --code-str:var(--text-2); --code-dim:#8b949e;
+  /* ── 4 tools ── */
+  --c-port:var(--text-2); --c-quote:var(--text-2); --c-trade:var(--text-2); --c-fund:var(--text-2);   /* monochrome: colour stays for the brand and for status */
+
+  /* ── type ── */
+  --font-sans:"Inter","Geist","Geist Fallback",system-ui,sans-serif;   /* Q1: Inter; the hyphen and what its latin subset lacks come from Geist (unicode-range) */
+  --font-serif:"Instrument Serif",Georgia,serif;   /* Q1: the accent phrase of a heading, italic */
+  --font-mono:"Geist Mono","Geist Mono Fallback",ui-monospace,monospace;
+  --t-hero:  500 clamp(44px, 7.2vw, 112px)/.92 var(--font-sans);
+  --t-h1:    500 clamp(40px, 5vw, 72px)/1 var(--font-sans);
+  --t-h2:    500 clamp(36px, 4.6vw, 64px)/1 var(--font-sans);
+  --t-h3:    500 24px/32px var(--font-sans);
+  --t-lead:  400 18px/28px var(--font-sans);
+  --t-body:  400 16px/26px var(--font-sans);
+  --t-title: 500 16px/26px var(--font-sans);
+  --t-ui:    400 14px/20px var(--font-sans);
+  --t-sm:    400 13px/20px var(--font-sans);
+  --t-xs:    500 12px/16px var(--font-sans);
+  --t-label: 500 11px/16px var(--font-mono);
+  --t-code:  400 13px/20px var(--font-mono);
+  --t-num:   500 clamp(40px, 4.6vw, 72px)/1 var(--font-sans);
+  --t-board: 500 clamp(40px, 4vw, 56px)/1 var(--font-sans);   /* a big number on a board */
+  --t-stat:  500 clamp(32px, 4.4vw, 72px)/1 var(--font-sans);   /* the landing facts: 4 cells of the wide container */
+  --t-og: 500 96px/.96 var(--font-sans);   /* og.png: the hero title at 1200 × 630 */
+  --t-app-num: 500 clamp(30px, 3vw, 40px)/1.1 var(--font-sans);   /* the console's numbers: a card is ~520 px wide */
+  --t-step:  500 clamp(18px, 1.8vw, 26px)/1 var(--font-sans);
+  --t-card:  500 clamp(24px, 2.2vw, 32px)/1.1 var(--font-sans);
+  --t-eyebrow: 500 13px/16px var(--font-sans);
+  --t-tape:  500 16px/1 var(--font-sans);
+  --t-big:   500 96px/96px var(--font-sans);   /* og.png only */
+  --tr-tight:-.01em; --tr-caps:.08em; --tr-display:-.035em; --lh-hero-acc:.98; --tk-txt-y:-1.5px; --cl-mono-y:1.25px; --tr-hero:-.045em; --tr-serif:-.02em; --tr-eyebrow:.14em;
+  --fw-4:400; --fw-5:500; --fw-6:600;
+  --lh-1:1;
+
+  /* ── spacing: 4-grid ── */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px; --s-8:32px; --s-10:40px; --s-12:48px; --s-16:64px; --s-24:96px;
+  --sh-2:2px; --sh-6:6px; --sh-10:10px; --sh-14:14px;
+  --sec-pair:40px; --sec:144px; --sec-chapter:192px;
+
+  /* ── radii ── */
+  --r-xs:0; --r-sm:0; --r-md:0; --r-in:0; --r-card:0; --r-pill:999px;   /* Q1: square corners; pills stay for buttons, chips and discs */ --r-device:52px;
+
+  /* ── control heights ── */
+  --h-chip:20px; --h-sm:28px; --h-tab:32px; --h-item:36px; --h-nav:40px; --h-lg:44px; --hdr:64px;
+  --d-xs:16px; --d-sm:20px; --d-md:28px; --d-lg:40px;
+
+  /* ── motion ── */
+  --dur-1:150ms; --dur-2:200ms; --dur-3:280ms; --dur-4:400ms; --dur-5:600ms; --dur-6:900ms; --dur-7:1200ms;
+  --dur-spin:1200ms; --dur-pulse:1300ms; --dur-marquee:60s; --dur-tape:80s; --dur-h:240ms;
+  /* mascot (compositor engine, v2 C-motion §4) */
+  --dur-breathe:1350ms; --dur-gaze:440ms; --dur-follow:180ms; --dur-turn-in:170ms; --dur-turn-out:280ms; --dur-squint:600ms;
+  /* WOW moments — on the scale (PLAN-v2 WOW-0); --dur-draw is the only exception */
+  --stagger:60ms; --dur-roll:var(--dur-5); --dur-decode:var(--dur-5); --dur-draw:1600ms;
+  --ease-std:cubic-bezier(.4,0,.2,1);
+  --ease-expo:cubic-bezier(.16,1,.3,1);   /* next/ref-qfex/motion: arrow buttons, photos; the smooth heights (common.js smooth) */
+  --ease-out:cubic-bezier(0,0,.2,1);
+  --ease-entry:cubic-bezier(.22,1,.36,1);
+  --ease-pop:cubic-bezier(.2,.9,.3,1.15);
+  --ease-io:cubic-bezier(.4,0,.6,1);
+  --ease-lin:linear;
+  --ease-sine:cubic-bezier(.37,0,.63,1);
+  --ease-back:cubic-bezier(.34,1.56,.64,1);
+  --ease-back-soft:cubic-bezier(.34,1.3,.64,1);
+  --ease-cos-in:cubic-bezier(.45,0,.95,.55);
+
+  /* ── grid ── */
+  --wrap:1024px; --wide:1232px; --docs:1680px; --gut:24px;
+  --qcell:calc(min(100vw - var(--gut) * 2, var(--wide)) / 32); --hair-o:-1px;   /* Q1 graph paper (DESIGN §5.2): 32 cells across the .wide container ≥768, 8 below */
+}
+@media (max-width:767px){:root{
+  --t-h3:500 20px/28px var(--font-sans); --t-lead:400 16px/26px var(--font-sans); --t-num:500 36px/40px var(--font-sans);
+  --sec:96px; --sec-chapter:128px; --gut:16px; --qcell:calc((100vw - var(--gut) * 2) / 8) }}
+@media (max-width:359px){:root{ --t-hero:500 40px/.92 var(--font-sans) }}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--text);font:var(--t-body);font-feature-settings:"calt" 0;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+h1,h2,h3,.h2,.h2p,.h3,.pg-h1{text-wrap:balance}
+p,li,dd,figcaption,.lead{text-wrap:pretty}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mono{font-family:var(--font-mono)}
+.num{font-variant-numeric:tabular-nums!important}
+/* every digit on the site is tabular: numbers never jitter while they update (06 §3); font shorthands would reset it, hence !important */
+*,*::before,*::after{font-variant-numeric:tabular-nums!important}
+.muted{color:var(--muted)}
+.unk{color:var(--muted)}
+.wrap{width:100%;max-width:calc(var(--wrap) + var(--gut)*2);margin:0 auto;padding:0 var(--gut)}
+.wide{width:100%;max-width:calc(var(--wide) + var(--gut)*2);margin:0 auto;padding:0 var(--gut)}
+.hdr-in,.wrap,.wide{padding-left:max(var(--gut),env(safe-area-inset-left));padding-right:max(var(--gut),env(safe-area-inset-right))}
+
+/* type scale */
+.h1{font:var(--t-h1);letter-spacing:var(--tr-tight);margin:0}
+.h2{font:var(--t-h2);letter-spacing:var(--tr-tight);margin:0}
+.h2p{font:var(--t-h1);letter-spacing:var(--tr-tight);margin:0}
+.h3{font:var(--t-h3);letter-spacing:var(--tr-tight);margin:0}
+.h4{font:var(--t-title);margin:0}
+.lead{font:var(--t-lead);color:var(--muted);margin:0}
+.label{font:var(--t-label);letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--muted)}
+
+/* V1-11: paused by the visitor — every CSS animation holds its frame */
+[data-motion=off] *,[data-motion=off] *::before,[data-motion=off] *::after{animation-play-state:paused!important}
+/* icons: mono svg via mask, coloured via currentColor */
+.i{display:inline-block;flex:none;width:1em;height:1em;background:currentColor;-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat}
+.ic{display:inline-block;flex:none;width:1em;height:1em;object-fit:contain}
+
+/* ticker / logo on a disc: diameters 20 / 28 / 40, mark 64 % (assets carry an 18 % field) */
+.tk,.logo-t{display:inline-grid;place-items:center;flex:none;width:var(--d-sm);height:var(--d-sm);border-radius:var(--r-pill);background:var(--disc);overflow:hidden;vertical-align:middle}
+.tk img,.logo-t img{width:100%;height:100%;object-fit:contain}
+img.tk,img.logo-t{object-fit:contain}
+.tk.md,.logo-t.md{width:var(--d-md);height:var(--d-md)}
+.tk.lg,.logo-t.lg{width:var(--d-lg);height:var(--d-lg)}
+.tk.xs{width:var(--d-xs);height:var(--d-xs)}
+.tk.txt{--tkd:var(--d-sm);font-family:var(--font-sans);font-weight:var(--fw-6);font-size:calc(var(--tkd) * .32);line-height:var(--lh-1);letter-spacing:var(--tr-tight);color:var(--text);background:var(--disc)}
+.tk.md.txt{--tkd:var(--d-md)}.tk.lg.txt{--tkd:var(--d-lg)}.tk.xs.txt{--tkd:var(--d-xs)}
+.tk.xl{width:44px;height:44px}
+.kfw{white-space:nowrap}
+.tk-h1{display:flex;align-items:center;gap:var(--s-3)}
+@media (max-width:767px){.tk.xl{width:32px;height:32px}}
+img.tk.full{background:none}
+.tk.keyfo{background:var(--k-field)}
+.tk.keyfo::before{content:"";width:100%;height:100%;background:var(--text);-webkit-mask:url(/img/tokens/keyfo-mark.svg?v=d4525333) center/contain no-repeat;mask:url(/img/tokens/keyfo-mark.svg?v=d4525333) center/contain no-repeat}
+.ph-l{display:inline-grid;place-items:center;flex:none;width:var(--d-sm);height:var(--d-sm);border-radius:var(--r-xs);background:var(--disc);color:var(--text-2);font:var(--t-label);text-transform:uppercase}
+
+/* buttons — pills only: L 44 · M 40 · S 28 */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:var(--s-2);height:var(--h-lg);padding:0 var(--s-6);border-radius:var(--r-pill);font:var(--t-body);white-space:nowrap;user-select:none}
+.btn .i,.btn .ic{width:18px;height:18px}
+.btn-1{background:var(--accent);color:var(--on-accent);--spin:var(--on-accent)}
+.btn-1:hover{background:var(--accent-h)}
+.btn-n{background:var(--text);color:var(--bg);--spin:var(--bg)}   /* a partner's button stays neutral: its logo never sits on our blue */
+.btn-n:hover,.btn-n:active{background:var(--text-h)}
+.cta-own .hdr-cta .btn-1{background:var(--raise);color:var(--text-2)}   /* one blue action on a screen: the header steps back while the page shows its own */
+.cta-own .hdr-cta .btn-1:hover{background:var(--ctl);color:var(--text)}
+.btn-2{background:var(--ctl);color:var(--text-2);--spin:var(--text-2)}
+.btn-2:hover{background:var(--ctl-h);color:var(--text)}
+.btn-nav{height:var(--h-nav);padding:0 var(--s-4);font:var(--t-ui);font-weight:var(--fw-5)}
+.btn-nav.btn-2{background:var(--raise)}
+.btn-nav.btn-2:hover{background:var(--ctl)}
+.btn-sm{height:var(--h-sm);padding:0 var(--s-3);font:var(--t-sm);font-weight:var(--fw-5);gap:var(--sh-6)}
+.btn-sm.btn-2{background:var(--raise);color:var(--text-2)}
+.btn-sm.btn-2:hover{background:var(--ctl);color:var(--text)}
+.btn-sm .i,.btn-sm .ic{width:14px;height:14px}
+.btn-block{width:100%}
+.btn-danger{background:var(--ctl);color:var(--err-fg);--spin:var(--err-fg)}
+.btn-danger:hover{background:var(--ctl-h)}
+.btn:active:not([disabled]):not([aria-busy=true]){transform:scale(.98)}
+.btn-1:active{background:var(--accent-a)}
+.btn-2:active,.btn-sm.btn-2:active{background:var(--ctl-h)}
+/* disabled: one quiet step (--raise / --muted, 5:1 — readable, clearly off), no hover, cursor not-allowed */
+.btn[disabled]:not([aria-busy=true]),.btn[aria-disabled=true],.btn[disabled]:not([aria-busy=true]):hover,.btn[aria-disabled=true]:hover{background:var(--raise);color:var(--muted);box-shadow:none;cursor:not-allowed}
+.btn[aria-busy=true]{opacity:1;color:transparent;pointer-events:none}
+.btn[aria-busy=true] > *{visibility:hidden}
+.btn[aria-busy=true]::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;margin:calc(-1 * var(--s-2) + 1px) 0 0 calc(-1 * var(--s-2) + 1px);border-radius:var(--r-pill);border:1.5px solid var(--spin,var(--text));border-top-color:transparent;animation:spin var(--dur-spin) var(--ease-lin) infinite}
+@media (max-width:767px){.btn:not(.btn-sm):not(.btn-nav){height:var(--h-lg);font:var(--t-body);padding:0 var(--s-5)}}
+.link{color:var(--accent-fg);text-decoration:underline;text-decoration-color:var(--accent-fg);text-underline-offset:3px}
+.link:hover{text-decoration-color:var(--text)}
+
+/* one transition rule for every control (P1-22) */
+.btn,.tab,.tk-chip,.seg button,.prov button,.cn-chips button,.side-a,.nav-a,.nav-t,.ftr-col a,.dots-btn,.mx-cp,.ddi,.modal-x,.icon-btn,.th-sort,.menu button,.cx-prompt,.wlist button,.menu-btn,.ftr-x,.dnav a,.link-more,.input{transition:background-color var(--dur-1) var(--ease-std),color var(--dur-1) var(--ease-std),box-shadow var(--dur-1) var(--ease-std),transform var(--dur-1) var(--ease-std),opacity var(--dur-1) var(--ease-std)}
+
+/* icon buttons: 28 in rows, 36 for ✕ / ⋯ / X */
+.icon-btn{position:relative;display:inline-grid;place-items:center;flex:none;width:var(--h-sm);height:var(--h-sm);border-radius:var(--r-pill);color:var(--muted)}
+.icon-btn:hover{background:var(--raise);color:var(--text)}
+.icon-btn:active{background:var(--ctl);transform:scale(.98)}
+.icon-btn svg{width:14px;height:14px}
+.icon-btn::after{content:"";position:absolute;inset:calc(-1 * var(--s-2))}
+.is-copied svg{display:none}
+.is-copied::before{content:"";width:14px;height:14px;background:var(--ok-fg);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5 6.5 12 13 4.5'/%3E%3C/svg%3E") center/contain no-repeat}
+
+/* chips — badge 20 */
+.chip{display:inline-flex;align-items:center;gap:var(--sh-6);height:var(--h-chip);padding:0 var(--s-2);border-radius:var(--r-pill);font:var(--t-xs);letter-spacing:0;white-space:nowrap}
+.chip.ok{color:var(--ok-fg);background:color-mix(in srgb,var(--ok) 18%,transparent)}
+.chip.err{color:var(--err-fg);background:color-mix(in srgb,var(--err) 16%,transparent)}
+.chip.wait{color:var(--wait);background:color-mix(in srgb,var(--wait) 14%,transparent)}
+.cx-warn .chip.wait,.prm-h .chip.wait,.warn .chip.wait,.once-chip .chip.wait{color:var(--text-2);background:var(--tint)}   /* a note, not a degraded state: amber stays for status */
+.chip.dim{color:var(--text-2);background:var(--tint)}
+.chip.mono{font-family:var(--font-mono)}
+
+/* header */
+.hdr{position:fixed;inset:0 0 auto 0;z-index:40;height:var(--hdr);background:var(--bg);border-bottom:1px solid transparent;transition:border-color var(--dur-2) var(--ease-std)}
+.hdr.scrolled{border-bottom-color:var(--line)}
+.hdr-in{position:relative;height:var(--hdr);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:var(--s-6);max-width:calc(var(--wide) + var(--gut)*2);margin:0 auto;padding:0 var(--gut)}
+.brand{display:inline-flex;align-items:center;gap:var(--s-2);min-height:var(--h-lg);flex:none;color:var(--text)}
+.bm{display:block;width:24px;height:24px;flex:none;border-radius:var(--r-pill);background:var(--k-field);color:var(--text);position:relative;top:-3.5px}   /* the X avatar sign before the word; its centre on the centre of the word's ascenders (baseline − 8.5 px) */
+.wm{display:block;width:60px;height:22px;flex:none;position:relative;top:-2px}   /* outlines, Geist 560 with the drawn k: nothing waits for a font; the baseline sits 18 px down the box, on the menu's */
+.kk{display:block;width:100%;height:100%}   /* the sign: white k, the field comes from the holder (--k-field) */
+/* mascot A "Keyhole": paper = currentColor, keyhole = background */
+.kmascot,.kstatic{display:block;overflow:visible}
+.km-p{fill:var(--km-body,var(--accent))}   /* the Keyhole in the brand colour; the keyhole keeps its host colour (--km-eye) */
+.km-i{fill:var(--km-eye,var(--bg))}
+/* compositor mascot (js/mascot.js): breathing = CSS animation, gaze = transition, squint/turn/wake = WAAPI — transform/opacity only */
+.kmc,.kmc-t,.kmc-b{display:block;position:relative;width:100%;height:100%;transform-origin:50% 50%}
+.kmc-e,.kmc-l{position:absolute;inset:0;transform-origin:50% 50%}
+.kmc-l{transform-origin:50% 33%}
+.kmc-l>svg{position:absolute;inset:0;width:100%;height:100%}
+.fa-dst .kmc,.pav .kmc{width:auto;height:auto}
+.kmc-b{animation:kmc-breathe var(--dur-breathe) var(--ease-sine) var(--kmc-ph,0s) infinite alternate}
+.kmc.zz .kmc-b{animation-play-state:paused}
+.kmc.still .kmc-b{animation:none}
+.kmc-e{transition:transform var(--dur-gaze) var(--ease-entry)}
+.kmc.fol .kmc-e{transition-duration:var(--dur-follow)}
+@keyframes kmc-breathe{from{transform:scale(.988)}to{transform:scale(1.012)}}
+@media (prefers-reduced-motion:reduce){.kmc-b{animation:none}.kmc-e{transition:none}}
+.nav{display:flex;gap:var(--sh-2);align-items:center;margin:0 auto}
+.nav-a,.nav-t{position:relative;height:var(--h-item);display:inline-flex;align-items:center;gap:var(--sh-6);padding:0 var(--s-3);border-radius:var(--r-pill);font:var(--t-ui);font-weight:var(--fw-5);color:var(--text-2);white-space:nowrap}
+.nav-a:hover,.nav-t:hover,.dd.open .nav-t{color:var(--text);background:var(--raise)}
+.nav-a:active,.nav-t:active{background:var(--ctl);transform:scale(.98)}
+.nav-a[aria-current=page]{color:var(--accent-fg)}
+.chev{width:10px;height:10px;transition:transform var(--dur-2) var(--ease-entry)}
+.dd{position:relative}
+.dd.open .chev{transform:rotate(180deg)}
+.ddp{position:absolute;left:calc(-1 * var(--s-2));top:calc(100% + 10px);display:flex;width:620px;padding:var(--s-2);border-radius:var(--r-in);background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-out),visibility 0s var(--ease-lin) var(--dur-1);z-index:50}
+.ddp::before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}
+.dd.open .ddp{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.ddp-list{width:300px;flex:none;display:flex;flex-direction:column;gap:var(--sh-2)}
+.ddi{display:grid;grid-template-columns:32px minmax(0,1fr);gap:var(--s-3);align-items:start;padding:var(--s-2) var(--s-3);border-radius:var(--r-sm)}
+.ddi:hover,.ddi.on,.ddi:focus-visible{background:var(--raise)}
+.ddi:active{background:var(--ctl)}
+.ddi-ic{width:32px;height:32px;border-radius:var(--r-sm);background:var(--disc);display:grid;place-items:center;color:var(--c,var(--text))}
+.ddi-ic svg,.ddi-ic img{width:16px;height:16px}
+.ddi-ic .tk{width:var(--d-sm);height:var(--d-sm)}
+.ddi-ic .tk img{width:100%;height:100%}
+.ddi-t{display:flex;flex-direction:column;min-width:0}
+.ddi-t b{font:var(--t-ui);font-weight:var(--fw-5);color:var(--text)}
+.ddi-t small{font:var(--t-xs);font-weight:var(--fw-4);color:var(--muted);text-wrap:pretty}
+.ddp-prev{position:relative;flex:1;min-height:236px;margin-left:var(--s-2);border-radius:var(--r-sm);overflow:hidden;background:var(--card)}
+.pv{position:absolute;inset:0;background:var(--card) center/cover no-repeat;opacity:0;transition:opacity var(--dur-2) var(--ease-out);display:grid;place-items:center}
+.pv.on{opacity:1}
+.pv-ui{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--s-2);max-width:240px;padding:var(--s-3);border-radius:var(--r-md);background:var(--glass);color:var(--text)}
+.pv-chips i{font:var(--t-label);font-style:normal;color:var(--c);padding:var(--sh-6) var(--s-2);border-radius:var(--r-pill);background:color-mix(in srgb,var(--c) 12%,transparent)}
+.pv-logos img,.pv-logos .i{width:22px;height:22px}
+.pv-logos .tk{width:var(--d-md);height:var(--d-md)}
+.pv-code{display:block;max-width:none;white-space:nowrap;text-align:left;font:var(--t-label);color:var(--text-2)}   /* V1-50 (P8-F3): code reads as one line */
+.pv-status,.pv-ui.pv-code{max-width:calc(100% - var(--s-6))}
+.pv-status{white-space:nowrap;flex-wrap:nowrap}   /* P7 R-F5: the dot and the line on one row */
+.pv-status .mono{font:var(--t-label)}
+.pv-code b{color:var(--c-quote);font-weight:var(--fw-5)}
+.pv-status{align-items:center}
+.pv-status i{width:8px;height:8px;border-radius:var(--r-pill);background:var(--st,var(--muted))}
+.hdr-cta{display:flex;gap:var(--s-2);align-items:center;flex:none}
+.menu-btn{display:none;width:var(--h-lg);height:var(--h-lg);border-radius:var(--r-pill);background:var(--raise);place-items:center}
+.menu-btn:hover{background:var(--ctl)}
+.menu-btn span{display:block;width:16px;height:1.5px;background:var(--text);position:relative}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:16px;height:1.5px;background:var(--text);transition:transform var(--dur-2) var(--ease-std)}
+.menu-btn span::before{top:-5px}.menu-btn span::after{top:5px}
+.menu-open .menu-btn span{background:transparent}
+.menu-open .menu-btn span::before{transform:translateY(5px) rotate(45deg)}
+.menu-open .menu-btn span::after{transform:translateY(-5px) rotate(-45deg)}
+.sheet{display:none}
+.ddp{max-width:calc(100vw - 32px)}   /* V0-16 (P8-F2): both panels open from the trigger's left edge and never leave the screen */
+@media (max-width:1279px){.dd[data-dd=dev] .ddp{left:-64px}}   /* P8-Н2: the panel stays 620 with its 296 preview; shifted left, it fits the screen on 1024 */
+@media (max-width:1100px){.nav-a[href="/security"]{display:none}}
+@media (max-width:1023px){.hdr .wm{top:-1px}.hdr .bm{top:-2.5px}}   /* no menu baseline here: the letters stand on the centre of the menu button */
+@media (max-width:1023px){
+  .nav,.hdr-cta{display:none}
+  .menu-btn{display:grid}
+  body:not(.is-app) .hdr-in{display:flex;gap:var(--s-2)}
+  body:not(.is-app) .hdr-in > .brand{margin-right:auto}
+  body:not(.is-app) .hdr-cta{display:flex}
+  body:not(.is-app) .hdr-cta .btn-2{display:none}
+  body:not(.is-app) .hdr-cta .btn-nav{height:var(--h-lg)}   /* the phone's one blue action, a 44 px target; the sheet carries Docs */
+  .menu-open .hdr-cta{visibility:hidden}   /* the sheet has its own Open app */
+  .sheet{position:fixed;inset:var(--hdr) 0 0 0;z-index:39;background:var(--bg);padding:var(--s-2) var(--gut) calc(var(--s-8) + env(safe-area-inset-bottom));flex-direction:column;overflow-y:auto;overscroll-behavior:contain}
+  .menu-open .sheet{display:flex}
+  .menu-open{overflow:hidden}
+  .sheet-h{margin:var(--s-5) 0 var(--s-1);font:var(--t-label);letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--muted)}
+  .sheet a:not(.btn){font:var(--t-lead);color:var(--text);min-height:var(--h-lg);padding:var(--s-2) 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:var(--s-2)}
+  .sheet .btn{margin-top:var(--s-6);flex:none}
+}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:80;display:none;align-items:flex-start;justify-content:center;padding:max(var(--s-12),8vh) var(--s-4) var(--s-8);background:var(--scrim);overflow-y:auto;overscroll-behavior:contain}
+.modal.open{display:flex}
+.modal-box{position:relative;width:100%;max-width:520px;background:var(--card);border-radius:var(--r-in);padding:var(--s-6);animation:entry var(--dur-3) var(--ease-pop) both}
+.modal-box.w440{max-width:440px}.modal-box.w480{max-width:480px}.modal-box.w420{max-width:420px}.modal-box.w400{max-width:400px}
+.modal-x{position:absolute;top:var(--s-4);right:var(--s-4);width:var(--h-item);height:var(--h-item);border-radius:var(--r-pill);display:grid;place-items:center;color:var(--muted)}
+.modal-x::after{content:"";position:absolute;inset:calc(-1 * var(--s-1))}
+.modal-x:hover{background:var(--ctl);color:var(--text)}
+.modal-x:active{background:var(--ctl-h);transform:scale(.98)}
+.modal-x svg{width:14px;height:14px}
+.modal-title{display:flex;align-items:center;gap:var(--s-3);margin:0 var(--s-12) var(--s-2) 0;font:var(--t-h3);letter-spacing:var(--tr-tight)}
+.modal-text{margin:0;color:var(--muted);font:var(--t-ui)}
+.modal-actions{display:flex;justify-content:flex-end;gap:var(--s-2);margin-top:var(--s-6)}
+body.modal-lock{overflow:hidden}
+
+/* fields — 44 pills */
+.field{display:block;margin-top:var(--s-4)}
+.field > span{display:block;font:var(--t-sm);color:var(--muted);margin-bottom:var(--s-2)}
+.input{width:100%;height:var(--h-lg);padding:0 var(--s-4);border-radius:var(--r-pill);background:var(--bg);border:0;box-shadow:inset 0 0 0 1px var(--line-input);color:var(--text);font:var(--t-ui);outline:none}
+.input:hover{box-shadow:inset 0 0 0 1px var(--decor)}
+.input:focus,.input:focus-visible{box-shadow:0 0 0 2px var(--focus)}
+.input[aria-invalid=true]{box-shadow:0 0 0 1px var(--err-fg)}
+.input::placeholder{color:var(--muted)}
+.help{display:block;margin-top:var(--s-2);font:var(--t-xs);font-weight:var(--fw-4);color:var(--muted)}
+.err-line{margin:var(--s-3) 0 0;font:var(--t-sm);color:var(--err-fg)}
+@media (max-width:767px){input,select,textarea,.input,.search input,.sel select{font:var(--t-body)}}
+
+/* code window — one component (P0-3): header 40 (label · Copy), body 13/20, never wraps */
+.code{position:relative;font:var(--t-code);color:var(--code-fg);border-radius:var(--r-md);background:var(--bg);box-shadow:0 0 0 1px var(--line);min-width:0}
+.code-h{display:flex;align-items:center;justify-content:space-between;gap:var(--s-2);height:calc(var(--h-nav) + 1px);padding:0 var(--s-2) 0 var(--s-4);border-bottom:1px solid var(--line)}
+.code-h:has(.tabs){padding-left:var(--s-1)}
+.code-l{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:var(--t-label);color:var(--muted)}
+.code-h .tabs{padding:0;background:none;box-shadow:none;min-width:0}
+.code-h .copy{margin-left:auto}
+.code-h .copy::after{content:"";position:absolute;inset:calc(-1 * var(--s-2))}
+.code pre,.code code,.code kbd,.code samp{font:inherit}
+.code pre{margin:0;padding:var(--sh-14) var(--s-4);white-space:pre;word-break:normal;overflow-wrap:normal;overflow-x:auto;tab-size:2;scrollbar-width:thin;color:inherit}
+#onceKey{white-space:pre-wrap;word-break:break-all}
+.code .k{color:var(--code-kw)} .code .s{color:var(--code-str)} .code .c{color:var(--code-dim)} .code .o{color:var(--text)}
+.code .key{color:var(--text);background:var(--tint);border-radius:var(--r-xs);padding:0 var(--sh-2)}
+.code .key.ph{color:var(--accent-fg);background:var(--tint)}
+
+/* tabs — capsules 32 */
+.tabs{display:flex;gap:var(--s-1);padding:var(--s-1);border-radius:var(--r-pill);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{position:relative;flex:none;height:var(--h-tab);padding:0 var(--sh-14);border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:var(--s-2);font:var(--t-sm);font-weight:var(--fw-5);color:var(--muted);white-space:nowrap}
+.tab:hover{color:var(--text);background:var(--raise)}
+.tab:active{background:var(--ctl);transform:scale(.98)}
+.tab[aria-selected=true],.tab[aria-checked=true]{background:var(--accent);color:var(--on-accent);box-shadow:inset 0 0 0 1px var(--accent-fg)}   /* V1-59 (X1-F8): the selected tab ≥ 3:1 against its neighbours: the ring carries it, the fill alone is 2.5:1 */
+.code-h .tab[aria-selected=true],[data-for] .tab[aria-selected=true],.cn-tabs .tab[aria-selected=true],.cx-tabs .tab[aria-selected=true]{background:var(--ctl);color:var(--text);box-shadow:inset 0 0 0 1px var(--accent-fg)}   /* a tab that repeats down the page, or carries partner logos: the ring only */
+.tab .i,.tab .ic{width:14px;height:14px}
+@media (max-width:767px){.tab::after,.tk-chip::after,.prov button::after,.cn-chips button::after{content:"";position:absolute;inset:calc(-1 * var(--sh-6)) 0}}
+
+/* toast */
+.toasts{position:fixed;right:var(--s-6);bottom:var(--s-6);z-index:90;display:flex;flex-direction:column;align-items:flex-end;gap:var(--s-2);pointer-events:none}
+.toast{display:flex;align-items:center;gap:var(--s-2);padding:var(--s-3) var(--s-4);border-radius:var(--r-md);background:var(--raise);font:var(--t-ui);color:var(--text);animation:entry var(--dur-3) var(--ease-pop) both;transition:opacity var(--dur-2) var(--ease-out)}
+.toast.out{opacity:0}
+.toast .t-ic{width:16px;height:16px;flex:none;color:var(--ok-fg)}
+.toast.err .t-ic{color:var(--err-fg)}
+@media (max-width:767px){.toasts{left:var(--s-4);right:var(--s-4);bottom:calc(var(--s-4) + env(safe-area-inset-bottom));align-items:stretch}}
+
+/* footer */
+.ftr{padding:var(--s-16) 0 var(--s-10);font:var(--t-ui);border-top:1px solid var(--line)}
+.ftr-grid{display:grid;grid-template-columns:352px repeat(3,minmax(0,1fr));grid-template-columns:352px repeat(3,round(down,calc((100% - 352px - var(--s-10) * 3) / 3),1px));gap:var(--s-10)}   /* P8-Н5: whole-pixel columns */
+.ftr-grid:has(> nav:nth-child(5)){grid-template-columns:352px repeat(4,round(down,calc((100% - 352px - var(--s-10) * 4) / 4),1px))}
+.ftr-h{margin:0 0 var(--s-1);font:var(--t-label);letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--muted)}
+.ftr-brand .ftr-ca{margin-top:var(--s-3);max-width:340px}
+.ftr-live{display:inline-flex;align-items:center;gap:var(--s-2)}
+/* one colour = one state everywhere (PLAN-v2 W0-5): summary, rows, kicker, footer, /app dot */
+[data-state]{--st:var(--muted)}
+[data-state=ok]{--st:var(--ok-fg)}
+[data-state=degraded]{--st:var(--wait)}
+[data-state=down]{--st:var(--err-fg)}
+.ftr-live i{width:8px;height:8px;border-radius:var(--r-pill);background:var(--st,var(--muted))}
+.ftr-live a{position:relative}
+.ftr-live a::after{content:"";position:absolute;inset:calc(-1 * var(--s-2)) calc(-1 * var(--s-1))}   /* X1-M9 */
+.ftr-live a:hover{color:var(--text)}
+.ftr-col{display:flex;flex-direction:column;gap:var(--s-2);align-items:flex-start;min-width:0}
+.ftr-col a{display:inline-flex;align-items:center;gap:var(--s-2);color:var(--text-2)}
+.ftr-col a:hover{color:var(--text)}
+.ftr-col a.brand{color:var(--text)}
+.ftr-col a:active{transform:scale(.98)}
+.ftr-brandline{margin:var(--s-2) 0 0;color:var(--muted)}
+.ftr-col a.ftr-x{position:relative;display:inline-grid;place-items:center;width:var(--h-item);height:var(--h-item);border-radius:var(--r-pill);background:var(--raise)}
+.ftr-col a.ftr-x:hover{background:var(--ctl)}
+.ftr-x::after{content:"";position:absolute;inset:calc(-1 * var(--s-1))}
+.ftr-x .i{width:14px;height:14px}
+.ftr-ca{display:flex;flex-direction:column;gap:var(--s-2);padding:var(--s-4);border-radius:var(--r-in);background:var(--card);width:100%}
+.ftr-ca-h{display:flex;align-items:center;gap:var(--s-2);color:var(--text)}
+.ftr-ca .addr{font:var(--t-sm);color:var(--muted);word-break:break-all}
+.ftr-ca .addr.set{font:var(--t-code);color:var(--text);white-space:nowrap;word-break:normal}
+/* owner 10.11 «исправь перенос»: the CA stands on one line — the short form shows, the full one stays for screen readers, Copy and title */
+.addr .ca-full{white-space:nowrap}
+.ftr-ca .addr .ca-full{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%)}
+.ftr-ca .copy{align-self:flex-start}
+.ftr-meta{margin-top:var(--s-12);padding-top:var(--s-6);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:var(--s-6);flex-wrap:wrap;color:var(--muted);font:var(--t-sm)}
+.ftr-disc{max-width:640px;color:var(--muted);margin:var(--s-4) 0 0;font:var(--t-xs);font-weight:var(--fw-4)}
+@media (max-width:1023px){.ftr-grid,.ftr-grid:has(> nav:nth-child(5)){grid-template-columns:repeat(3,minmax(0,1fr))}.ftr-grid>.ftr-brand{grid-column:1 / -1}}
+@media (max-width:767px){
+  .ftr{padding:var(--s-12) 0 var(--s-8)}
+  .ftr-grid,.ftr-grid:has(> nav:nth-child(5)){grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s-8) var(--s-6)}
+  .ftr-brand .ftr-ca{max-width:none}
+  .ftr-grid>.ftr-brand{grid-column:1 / -1}
+  .ftr-col{gap:0}
+  .ftr-col a{min-height:var(--h-lg);min-width:var(--h-lg)}
+  .ftr-h{margin-bottom:var(--s-1)}
+  .ftr-meta a{display:inline-flex;align-items:center;min-height:var(--h-lg)}
+}
+
+/* spinner */
+@keyframes entry{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes mount{from{opacity:0}to{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes dotpulse{0%,100%{opacity:.25}50%{opacity:.7}}
+.spin{width:16px;height:16px;border-radius:var(--r-pill);border:2px solid var(--line-ctl);border-top-color:var(--text);animation:spin var(--dur-spin) var(--ease-lin) infinite;flex:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0s!important;animation-iteration-count:1!important;transition-duration:0s!important}
+  .spin,.btn[aria-busy=true]::after{animation:spin var(--dur-spin) var(--ease-lin) infinite!important}
+}
+
+/* connect modal + /connect page (shared) */
+.cx{max-width:560px}
+.cx-logo{width:28px;height:28px;flex:none}
+.cx-logo.dark{display:grid;place-items:center;border-radius:var(--r-sm);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line)}
+.cx-logo.dark .i{width:18px;height:18px}
+.cx-key{margin-top:var(--s-5);padding:var(--s-4);border-radius:var(--r-md);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);min-height:84px}
+.cx-need{display:flex;align-items:center;justify-content:space-between;gap:var(--s-4)}
+/* WOW-03: need and have share one grid cell → the box is as tall as the taller of the two from the first frame (no 16 px jump) */
+.cx-key{display:grid}
+.cx-key>.cx-need,.cx-key>.cx-have{grid-area:1/1;min-width:0}
+.cx-key>.cx-have[hidden]{display:block!important;visibility:hidden;opacity:0}
+.cx-key>.cx-need[hidden]{display:flex!important;visibility:hidden;opacity:0}
+.cx-key>.cx-have{align-self:center;transition:opacity var(--dur-3) var(--ease-entry)}
+.cx-need.gone{opacity:0;visibility:hidden;transition:opacity var(--dur-2) var(--ease-out),visibility 0s var(--ease-lin) var(--dur-2)}
+.cx-ready .ok-ic.go{animation:chk var(--dur-3) var(--ease-entry) both}
+@keyframes chk{from{transform:scale(.4)}to{transform:none}}
+/* the trial button cuts the key: label kept (width fixed), a 16 px Keyhole turns instead of the spinner */
+.btn[data-trial] .kb{position:absolute;left:50%;top:50%;width:16px;height:16px;margin:calc(-1 * var(--s-2)) 0 0 calc(-1 * var(--s-2));opacity:0;pointer-events:none;--km-fg:var(--on-accent);--km-eye:var(--accent);transition:opacity var(--dur-1) var(--ease-std)}
+.btn[data-trial].btn-2 .kb{--km-fg:var(--text);--km-eye:var(--raise)}
+.btn[data-trial].cutting>span:not(.kb){opacity:0}
+.btn[data-trial].cutting .kb{opacity:1}
+.btn[data-trial][aria-busy=true]::after{display:none}
+.btn[data-trial][aria-busy=true] > .kb,.btn[data-trial][aria-busy=true] > .kb *{visibility:visible}
+/* the key lands in a snippet: underline sweeps 0 → 100 % and fades (transform/opacity) */
+.code .key{position:relative;display:inline-block}
+.code .key::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--ok-fg);transform:scaleX(0);transform-origin:0 50%;opacity:0}
+.code .key.land::after{animation:sweep var(--dur-6) var(--ease-entry) both}
+@keyframes sweep{0%{transform:scaleX(0);opacity:1}45%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+@media (prefers-reduced-motion:reduce){.code .key.land::after,.cx-ready .ok-ic.go{animation:none}}
+.cx-need .modal-text{margin-top:var(--sh-2)}
+.cx-need-act{display:flex;flex-direction:column;align-items:flex-end;gap:var(--s-2);flex:none}
+.cx-need-act .btn{min-width:132px}
+.cx-signin{font:var(--t-xs);font-weight:var(--fw-4);color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--decor)}
+.cx-signin:hover{color:var(--text)}
+.cx-ready{display:flex;align-items:center;gap:var(--s-2);flex-wrap:wrap;margin:0;font:var(--t-ui)}
+.ok-ic{width:16px;height:16px;color:var(--ok-fg)}
+.cx-keyline{margin:var(--sh-10) 0 0;font:var(--t-code);word-break:break-all;color:var(--text)}
+.cx-keyline [data-keyval]{display:block;min-height:var(--h-chip)}   /* WOW-03: the key line is reserved before the key arrives (CLS 0) */
+.cx-keyline .cx-meta{min-height:var(--d-xs)}
+@media (max-width:767px){.cx-keyline [data-keyval]{min-height:calc(var(--h-chip) * 2)}}
+.cx-meta{display:block;margin-top:var(--s-1);font:var(--t-xs);font-weight:var(--fw-4);font-family:var(--font-sans)}
+.cx-err{margin:var(--sh-10) 0 0;font:var(--t-sm);color:var(--err-fg)}
+.cx-warn{display:flex;align-items:flex-start;gap:var(--s-2);margin:var(--s-4) 0 0;font:var(--t-sm);color:var(--text-2)}
+.cx-warn .chip{height:var(--h-chip);width:24px;padding:0;justify-content:center;flex:none}
+.cx-warn svg{width:12px;height:12px}
+.cx-tabs{margin-top:var(--s-5)}
+.cx-panels{display:grid;margin-top:var(--s-4)}
+.cx-panel{grid-area:1 / 1;min-width:0}
+.cx-panel[hidden]{display:block!important;visibility:hidden}
+.cx-sub{margin:0 0 var(--s-2);font:var(--t-sm)}
+.cx-steps{margin:0 0 var(--s-3);padding:0 0 0 var(--s-6);font:var(--t-ui);color:var(--text-2)}
+.cx-steps li + li{margin-top:var(--s-1)}
+.cx-steps li::marker{color:var(--muted);font:var(--t-label)}
+.cx-panel .code + .cx-steps{margin-top:var(--s-3)}
+.cx-plan{margin:var(--s-3) 0 0;font:var(--t-xs);font-weight:var(--fw-4)}
+.cx-done{margin-top:var(--s-5);padding-top:var(--s-4);border-top:1px solid var(--line);display:flex;flex-direction:column;gap:var(--s-2)}
+.cx-done p{margin:0;font:var(--t-sm)}
+.cx-prompt{display:flex;align-items:center;justify-content:space-between;gap:var(--s-3);width:100%;min-height:var(--h-lg);padding:var(--s-2) var(--s-2) var(--s-2) var(--sh-14);border-radius:var(--r-md);background:var(--bg);box-shadow:inset 0 0 0 1px var(--line-ctl);text-align:left;font:var(--t-sm)}
+.cx-prompt:hover{box-shadow:inset 0 0 0 1px var(--decor)}
+.cx-prompt:active{transform:scale(.98)}
+.cx-prompt-copy{width:var(--h-sm);height:var(--h-sm);flex:none;border-radius:var(--r-pill);background:var(--raise);display:grid;place-items:center;color:var(--text-2)}
+.cx-prompt-copy svg{width:14px;height:14px}
+.cx-prompt.is-copied::before{display:none}
+.cx-prompt.is-copied .cx-prompt-copy{color:var(--ok-fg)}
+@media (max-width:767px){
+  .modal{padding:var(--s-4) var(--s-3)}
+  .modal-box{padding:var(--s-5) var(--s-4)}
+  .cx-need{flex-direction:column;align-items:stretch}
+  .cx-need-act{align-items:stretch}
+  .cx-need-act .cx-signin{text-align:center}
+}
+/* LI.FI route line (logo instead of the word) */
+.route{margin:var(--sh-10) 0 0;display:flex;align-items:center;justify-content:center;gap:var(--sh-6);font:var(--t-xs);font-weight:var(--fw-4);color:var(--muted)}
+.route img{height:12px;width:auto;display:inline-block}
+.route.dark{color:var(--ink-2)}
+.mark-in{display:inline-block;height:12px;width:auto;vertical-align:calc(.355em - 6px);margin:0 var(--sh-2)}
+
+/* plans (landing + /pricing) — P1-17 subgrid: label / head / points / button on shared lines */
+/* Plans (owner 30.10 «hard to read»): four levels — price → one line of meaning → list → action; every list keeps its own even step (no row sync between cards),
+   everything left-aligned, the action row on one axis at the bottom of all three cards. Refs: Linear pricing 5d709fa1, JetBrains Space 19b2e4ee, Epidemic Sound 8d2e8914, xai:07-pricing-1440 */
+.plans{margin-top:var(--s-12);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-5);align-items:stretch;max-width:calc(400px * 2 + var(--s-5))}   /* two plans since top-ups left (owner 07.11): the same 400 px cards */
+.plans{margin-inline:auto}   /* centred on the landing and on /pricing (audit «Модель холда» С-1); ≤1023 /pricing keeps the page axis (pages.css V1-38) */
+.plan{display:flex;flex-direction:column;border-radius:var(--r-card);background:var(--card);padding:var(--s-6)}
+.plan:has(.btn-1){box-shadow:inset 0 0 0 1px var(--accent-fg)}   /* the plan you can take now */
+.plan-label{display:flex;align-items:center;gap:var(--s-2);min-height:var(--h-chip);margin:0;font:var(--t-ui);font-weight:var(--fw-5);color:var(--text)}
+.plan-label .chip{margin-left:auto}
+.plan-price{margin:var(--s-6) 0 0;display:flex;flex-direction:column;gap:var(--s-1)}
+.plan-val{font:var(--t-h2);letter-spacing:var(--tr-tight);color:var(--text);font-variant-numeric:tabular-nums}
+.plan-unit{font:var(--t-ui);color:var(--text-2)}
+.plan-head{display:none}
+.plan-pts{list-style:none;margin:var(--s-6) 0 0;padding:var(--s-6) 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:var(--s-3);font:var(--t-ui);color:var(--text-2)}
+.plan-pts li{display:grid;grid-template-columns:16px minmax(0,1fr);gap:var(--s-2)}
+.plan-pts li::before{content:"";width:16px;height:16px;margin-top:var(--sh-2);border-radius:var(--r-pill);background:var(--line) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 8.3 7 10.7l4.5-5'/%3E%3C/svg%3E") center/10px no-repeat}
+@media (max-width:1023px){
+  .plans{grid-template-columns:minmax(0,1fr);gap:var(--s-4);max-width:560px;margin-left:auto;margin-right:auto}
+}
+.plan-ic{display:inline-flex;align-items:center}
+.plan-ic .tk{width:var(--d-sm);height:var(--d-sm);border-radius:var(--r-pill);box-shadow:0 0 0 2px var(--card);background:var(--card)}
+.plan-ic .tk + .tk{margin-left:calc(-1 * var(--sh-2))}
+/* the button and the «starts when…» line share one 44 px cell at the bottom; the line is left-aligned, the body size, readable */
+.plan-act{margin-top:auto;padding-top:var(--s-8);display:grid;min-height:calc(var(--h-lg) + var(--s-8))}
+.plan-act > *{grid-area:1/1}
+.plan-act .gated{visibility:hidden}
+.plan-act:has([data-gate]){grid-template-rows:auto auto;row-gap:var(--s-3)}   /* $KEYFO holders: «Starts when…» over the disabled «Buy $KEYFO» (owner 07.11) */
+.plan-act:has([data-gate]) > *{grid-area:auto}
+.plan-act:has([data-gate]) .plan-pre{order:-1}
+.plan-pre{margin:0;align-self:center;font:var(--t-ui);color:var(--text-2);text-align:left}   /* the button's size → the same baseline as the button label in the next card */
+.ddi-km{color:var(--text);background:var(--k-field)}
+.ddi-km .kk{width:24px;height:24px}
+@media (max-width:767px){
+  .btn-sm::after{content:"";position:absolute;inset:calc(-1 * var(--s-2)) 0}
+  .prose-risk a,.x-line,.dt p > a.link:only-child{display:inline-flex;align-items:center;min-height:var(--h-lg)}
+  .prose-end a,.sx-report a{position:relative}
+  .prose-end a::after,.sx-report a::after{content:"";position:absolute;inset:calc(50% - var(--h-lg) / 2) 0}   /* R1-1: a 44+ px target without growing the line */
+  .cx-signin{display:flex;align-items:center;justify-content:center;min-height:var(--h-lg);margin:calc(-1 * var(--s-2)) 0}
+}
+/* the "Soon" note keeps its line reserved: no shift when /health answers (CLS 0) */
+.plan-pre[hidden]{display:block!important;visibility:hidden}   /* reserved before /health answers */
+
+/* W2-4: no hanging single words in cells and short labels */
+td,.stat span,.how-r span{text-wrap:pretty}
+
+/* KF.roll odometer (WOW-02): fixed 1ch digit cells one line-height tall (1lh) → the element keeps its line box (CLS 0); strips move by transform; <i> cells */
+.roll{display:inline-flex;align-items:flex-start;height:1lh;vertical-align:top;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden}
+.roll i{font-style:normal;font:inherit}
+.roll .rd{display:block;width:1ch;height:1lh;overflow:hidden;user-select:none}
+.roll .rc{user-select:none}
+.roll .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.roll .rs{display:flex;flex-direction:column;transition:transform var(--dur-roll) var(--ease-entry)}
+.roll .rs i{display:block;height:1lh;text-align:center}
+.roll .rc{display:block;height:1lh;white-space:pre}
+@media (prefers-reduced-motion:reduce){.roll .rs{transition:none}}
+
+/* a horizontally scrolled <pre> fades its right 24 px until the end (opacity mask, no blur) — docs, modals, /connect (P1-F11, V1-44) */
+.code pre.ovf{-webkit-mask-image:linear-gradient(90deg,var(--text) calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,var(--text) calc(100% - 24px),transparent)}
+.code pre:focus-visible{-webkit-mask-image:none;mask-image:none;outline-offset:-2px}   /* X1-N1: a mask clips the outline — the ring is drawn inside, without the fade */
+.code-h .tabs .tab:focus-visible{outline-offset:-2px}   /* X1-M7 */
+
+/* V2-8 shell: the nav sits on the true centre (P8-F16), the CTA on the right edge; skip link (X1-F13); the third sheet group is spacing, not an empty heading (P8-F14) */
+.hdr-in > .brand{justify-self:start}
+.hdr-cta{justify-self:end;grid-column:3}
+.hdr-in > .nav{grid-column:2}
+.hdr-in > .menu-btn{grid-column:3;justify-self:end}
+.skip{position:fixed;left:var(--s-4);top:var(--s-2);z-index:100;padding:var(--s-2) var(--s-4);border-radius:var(--r-pill);background:var(--paper);color:var(--bg);font:var(--t-ui)}
+.skip:not(:focus){width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.sheet-gap{display:block;height:var(--s-6)}
+
+/* Owner 30.10 «the avatar sits crooked»: ONE rule for an icon inside running text — the icon's optical centre = the centre of the neighbouring capitals (not the baseline).
+   --cap = Geist cap height, --ic = 1.2em (one size on the site), the gap ¼ of the icon. Negative block margins shrink the margin box to the middle half of the icon,
+   so it can never push the line box: the line with a chip is exactly as tall as the line without one */
+.tkr,.kfw{--cap:.71em;--ic:1.2em;display:inline-block;white-space:nowrap;font:inherit;line-height:inherit}   /* inline-block: the mark and the word never part at a line end */
+.tkr img,.tkr .tk,.kfw .tk.keyfo.in{display:inline-block;width:var(--ic);height:var(--ic);margin:calc(var(--ic) * -.25) calc(var(--ic) * .25) calc(var(--ic) * -.25) 0;vertical-align:calc(var(--cap) / 2 - var(--ic) / 4);border-radius:var(--r-pill);background:var(--disc)}
+.kfw .tk.keyfo.in{position:relative;background:var(--k-field)}
+.kfw .tk.keyfo.in::before{position:absolute;left:0;top:0}   /* inline-block + overflow hidden: the baseline is the margin box bottom, the formula above holds */
+
+/* owner-eye №8: the key is seen whole in the URL and the command, in the modals too */
+.code pre[data-tpl]{white-space:pre-wrap;overflow-wrap:anywhere}
+@media (max-width:767px){.code pre[data-tpl]:not([data-tpl=url]),#onceCli{white-space:pre;overflow-wrap:normal}}   /* Б1: on a phone the indents stay, the block scrolls with its fade */
+.code pre[data-tpl] .key{display:inline;-webkit-box-decoration-break:clone;box-decoration-break:clone}   /* P6-R2-F1: the key runs on from the text; a closing quote never stands alone */
+.code pre[data-tpl=url] .key{display:block;width:fit-content;max-width:100%}   /* F2 М3: the key has its own line in both states, no blank line before it arrives */
+@media (min-width:768px){main .code pre[data-tpl=url] .key{display:inline}}   /* G1 С3: on the page the address and the key stand on one line; a 480 px modal keeps its own line */
+.mark-in[src*=relay]{height:15px;vertical-align:calc(.355em - 7.5px)}   /* №23 */
+
+/* ACCEPT-ICON (30.10): the rule for every icon next to text — its optical centre = the centre of the capitals. Measured at a real DPR (--force-device-scale-factor) */
+.ddi-ic{margin-top:calc(var(--sh-2) * 1.25)}   /* F5 */
+.tk.txt{padding-top:calc(var(--sh-2) / 4)}   /* F11 */
+.tk-h1 .tk.xl,.modal-title .cx-logo{position:relative;top:-.5px}   /* F8 */
+/* F6: the label's box = the capitals, so flex centres the capitals on any DPR; the rows keep their height */
+.btn>span:not(.i):not(.tk):not(.kb),.tab>span:not(.i):not(.tk):not(.ic),.tk-chip>span:last-child,.tc-t>span:last-child,.tchip>span:last-child,.prov button>span:not(.n):not(.i),.cn-chips button>span,.announce>span:last-child,.rv-head>span,.call .fn,.ukind>span:last-child,.chainrow li>span.mono,.wallet-btn .mono,.sx-ui .mono,.hk-t{text-box:trim-both cap alphabetic}
+.tc-t,.rv-head,.ftr-live,.ukind,.call{min-height:1lh}
+/* F7: icon size 1.2em in flex rows: 13→16, 14→17, 16→19 */
+.btn .i,.btn .ic{width:19px;height:19px}
+.tab .i,.tab .ic,.tab .tk{width:16px;height:16px}
+.prov button .i,.prov button img{width:16px;height:16px}
+.nav-a .tk,.ftr-col a .tk,.ftr-ca-h .tk,.card-l .tk,.plan-label .tk,.tk-ca-l .tk{width:17px;height:17px}
+.nav-a:has(.tk){gap:var(--s-2)}
+.ok-ic{margin-right:calc(var(--sh-2) * -1.5)}
+
+/* круг 2 */
+@media (min-width:1280px){.plans{gap:var(--s-4);max-width:calc(400px * 2 + var(--s-4))}}   /* P1-R7, P5-N9: 400 px cards on whole x, the same 16 as the bento */
+.tk.txt.len4{font-size:calc(var(--tkd) * .28);letter-spacing:calc(var(--tr-tight) * 2)}   /* P4-Н7: four letters keep a margin to the circle */
+#kfLive{position:fixed!important;top:0}   /* EYE М1: the live region does not add 1 px of scroll */
+@media (max-resolution:1.49dppx){.tk-h1 .tk.xl{top:-1px}}   /* ICON N1 */
+.tab .tk.xs{width:16px;height:16px}   /* ICON N3 */
+.tk.txt.mono1{font-size:calc(var(--tkd) * .46);letter-spacing:0}   /* no mark in the file: the initial on the dark disc, the ticker reads in the line beside it */
+/* the k sign takes the small places the Keyhole used to fill (window head, phone, Fund, Approve, trial, sign-in): white k on the blue disc, as the X avatar */
+.btn[data-trial] .kb{background:url(/img/tokens/keyfo.svg?v=8cce9f9d) center/contain no-repeat}   /* the window head, phone, Fund and Approve: landing.css */
+.kmark-lg{border-radius:var(--r-pill);background:var(--k-field);color:var(--text)}
+.modal:has(.cx-panel[data-panel=api]:not([hidden])) .cx-done{display:none}   /* PM М-14: as on /connect, the API tab has no «Then ask your agent» */
+[data-keyval][aria-busy=true],.code .key.land{user-select:none}   /* PU М-2: the decoding key is not the key yet */
+@media (max-width:767px){.code-h:has(.tabs[data-for]){height:auto;min-height:calc(var(--h-nav) + 1px);align-items:flex-start;padding-block:var(--s-1)}.code-h .tabs[data-for]{flex-wrap:wrap;overflow:visible}.code-h:has(.tabs[data-for]) .copy{margin-top:var(--sh-2)}}   /* PM С-5: VS Code and REST stay in view on 375 */
+.cx-keep{margin:var(--s-1) 0 0;font:var(--t-xs);font-weight:var(--fw-4)}   /* PU С-2: the trial key lives in this tab only */
+.code pre[data-tpl] .ln{display:block;padding-left:calc(var(--in) * 1ch);text-indent:calc(var(--in) * -1ch)}   /* PD С1 */
+@media (max-width:767px){.cx-panel[hidden]{display:none!important}}   /* PD М22: on a phone a panel is as tall as itself */
+.ddp,.dd[data-dd=dev] .ddp{width:auto;left:calc(-1 * var(--s-2))}
+.ddp-prev{display:none}   /* PD С2: a menu is a list sized by its links, no half-empty stage (ref: x.ai/bot header, research/ref-xai-full/01-hero-1440-f1.jpg — plain text triggers, no illustrated panels) */
+@media (max-width:767px){.modal .code pre[data-tpl]:has(.ln){white-space:pre-wrap;overflow-wrap:anywhere}}   /* PU М-3: the key wraps under its line instead of hiding past the edge */
+.nw{white-space:nowrap}   /* PD Н4: a word and its token mark */
+.code pre{font-variant-ligatures:none}   /* PD Н3: «!==» stays three characters */
+.cx-prompt > span:first-child{text-wrap:pretty}   /* PD Н5 */
+.cx-hint code.sf,.run-note code.sf{font:var(--t-code);line-height:var(--lh-1);color:var(--text)}   /* LIVE Д-3, Д-5: commands read as code */
+.cx-hint code.sf{white-space:nowrap;font-size:var(--fs-code-in)}   /* R4-1: a command never breaks, a step smaller than the text */
+[data-feature]:not(.feat-on){display:none}   /* Arcom-plan D4: shown only when /health lists the source (common.js); it sits last in its row or list, so only what is below it can move, and only when the source is on */
+[data-nofeature].feat-on{display:none}
+/* the $KEYFO holder model: before launch (no data-launched="1" from /health) there is no wallet sign-in and no full key */
+html[data-launched="1"] [data-prelaunch]{display:none}
+html:not([data-launched="1"]) [data-postlaunch]{display:none!important}   /* §78: wallet sign-in is open before launch (.cx-signin shows) */
+
+/* ═══ Q1 — the QFEX language as the site's system (owner 09.11: «дорогой финтех», Q1 + prices 1; next/ref-qfex/DESIGN.md §1–§7) ═══
+   canvas --bg, hairlines --line, square corners (radius tokens 0), Inter + one Instrument Serif italic accent phrase per heading,
+   the white pill = the one main action on a screen, blue = the k sign, links, focus and one data accent (never a button). No blur, no shadows. */
+.h1,.h2,.h2p,.pg-h1{letter-spacing:var(--tr-display)}
+.acc{font-family:var(--font-serif);font-style:italic;font-weight:var(--fw-4);letter-spacing:var(--tr-serif)}   /* the accent phrase: build.py wraps it from the copy note «акцент: …» */
+:is(.h1,.h2,.h2p,.pg-h1,.hero-title) .acc{display:block}
+.btn-1{background:var(--inverse);color:var(--on-inverse);--spin:var(--on-inverse)}
+.btn-1:hover{background:var(--inverse-h)}
+.btn-1:active{background:var(--text-h)}
+.btn-1:focus-visible,.btn-n:focus-visible{outline-color:var(--accent-fg);outline-offset:3px}
+.btn-2,.btn-nav.btn-2,.btn-sm.btn-2{background:transparent;color:var(--text);box-shadow:inset 0 0 0 1px var(--line)}
+.btn-2:hover,.btn-nav.btn-2:hover,.btn-sm.btn-2:hover{background:var(--ctl);color:var(--text)}
+.btn-2:active,.btn-sm.btn-2:active{background:var(--ctl-h)}
+.cta-own .hdr-cta .btn-1{background:transparent;color:var(--text);box-shadow:inset 0 0 0 1px var(--line)}   /* the page shows its own white pill: the header's steps back */
+.cta-own .hdr-cta .btn-1:hover{background:var(--ctl)}
+.btn[disabled]:not([aria-busy=true]),.btn[aria-disabled=true],.btn[disabled]:not([aria-busy=true]):hover,.btn[aria-disabled=true]:hover{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
+.btn-danger{background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
+.nav-a:hover,.nav-t:hover,.dd.open .nav-t{background:var(--tint)}
+.nav-a[aria-current=page]{color:var(--text);background:var(--tint)}
+.menu-btn{background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
+.ddp,.modal-box,.toast{box-shadow:inset 0 0 0 1px var(--line-board)}
+.modal-box{background:var(--board-solid)}
+.chip.dim{text-transform:uppercase;letter-spacing:var(--tr-caps)}   /* badges: Soon, New in, Trial */
+.eyebrow{margin:0;font:var(--t-eyebrow);letter-spacing:var(--tr-eyebrow);text-transform:uppercase;color:var(--muted)}
+/* graph paper (DESIGN §5.2): 32 cells ≥768, 8 below; one cell = (container − 2 gutters) / columns */
+.qgrid{background-color:var(--bg);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:var(--qcell) var(--qcell)}
+.qrows{--qn:3}
+.qrows::before{content:"";display:block;width:calc(var(--qcell) * 32);height:calc(var(--qcell) * var(--qn));margin:var(--hair-o) auto 0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:var(--qcell) var(--qcell);box-shadow:inset 0 0 0 1px var(--line)}   /* Q1-С4: the rows ARE the interval — the block above and the block below stand on them, no empty margin on either side (DESIGN §5.2) */
+.qrows.q2{--qn:2}
+@media (max-width:767px){.qrows::before{width:calc(var(--qcell) * 8)}}
+.qrows > .sec-head{padding-top:var(--s-12)}   /* a heading without a frame keeps its air inside the section, under the rows */
+.ftr.qrows::before{margin-bottom:var(--s-12)}
+/* footer: three rows of the grid above, the columns as cells of one frame */
+.ftr{border-top:0;padding-top:var(--s-16)}
+/* prices, variant 1 (owner 09.11; copy-v2 §71): two cells of one frame — Trial .72, holders 1.28; Trial's line and button together in the middle of
+   its cell (no hole between them); holders: the big range, a line, a staircase of the four tiers (top step blue = the one data accent), Buy */
+.plans.q1p{max-width:none;margin-top:var(--s-12);display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:0;box-shadow:inset 0 0 0 1px var(--line)}
+.q1p .plan{border-radius:0;background:transparent;box-shadow:none;padding:var(--s-10)}
+.q1p .plan + .plan{border-left:1px solid var(--line)}
+.q1p .plan[data-plan=trial]{justify-content:center}
+.q1p .plan-label{display:flex;align-items:center;gap:var(--sh-10);min-height:var(--h-chip);font:var(--t-eyebrow);letter-spacing:var(--tr-eyebrow)}
+.q1p .plan-label .kfw{text-transform:none;letter-spacing:0}
+.q1p .plan-label .chip{margin-left:auto}
+.q1p .plan-val{display:block;margin:var(--s-5) 0 0;font:var(--t-num);letter-spacing:var(--tr-hero);color:var(--text)}
+.q1p .plan-unit{display:block;margin:var(--s-3) 0 0;font:var(--t-lead);color:var(--muted)}
+.q1p .plan-btn{align-self:flex-start;margin-top:var(--s-8)}
+.lad{margin:var(--s-8) 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:var(--s-4)}
+.lad-y,.lad-x{font:var(--t-eyebrow);letter-spacing:var(--tr-eyebrow);text-transform:uppercase;color:var(--fine)}
+.lad-y{grid-row:1;align-self:start;writing-mode:vertical-rl;transform:rotate(180deg)}
+.lad-cols{grid-column:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;height:220px;border-bottom:1px solid var(--line)}
+.lad-c{display:flex;flex-direction:column;justify-content:flex-end;height:100%;padding:0 0 0 var(--s-3);border-left:1px solid var(--line)}
+.lad-c b{margin-bottom:var(--sh-10);font:var(--t-step);letter-spacing:var(--tr-display);color:var(--text)}
+.lad-c i{display:block;width:100%;height:var(--h);background:linear-gradient(var(--bar-hi),var(--bar-lo))}
+.lad-c:last-child i{background:var(--accent)}
+.lad-c span{order:3;position:relative;top:var(--s-6);margin-top:var(--sh-10);font:var(--t-ui);font-weight:var(--fw-5);color:var(--muted)}
+.lad-x{grid-column:2;margin-top:var(--s-10)}
+@media (max-width:767px){
+  .plans.q1p{grid-template-columns:minmax(0,1fr)}
+  .q1p .plan{padding:var(--s-6) var(--s-5)}
+  .q1p .plan + .plan{border-left:0;border-top:1px solid var(--line)}
+  .q1p .plan-btn{margin-top:var(--s-6)}
+  .lad-cols{height:180px}.lad-c{padding-left:var(--sh-6)}.lad-c span{font:var(--t-sm)}
+}
+/* Q1 archive photo slots (flag photos in build.py; files img/archive/, research/archive-photos/LICENSES.md): a frame behind the content,
+   darkened under the text; no filter, no blur; loaded by [data-bg] near the viewport, absolute — nothing moves when it arrives */
+.qph{position:absolute;inset:0;z-index:-1;background:var(--bg) center/cover no-repeat;pointer-events:none}
+.qph::after{content:"";position:absolute;inset:0;background:var(--ph-shade)}
+.q1p .plan[data-plan=trial]{position:relative;isolation:isolate;overflow:hidden}
+.q1p .plan[data-plan=trial]:has(.qph){justify-content:flex-end}
+.q1p .qph{inset:1px 0 1px 1px}.q1p .qph::after{background:var(--ph-shade-text)}
+@media (max-width:767px){.q1p .qph{inset:1px 1px 0 1px}}
+@media (max-width:767px){.q1p .plan[data-plan=trial]:has(.qph){min-height:420px}}
+.ftr-credit{margin-top:var(--s-2);color:var(--fine)}
+/* Q1 selection (DESIGN §6.2, §6.5 D): a chosen tab or chip is white — fill for tabs, a white ring for choice chips; blue never marks a choice */
+.tab[aria-selected=true],.tab[aria-checked=true]{background:var(--inverse);color:var(--on-inverse);box-shadow:none}
+.code-h .tab[aria-selected=true],[data-for] .tab[aria-selected=true],.cn-tabs .tab[aria-selected=true],.cx-tabs .tab[aria-selected=true]{background:var(--ctl);color:var(--text);box-shadow:inset 0 0 0 1px var(--text-2)}
+.nav-a[aria-current=page]{color:var(--text)}
+/* Q1 audit PD (09.11) minors */
+.lad-c i{width:auto;margin-right:var(--s-3)}   /* М1: the step stands in the middle of its column, the same air on both sides */
+@media (max-width:767px){.lad-c i{margin-right:var(--sh-6)}}
+.tkr .tk.txt{transform:translateY(var(--tk-txt-y))}   /* М6: a letter disc sits on the capitals' centre like the image marks (measured 1.5–1.9 px low) */
+.tk.txt{font-weight:var(--fw-5)}   /* М7 */
+code.sf{font-family:var(--font-mono)}   /* М7: never the system monospace */
+.input,.search,.sel select{border-radius:0}   /* М8: fields are square; pills are buttons and chips */
+@media (max-width:767px){.cx-key>.cx-have[hidden]{display:none!important}}   /* М10: on a phone the card is as tall as what it shows */
+.code .k{font-weight:var(--fw-5)}   /* М5: keywords white 500, blue stays for links and focus */
+/* М13 (DESIGN §6.1): the header is 80 px from 1024 with 16 px items, 44 px tall */
+@media (min-width:1024px){
+  :root{--hdr:80px}
+  .nav-a,.nav-t{height:var(--h-lg);padding:0 var(--s-4);font:var(--t-body);font-weight:var(--fw-5)}
+  .hdr-cta .btn-nav{height:var(--h-lg);padding:0 var(--s-5);font:var(--t-body);font-weight:var(--fw-5)}
+}
+.ftr.qrows{padding-top:0}   /* Q1-С4: the footer rows stand right under the last block (the CTA frame on the landing); inner pages keep their own bottom air */
+.qph > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}   /* PP «Q1» С1: the photo is an <img> in the HTML (preload scanner, fetchpriority) — not a JS background */
+/* Smooth switching (owner 09.11, 06-connect-modal-tabs): a panel or a key box is as tall as itself and its container's height animates (common.js smooth),
+   the new panel fades in; with reduced motion or the page paused, nothing animates — the panels share one cell (the tallest), so nothing jumps either */
+@keyframes kf-fade{from{opacity:0}to{opacity:1}}
+.cx-panel[hidden]{display:none!important}
+.cx-key>.cx-have[hidden],.cx-key>.cx-need[hidden]{display:none!important}
+.cx-panel:not([hidden]),.cn-p:not([hidden]),.code > pre[aria-labelledby]:not([hidden]){animation:kf-fade var(--dur-2) var(--ease-out)}
+@media (prefers-reduced-motion:reduce){
+  .cx-panel[hidden],.cx-key>.cx-have[hidden],.cn-p[hidden]{display:block!important;visibility:hidden}
+  .cx-key>.cx-need[hidden]{display:flex!important;visibility:hidden}
+  .modal:has(.cx-panel[data-panel=api]:not([hidden])) .cx-done{display:flex;visibility:hidden}
+}
+[data-motion=off] :is(.cx-panel[hidden],.cx-key>.cx-have[hidden],.cn-p[hidden]){display:block!important;visibility:hidden}
+[data-motion=off] .cx-key>.cx-need[hidden]{display:flex!important;visibility:hidden}
+[data-motion=off] .modal:has(.cx-panel[data-panel=api]:not([hidden])) .cx-done{display:flex;visibility:hidden}
+/* the «First, get a key» box: no reserved height for the key it doesn't hold yet (the box grows smoothly when the key arrives) */
+.cx-key{min-height:0}
+[data-motion=off] :is(.cx-panel,.cn-p,.code > pre[aria-labelledby]){animation:none}   /* a paused page never holds a panel at its first (transparent) frame */
+@media (prefers-reduced-motion:reduce){
+  .code:has(> pre[aria-labelledby]){display:grid;grid-template-columns:minmax(0,1fr)}
+  .code > pre[aria-labelledby]{grid-row:2;grid-column:1}
+  .code > pre[aria-labelledby][hidden]{display:block!important;visibility:hidden}
+}
+[data-motion=off] .code:has(> pre[aria-labelledby]){display:grid;grid-template-columns:minmax(0,1fr)}
+[data-motion=off] .code > pre[aria-labelledby]{grid-row:2;grid-column:1}
+[data-motion=off] .code > pre[aria-labelledby][hidden]{display:block!important;visibility:hidden}
+@media (max-width:767px){.code-h:has(.tabs[data-for]) .code-file{display:none}}   /* a phone: the file name would push the tabs onto a second line on one tab only — the header keeps one height on every tab */
+/* owner 09.11 «сделай hover заливку целиком на строку»: the menu row fills the panel from edge to edge (inside its 1 px frame); the panel's padding moved
+   into the rows, so text and icons keep their places (x 20, first row y 16 from the outer edge, rows 2 px apart as before) */
+.ddp{padding:0;border:1px solid var(--line-board);box-shadow:none}
+.ddp-list{gap:0;width:calc(300px + var(--s-2) * 2 - 2px)}
+.ddi{border-radius:0;padding:calc(var(--s-2) + 1px) calc(var(--s-3) + var(--s-2) - 1px)}
+.ddi:first-child{padding-top:calc(var(--s-2) * 2 - 1px)}
+.ddi:last-child{padding-bottom:calc(var(--s-2) * 2 - 1px)}
+.ddi:focus-visible{outline-offset:calc(-1 * var(--sh-2))}
+@media (max-width:1023px){   /* the phone sheet: a row's hover and keyboard focus run edge to edge too */
+  .sheet a:not(.btn){margin-inline:calc(-1 * var(--gut));padding-inline:var(--gut)}
+  .sheet a:not(.btn):hover,.sheet a:not(.btn):focus-visible{background:var(--raise)}
+  .sheet a:not(.btn):focus-visible{outline-offset:calc(-1 * var(--sh-2))}
+}
+
+.wm-txt{display:inline-flex;align-items:center;gap:5px;font-weight:700;font-size:17px;letter-spacing:-0.03em;line-height:1;color:currentColor}
+.wm-ai{font-size:10px;font-weight:700;letter-spacing:.06em;padding:2px 5px;border-radius:4px;background:rgba(74,222,128,.16);color:#4ade80;line-height:1.1}

@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>document.documentElement.classList.add("js")</script>
+<title>Keydex AI · One key for AI models and stock trading</title>
+<meta name="description" content="An API key and MCP server for AI agents: 300+ models, plus quotes and trades for stock tokens on Solana. Your agent signs every trade.">
+<link rel="canonical" href="https://keydex.ai/">
+<meta name="kf-site" content="https://keydex.ai">
+<meta name="kf-model" content="openai/gpt-4.1-mini">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Keydex AI">
+<meta property="og:title" content="Keydex AI · One key for AI models and stock trading">
+<meta property="og:description" content="An API key and MCP server for AI agents: 300+ models, plus quotes and trades for stock tokens on Solana. Your agent signs every trade.">
+<meta property="og:url" content="https://keydex.ai/">
+<meta property="og:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Keydex AI · One key for AI models and stock trading">
+<meta name="twitter:description" content="An API key and MCP server for AI agents: 300+ models, plus quotes and trades for stock tokens on Solana. Your agent signs every trade.">
+<meta name="twitter:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta name="twitter:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="theme-color" content="#0f1013">
+<link rel="icon" href="/img/brand/favicon.svg?v=ba49f76b" type="image/svg+xml">
+<link rel="icon" href="/img/brand/favicon-32.png?v=7a31a482" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/img/brand/apple-touch-icon.png?v=7ccf5817">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/fonts/Inter-latin.woff2?v=c9407645" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/InstrumentSerif-Italic-latin.woff2?v=6ee678c3" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/base.css?v=14960b84">
+<link rel="stylesheet" href="/css/landing.css?v=e72ec0e5">
+</head>
+<body>
+
+<!--HDR-->
+<a class="skip" href="#main" data-slot="ui.skip">Skip to content</a>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+    <nav class="nav" aria-label="Main" data-slot="nav.main" data-slot-attr="aria-label">
+      <div class="dd" data-dd="product">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-product"><span data-slot="nav.product">Product</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-product">
+          <div class="ddp-list">
+            <a class="ddi" href="/tools" data-prev="tools"><span class="ddi-ic ddi-km"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="ddi-t"><b data-slot="nav.product.tools">Tools</b><small data-slot="nav.product.tools.sub">Tools for stock tokens on Solana</small></span></a>
+            <a class="ddi" href="/models" data-prev="models"><span class="ddi-ic"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="16" height="16" loading="lazy" decoding="async"></span><span class="ddi-t"><b data-slot="nav.product.models">Models</b><small data-slot="nav.product.models.sub">Prices, context sizes and model IDs</small></span></a>
+            <a class="ddi" href="/stocks" data-prev="stocks"><span class="ddi-ic" style="--c:var(--c-port)"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 11.5 6 8l2.5 2.5 5-5"/><path d="M10.5 5.5h3v3"/></svg></span><span class="ddi-t"><b data-slot="nav.product.stocks">Stocks</b><small data-slot="nav.product.stocks.sub">Stock tokens and ETFs, with pool prices</small></span></a>
+            <a class="ddi" href="/connect" data-prev="connect"><span class="ddi-ic" style="--c:var(--c-trade)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.5v3M10 2.5v3M4.5 5.5h7v2.5a3.5 3.5 0 0 1-7 0zM8 11.5v2"/></svg></span><span class="ddi-t"><b data-slot="nav.product.connect">Connect</b><small data-slot="nav.product.connect.sub">Claude, ChatGPT, Cursor, VS Code and REST</small></span></a>
+          </div>
+        </div>
+      </div>
+      <div class="dd" data-dd="dev">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-dev"><span data-slot="nav.developers">Developers</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-dev">
+          <div class="ddp-list">
+            <a class="ddi" href="/docs" data-prev="docs"><span class="ddi-ic" style="--c:var(--c-quote)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v10H4.5A1.5 1.5 0 0 0 3 13.5zM3 13.5A1.5 1.5 0 0 0 4.5 15H13v-3"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.docs">Docs</b><small data-slot="nav.developers.docs.sub">Quickstart, API, MCP and tool reference</small></span></a>
+            <a class="ddi" href="/status" data-prev="status"><span class="ddi-ic" style="--c:var(--ok-fg)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8.5h3l1.5-4 3 8 1.5-4h4"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.status">Status</b><small data-slot="nav.developers.status.sub">Current state of each Keydex AI service</small></span></a>
+            <a class="ddi" href="/changelog" data-prev="changelog"><span class="ddi-ic" style="--c:var(--c-fund)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5.5 4h8M5.5 8h8M5.5 12h8M2.5 4h.01M2.5 8h.01M2.5 12h.01"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.changelog">Changelog</b><small data-slot="nav.developers.changelog.sub">Every release, newest first</small></span></a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-a" href="/pricing" data-slot="nav.pricing">Pricing</a>
+      <a class="nav-a" href="/security" data-slot="nav.security">Security</a>
+      <a class="nav-a" href="/token"><span data-slot="nav.token">Token</span></a>
+    </nav>
+    <div class="hdr-cta">
+      
+      <a class="btn btn-2 btn-nav" href="/docs" data-slot="nav.docs">Docs</a>
+      <a class="btn btn-1 btn-nav" href="/app" data-slot="nav.app">Open app</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet" data-slot="nav.menu" data-slot-attr="aria-label" aria-label="Open menu"><span></span></button>
+    <span hidden id="s-menu-close" data-slot="nav.menu.close">Close menu</span>
+  </div>
+</header>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" data-slot="nav.sheet" data-slot-attr="aria-label" aria-label="Site menu">
+  <p class="sheet-h" data-slot="nav.product">Product</p>
+  <a href="/tools" data-slot="nav.product.tools">Tools</a>
+  <a href="/models" data-slot="nav.product.models">Models</a>
+  <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+  <a href="/connect" data-slot="nav.product.connect">Connect</a>
+  <p class="sheet-h" data-slot="nav.developers">Developers</p>
+  <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+  <a href="/status" data-slot="nav.developers.status">Status</a>
+  <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+  <p class="sheet-h" data-slot="nav.more">More</p>
+  <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+  <a href="/security" data-slot="nav.security">Security</a>
+  <a href="/token"><span data-slot="nav.token">Token</span></a>
+  <a class="btn btn-1 btn-block" href="/app" data-slot="nav.app">Open app</a>
+</div>
+<!--/HDR-->
+
+<main id="main">
+<!-- HERO — analysis.md §3 Hero; refs 01-hero-1440-f1…f5, 02-hero-window-1440 -->
+<section class="hero">
+  <!--F:photos--><div class="qph qph-hero" aria-hidden="true"><img src="/img/archive/hero-gemini-tracking-board-1965-1280.webp?v=00cb4b20" srcset="/img/archive/hero-gemini-tracking-board-1965-1280.webp?v=00cb4b20 1280w, /img/archive/hero-gemini-tracking-board-1965-1920.webp?v=212200cb 1920w" sizes="100vw" width="1920" height="1080" alt="" fetchpriority="high" decoding="async"></div><!--/F:photos-->
+  <div class="wrap hero-in">
+    <p class="announce"><span class="announce-dot" aria-hidden="true"></span><span data-slot="hero.announce">Stock tokens on Solana</span></p>
+    <h1 class="hero-title" aria-label="One key for AI models and stock trading." data-slot="hero.title" data-slot-attr="aria-label"><span class="ht-l" aria-hidden="true" data-slot="hero.title.main">One key for AI models</span> <em class="acc" aria-hidden="true" data-slot="hero.title.accent">and stock trading.</em></h1>
+    <p class="lead hero-lead" data-slot="hero.lead">300+ models and MCP tools that let your agent quote, buy and sell stock tokens.</p>
+    <div class="hero-cta">
+      <button class="btn btn-n" type="button" data-connect="claude"><img class="ic" src="/img/models/claude-color.svg?v=a3101f30" alt="" width="18" height="18"><span data-slot="hero.cta.claude">Connect to Claude</span></button>
+      <button class="btn btn-2" type="button" data-connect="openai"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span><span data-slot="hero.cta.openai">Connect to OpenAI</span></button>
+    </div>
+  </div>
+
+  <div class="wide hero-stage">
+    <div class="win" id="hw" data-model="claude">
+      <div class="win-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="win-title hk" aria-hidden="true"><span class="m" data-hk-av><img class="ic" src="/img/models/claude-color.svg?v=a3101f30" alt="" width="14" height="14"></span><span class="hk-dots"></span><span class="m k"></span><span class="hk-t mono">Keydex AI · mcp</span><span class="hk-tools"><i style="--c:var(--c-port)"></i><i style="--c:var(--c-quote)"></i><i style="--c:var(--c-trade)"></i><i style="--c:var(--c-fund)"></i></span></span>
+        <div class="win-act">
+        <!-- V1-11 (X1-F2/F3, WCAG 2.2.2): one control pauses every scene on the page; Runway 1744d58a -->
+        <button class="mo" type="button" data-motion-toggle aria-pressed="false" data-slot="ui.motion.pause" data-slot-attr="aria-label" aria-label="Pause animations"><svg class="mo-p" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="4" y="3" width="2.6" height="10" rx="1"/><rect x="9.4" y="3" width="2.6" height="10" rx="1"/></svg><svg class="mo-g" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 3.2v9.6a.8.8 0 0 0 1.2.7l7.6-4.8a.8.8 0 0 0 0-1.4L6.2 2.5A.8.8 0 0 0 5 3.2Z"/></svg><span class="mo-t" aria-hidden="true"></span></button>
+        <div class="seg" role="group" aria-label="Assistant" data-slot="hero.win.assistant" data-slot-attr="aria-label">
+          <button type="button" aria-pressed="true" data-m="claude" aria-label="Claude"><img class="ic" src="/img/models/claude-color.svg?v=a3101f30" alt="" width="14" height="14"></button>
+          <button type="button" aria-pressed="false" data-m="openai" aria-label="ChatGPT"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span></button>
+        </div>
+        </div>
+      </div>
+      <p class="sr" data-slot="hero.win.sr">Demo chat: the agent checks its portfolio and the TSLA price, asks you to approve, then signs a $50 TSLA buy.</p>
+      <div class="win-body" aria-hidden="true">
+        <div class="chat">
+          <div class="chat-log">
+            <div class="msg u hist"><p data-slot="hero.win.hist.1.ask">Sell a quarter of my NVDA.</p></div>
+            <div class="msg a hist"><span></span><p class="hres"><span class="arg stack"><span class="logo-t"><img src="/img/stocks/NVDA@64.webp?v=365a1893" alt="" width="16" height="16"></span></span><span class="mono" data-slot="hero.win.hist.1.result">build_trade · NVDA sell 25% · unsigned</span></p></div>
+            <div class="msg u hist"><p data-slot="hero.win.hist.2.ask">Now put <span class="nw">0.02 <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span></span> into AAPL.</p></div>
+            <div class="msg a hist"><span></span><p class="hres"><span class="arg stack"><span class="logo-t"><img src="/img/stocks/AAPL@64.webp?v=cb182404" alt="" width="16" height="16"></span></span><span class="mono" data-slot="hero.win.hist.2.result">build_trade · AAPL buy · unsigned</span></p></div>
+            <div class="msg u"><p data-slot="hero.win.ask">Check your portfolio and TSLA’s price. Then buy $50 of TSLA.</p></div>
+            <div class="msg a">
+              <span class="av" data-av><img class="ic" src="/img/models/claude-color.svg?v=a3101f30" alt="" width="16" height="16"></span>
+              <div class="calls">
+                <div class="call done" data-call="0" style="--c:var(--c-port)"><span class="cst"><i class="spin"></i><span class="ok-c"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 6.5 11.5 12.5 5"/></svg></span></span><span class="fn mono">stock_portfolio</span><span class="arg stack"><span class="logo-t"><img src="/img/stocks/NVDA@64.webp?v=365a1893" srcset="/img/stocks/NVDA@64.webp?v=365a1893 1x, /img/stocks/NVDA.webp?v=92ee9328 2x" alt="" width="20" height="20"></span><span class="logo-t"><img src="/img/stocks/TSLA@64.webp?v=4fc7023e" srcset="/img/stocks/TSLA@64.webp?v=4fc7023e 1x, /img/stocks/TSLA.webp?v=22ed67da 2x" alt="" width="20" height="20"></span><span class="logo-t"><img src="/img/stocks/AAPL@64.webp?v=cb182404" srcset="/img/stocks/AAPL@64.webp?v=cb182404 1x, /img/stocks/AAPL.webp?v=3a60754b 2x" alt="" width="20" height="20"></span></span></span><span class="http">200</span></div>
+                <div class="call" data-call="1" style="--c:var(--c-quote)"><span class="cst"><i class="spin"></i><span class="ok-c"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 6.5 11.5 12.5 5"/></svg></span></span><span class="fn mono">stock_quote</span><span class="arg"><span class="logo-t"><img src="/img/stocks/TSLA@64.webp?v=4fc7023e" srcset="/img/stocks/TSLA@64.webp?v=4fc7023e 1x, /img/stocks/TSLA.webp?v=22ed67da 2x" alt="" width="20" height="20"></span>TSLA</span><span class="http">200</span></div>
+                <div class="call wait" data-call="2" style="--c:var(--c-trade)"><span class="cst"><i class="spin"></i><span class="ok-c"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 6.5 11.5 12.5 5"/></svg></span></span><span class="fn mono">build_trade</span><span class="arg"><span class="logo-t"><img src="/img/stocks/TSLA@64.webp?v=4fc7023e" srcset="/img/stocks/TSLA@64.webp?v=4fc7023e 1x, /img/stocks/TSLA.webp?v=22ed67da 2x" alt="" width="20" height="20"></span>TSLA · $50</span><span class="http">200</span></div>
+              </div>
+            </div>
+            <div class="msg a"><span></span><div class="swap"><span class="hs off" data-h="need"><span class="need"><i></i><span data-slot="hero.win.review.title">Needs your approval</span></span></span><span class="hs off" data-h="done"><span class="donel"><span class="ok-c"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 6.5 11.5 12.5 5"/></svg></span><span data-slot="hero.win.receipt">Signed and sent. TSLA is in my portfolio.</span></span></span></div></div>
+          </div>
+          <div class="composer" aria-hidden="true"><span class="ph" data-slot="demo.placeholder">Ask about a stock token, like NVDA</span><span class="send"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></span></div>
+        </div>
+        <div class="screen hero-scr">
+          <div class="sc-card sc-quote hs off" data-h="quote">
+            <div class="q-top"><span class="logo-t lg"><img src="/img/stocks/TSLA@64.webp?v=4fc7023e" srcset="/img/stocks/TSLA@64.webp?v=4fc7023e 1x, /img/stocks/TSLA.webp?v=22ed67da 2x" alt="" width="40" height="40"></span><span class="q-name"><b>TSLA</b><span>Tesla</span></span></div>
+            <div class="q-price"><b class="num unk" data-q="TSLA:price">—</b><span class="num" data-q="TSLA:chg">—</span></div>
+            <svg class="spark" viewBox="0 0 240 44" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="sparkfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-opacity=".14"/><stop offset="1" stop-opacity="0"/></linearGradient></defs><path class="area" data-spark-area="TSLA"/><path data-spark="TSLA"/></svg>
+          </div>
+          <div class="sc-card sc-port hs off" data-h="port">
+            <div class="pt-top"><span class="tchip"><span class="tool-dot"></span>stock_portfolio</span></div>
+            <p class="pt-total"><span data-slot="tools.stock_portfolio.total">Stock tokens total</span><b class="num unk" data-pf-total>—</b></p>
+            <ul class="pf" data-pf="hero"></ul>
+          </div>
+          <div class="review hs off" data-h="review">
+            <div class="rv-face" data-face="sheet">
+              <div class="rv-head"><i></i><span data-slot="hero.win.review.title">Needs your approval</span></div>
+              <div class="rv-amt"><span class="logo-t lg"><img src="/img/stocks/TSLA@64.webp?v=4fc7023e" srcset="/img/stocks/TSLA@64.webp?v=4fc7023e 1x, /img/stocks/TSLA.webp?v=22ed67da 2x" alt="" width="40" height="40"></span><div><b class="num">$50.00</b><span class="num" data-tsla-out>—</span></div></div>
+              <dl class="rv-kv"><dt>side</dt><dd>buy</dd><dt>token</dt><dd class="mono">So11…1112</dd><dt>network</dt><dd class="mono">solana</dd></dl>
+              <p class="route" data-route data-slot="tools.build_trade.route">Routes via Jupiter</p>
+              <span class="rv-btn" data-approve><span class="lbl" data-slot="hero.win.review.approve">Approve</span><span class="sig" aria-hidden="true"></span></span>
+            </div>
+            <div class="rv-face rc hs off" data-h="receipt">
+              <span class="rc-ok"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7.5"/></svg></span>
+              <b class="rc-usd num">$50.00</b>
+              <span class="rc-amt num"><span class="logo-t"><img src="/img/stocks/TSLA@64.webp?v=4fc7023e" srcset="/img/stocks/TSLA@64.webp?v=4fc7023e 1x, /img/stocks/TSLA.webp?v=22ed67da 2x" alt="" width="20" height="20"></span><span data-tsla-plus>—</span></span>
+            </div>
+          </div>
+          <span class="cursor hs off" data-h="cursor" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 3l14 8.2-6.2 1.3L9.6 19z"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <p class="hero-note"><span data-slot="hero.sign.note">Trades are built by Keydex AI and signed by your agent’s own wallet.</span> <a class="link" href="/docs#sign-and-send" data-slot="hero.sign.link">How signing works</a></p>
+    <div class="q-tape" aria-hidden="true"><ul><!--SNAP:tape--><li><span class="tk md txt mono1">U</span><b>USO</b><i data-chg="USO">—</i></li><li><span class="tk md txt mono1">S</span><b>SPCX</b><i data-chg="SPCX">—</i></li><li><span class="tk md"><img src="/img/stocks/AMZN@64.webp?v=9e13b428" srcset="/img/stocks/AMZN@64.webp?v=9e13b428 1x, /img/stocks/AMZN.webp?v=3421f53c 2x" alt="" width="28" height="28" loading="lazy"></span><b>AMZN</b><i data-chg="AMZN">—</i></li><li><span class="tk md txt mono1">G</span><b>GLD</b><i data-chg="GLD">—</i></li><li><span class="tk md"><img src="/img/stocks/CRCL@64.webp?v=9da05ff9" srcset="/img/stocks/CRCL@64.webp?v=9da05ff9 1x, /img/stocks/CRCL.webp?v=4649e5e8 2x" alt="" width="28" height="28" loading="lazy"></span><b>CRCL</b><i data-chg="CRCL">—</i></li><li><span class="tk md txt mono1">S</span><b>SPY</b><i data-chg="SPY">—</i></li><li><span class="tk md"><img src="/img/stocks/TSLA@64.webp?v=4fc7023e" srcset="/img/stocks/TSLA@64.webp?v=4fc7023e 1x, /img/stocks/TSLA.webp?v=22ed67da 2x" alt="" width="28" height="28" loading="lazy"></span><b>TSLA</b><i data-chg="TSLA">—</i></li><li><span class="tk md txt mono1">C</span><b>COST</b><i data-chg="COST">—</i></li><li><span class="tk md"><img src="/img/stocks/NVDA@64.webp?v=365a1893" srcset="/img/stocks/NVDA@64.webp?v=365a1893 1x, /img/stocks/NVDA.webp?v=92ee9328 2x" alt="" width="28" height="28" loading="lazy"></span><b>NVDA</b><i data-chg="NVDA">—</i></li><li><span class="tk md"><img src="/img/stocks/MSFT@64.webp?v=b08e3e54" srcset="/img/stocks/MSFT@64.webp?v=b08e3e54 1x, /img/stocks/MSFT.webp?v=f4f3cf59 2x" alt="" width="28" height="28" loading="lazy"></span><b>MSFT</b><i data-chg="MSFT">—</i></li><li><span class="tk md txt mono1">H</span><b>HIMS</b><i data-chg="HIMS">—</i></li><li><span class="tk md"><img src="/img/stocks/TTWO@64.webp?v=c790397d" srcset="/img/stocks/TTWO@64.webp?v=c790397d 1x, /img/stocks/TTWO.webp?v=996c8623 2x" alt="" width="28" height="28" loading="lazy"></span><b>TTWO</b><i data-chg="TTWO">—</i></li><li><span class="tk md txt mono1">Q</span><b>QQQ</b><i data-chg="QQQ">—</i></li><li><span class="tk md"><img src="/img/stocks/GOOGL@64.webp?v=c6fdee7c" srcset="/img/stocks/GOOGL@64.webp?v=c6fdee7c 1x, /img/stocks/GOOGL.webp?v=43560550 2x" alt="" width="28" height="28" loading="lazy"></span><b>GOOGL</b><i data-chg="GOOGL">—</i></li><li><span class="tk md"><img src="/img/stocks/AMD@64.webp?v=c9644c3a" srcset="/img/stocks/AMD@64.webp?v=c9644c3a 1x, /img/stocks/AMD.webp?v=29ca8c6a 2x" alt="" width="28" height="28" loading="lazy"></span><b>AMD</b><i data-chg="AMD">—</i></li><li><span class="tk md txt mono1">S</span><b>SGOV</b><i data-chg="SGOV">—</i></li><li><span class="tk md txt mono1">M</span><b>MU</b><i data-chg="MU">—</i></li><li><span class="tk md"><img src="/img/stocks/SLV@64.webp?v=429f8215" srcset="/img/stocks/SLV@64.webp?v=429f8215 1x, /img/stocks/SLV.webp?v=bdddbaf5 2x" alt="" width="28" height="28" loading="lazy"></span><b>SLV</b><i data-chg="SLV">—</i></li><li aria-hidden="true"><span class="tk md txt mono1">U</span><b>USO</b><i data-chg="USO">—</i></li><li aria-hidden="true"><span class="tk md txt mono1">S</span><b>SPCX</b><i data-chg="SPCX">—</i></li><li aria-hidden="true"><span class="tk md"><img src="/img/stocks/AMZN@64.webp?v=9e13b428" srcset="/img/stocks/AMZN@64.webp?v=9e13b428 1x, /img/stocks/AMZN.webp?v=3421f53c 2x" alt="" width="28" height="28" loading="lazy"></span><b>AMZN</b><i data-chg="AMZN">—</i></li><li aria-hidden="true"><span class="tk md txt mono1">G</span><b>GLD</b><i data-chg="GLD">—</i></li><li aria-hidden="true"><span class="tk md"><img src="/img/stocks/CRCL@64.webp?v=9da05ff9" srcset="/img/stocks/CRCL@64.webp?v=9da05ff9 1x, /img/stocks/CRCL.webp?v=4649e5e8 2x" alt="" width="28" height="28" loading="lazy"></span><b>CRCL</b><i data-chg="CRCL">—</i></li><li aria-hidden="true"><span class="tk md txt mono1">S</span><b>SPY</b><i data-chg="SPY">—</i></li><li aria-hidden="true"><span class="tk md"><img src="/img/stocks/TSLA@64.webp?v=4fc7023e" srcset="/img/stocks/TSLA@64.webp?v=4fc7023e 1x, /img/stocks/TSLA.webp?v=22ed67da 2x" alt="" width="28" height="28" loading="lazy"></span><b>TSLA</b><i data-chg="TSLA">—</i></li><li aria-hidden="true"><span class="tk md txt mono1">C</span><b>COST</b><i data-chg="COST">—</i></li><li aria-hidden="true"><span class="tk md"><img src="/img/stocks/NVDA@64.webp?v=365a1893" srcset="/img/stocks/NVDA@64.webp?v=365a1893 1x, /img/stocks/NVDA.webp?v=92ee9328 2x" alt="" width="28" height="28" loading="lazy"></span><b>NVDA</b><i data-chg="NVDA">—</i></li><li aria-hidden="true"><span class="tk md"><img src="/img/stocks/MSFT@64.webp?v=b08e3e54" srcset="/img/stocks/MSFT@64.webp?v=b08e3e54 1x, /img/stocks/MSFT.webp?v=f4f3cf59 2x" alt="" width="28" height="28" loading="lazy"></span><b>MSFT</b><i data-chg="MSFT">—</i></li><li aria-hidden="true"><span class="tk md txt mono1">H</span><b>HIMS</b><i data-chg="HIMS">—</i></li><li aria-hidden="true"><span class="tk md"><img src="/img/stocks/TTWO@64.webp?v=c790397d" srcset="/img/stocks/TTWO@64.webp?v=c790397d 1x, /img/stocks/TTWO.webp?v=996c8623 2x" alt="" width="28" height="28" loading="lazy"></span><b>TTWO</b><i data-chg="TTWO">—</i></li><li aria-hidden="true"><span class="tk md txt mono1">Q</span><b>QQQ</b><i data-chg="QQQ">—</i></li><li aria-hidden="true"><span class="tk md"><img src="/img/stocks/GOOGL@64.webp?v=c6fdee7c" srcset="/img/stocks/GOOGL@64.webp?v=c6fdee7c 1x, /img/stocks/GOOGL.webp?v=43560550 2x" alt="" width="28" height="28" loading="lazy"></span><b>GOOGL</b><i data-chg="GOOGL">—</i></li><li aria-hidden="true"><span class="tk md"><img src="/img/stocks/AMD@64.webp?v=c9644c3a" srcset="/img/stocks/AMD@64.webp?v=c9644c3a 1x, /img/stocks/AMD.webp?v=29ca8c6a 2x" alt="" width="28" height="28" loading="lazy"></span><b>AMD</b><i data-chg="AMD">—</i></li><li aria-hidden="true"><span class="tk md txt mono1">S</span><b>SGOV</b><i data-chg="SGOV">—</i></li><li aria-hidden="true"><span class="tk md txt mono1">M</span><b>MU</b><i data-chg="MU">—</i></li><li aria-hidden="true"><span class="tk md"><img src="/img/stocks/SLV@64.webp?v=429f8215" srcset="/img/stocks/SLV@64.webp?v=429f8215 1x, /img/stocks/SLV.webp?v=bdddbaf5 2x" alt="" width="28" height="28" loading="lazy"></span><b>SLV</b><i data-chg="SLV">—</i></li><!--/SNAP--></ul></div>
+    <p class="facts" id="facts" data-slot="hero.facts">Latest block {n}</p>
+  </div>
+</section>
+
+<!-- ONE KEY — wide card + Keyhole giant cut by the edge; ref 03-message-bots-1440-f1…f3 -->
+<section class="sec onekey qrows" id="onekey">
+  <div class="wide">
+    <div class="okc">
+      <div class="okc-txt">
+        <h2 class="h2" data-slot="onekey.title">Call any model with the same key.</h2>
+        <p class="lead" data-slot="onekey.lead">Claude, GPT, Gemini, Grok and the rest through one OpenAI-compatible API. To switch, change the model ID.</p>
+      </div>
+      <div class="okc-scr">
+        <div class="okb">
+          <div class="okb-h" aria-hidden="true"><span data-slot="page.models.col.model">Model</span><span data-slot="page.models.col.input">Input / 1M</span><span data-slot="page.models.col.output">Output / 1M</span></div>
+          <ul class="okb-l" aria-label="Model prices per 1M tokens" data-slot="page.pricing.models.caption" data-slot-attr="aria-label"><!--SNAP:okboard--><li data-m="anthropic/claude-fable-5.2"><span class="mx-lg"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="18" height="18"></span><span class="okb-n"><b>Claude Fable 5.2</b><span class="mono">anthropic/claude-fable-5.2</span></span><span class="okb-v" data-p="in">$8.00</span><span class="okb-v" data-p="out">$40.00</span></li><li data-m="openai/gpt-6.1-terra"><span class="mx-lg"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span></span><span class="okb-n"><b>GPT-6.1 Terra</b><span class="mono">openai/gpt-6.1-terra</span></span><span class="okb-v" data-p="in">$1.00</span><span class="okb-v" data-p="out">$5.00</span></li><li data-m="google/gemini-omni-1.2-flash"><span class="mx-lg"><img src="/img/models/gemini-color.svg?v=8ab0a9ba" alt="" width="18" height="18"></span><span class="okb-n"><b>Gemini Omni 1.2 Flash</b><span class="mono">google/gemini-omni-1.2-flash</span></span><span class="okb-v" data-p="in">$1.50</span><span class="okb-v" data-p="out">$9.00</span></li><li data-m="x-ai/grok-4.7"><span class="mx-lg"><span class="i" style="--src:url(/img/models/grok.svg?v=9175fc90)"></span></span><span class="okb-n"><b>Grok 4.7</b><span class="mono">x-ai/grok-4.7</span></span><span class="okb-v" data-p="in">$2.00</span><span class="okb-v" data-p="out">$6.00</span></li><li data-m="deepseek/deepseek-v4.1-flash"><span class="mx-lg"><img src="/img/models/deepseek-color.svg?v=deba5f98" alt="" width="18" height="18"></span><span class="okb-n"><b>DeepSeek V4.1 Flash</b><span class="mono">deepseek/deepseek-v4.1-flash</span></span><span class="okb-v" data-p="in">$0.006</span><span class="okb-v" data-p="out">$0.50</span></li><li data-m="qwen/qwen3.8-max-prime"><span class="mx-lg"><img src="/img/models/qwen-color.svg?v=a158a0e3" alt="" width="18" height="18"></span><span class="okb-n"><b>Qwen3.8 Max Prime</b><span class="mono">qwen/qwen3.8-max-prime</span></span><span class="okb-v" data-p="in">$4.00</span><span class="okb-v" data-p="out">$12.00</span></li><!--/SNAP--></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS 2×2 — each card a painted "screen" with live UI; ref 04-many-bots-cards-1440-f1/f2 -->
+<section class="sec tools qrows" id="tools">
+  <div class="wrap sec-head">
+    <h2 class="h2" data-slot="tools.title">Your agent’s tools for stock tokens.</h2>
+    <p class="lead" data-slot="tools.lead">Same tools over MCP and REST. Read tools work without a key.</p>
+  </div>
+  <div class="wide">
+    <div class="tgrid">
+      <article class="tc" id="tPort" style="--c:var(--c-port)">
+        <div class="tc-txt"><h3 class="tc-t"><span class="tool-dot"></span><span data-slot="tools.stock_portfolio.title">See your agent’s portfolio</span></h3><p class="tc-p" data-slot="tools.stock_portfolio.text">Every stock token and ETF in the wallet, valued in dollars, plus <span class="nw">its <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span>.</span></p></div>
+        <div class="tscr">
+          <!--F:photos--><div class="qph" data-bg="/img/archive/card-portfolio-ibm7090-tape-room-1963-1280.webp?v=4d98f7cf" aria-hidden="true"></div><!--/F:photos-->
+          <div class="tscr-bar"><span class="tchip"><span class="tool-dot"></span>stock_portfolio</span></div>
+          <div class="tw">
+            <p class="pt-total big"><span data-slot="tools.stock_portfolio.total">Stock tokens total</span><b class="num unk" data-pf-total>—</b></p>
+            <ul class="pf" data-pf="card"></ul>
+          </div>
+        </div>
+      </article>
+      <article class="tc" id="tQuote" style="--c:var(--c-quote)">
+        <div class="tc-txt"><h3 class="tc-t"><span class="tool-dot"></span><span data-slot="tools.stock_quote.title">Quotes before every trade</span></h3><p class="tc-p" data-slot="tools.stock_quote.text">Price, 24h change and pool depth for each stock token, before your agent decides.</p></div>
+        <div class="tscr">
+          <!--F:photos--><div class="qph" data-bg="/img/archive/card-stocks-nyse-ticker-control-1922-1280.webp?v=51679708" aria-hidden="true"></div><!--/F:photos-->
+          <div class="tscr-bar"><span class="tchip"><span class="tool-dot"></span>stock_quote</span></div>
+          <div class="tw">
+            <ul class="ql" id="qList"></ul>
+          </div>
+        </div>
+      </article>
+      <article class="tc" id="tTrade" style="--c:var(--c-trade)">
+        <div class="tc-txt"><h3 class="tc-t"><span class="tool-dot"></span><span data-slot="tools.build_trade.title">Buy and sell stock tokens</span></h3><p class="tc-p" data-slot="tools.build_trade.text">Buy <span class="nw">with <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span>,</span> sized <span class="nw">in <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span></span> or dollars, or sell part of a position.</p></div>
+        <div class="tscr">
+          <!--F:photos--><div class="qph" data-bg="/img/archive/card-trade-alt-eniac-programmers-1946-1280.webp?v=d12a0e39" data-qph="eniac" aria-hidden="true"></div><!--/F:photos-->
+          <div class="tscr-bar"><span class="tchip"><span class="tool-dot"></span>build_trade</span></div>
+          <div class="tw tx">
+            <!-- V1-2 (P1-F6): the bento shows the other screen of build_trade — the unsigned transaction itself; the Review sheet lives only in the hero -->
+            <div class="tx-top"><span class="tchip tx-badge"><span class="tool-dot"></span><span data-slot="tools.build_trade.badge">unsigned · agent signs</span></span></div>
+            <div class="tx-lbl"><span class="logo-t md"><img src="/img/stocks/TSLA@64.webp?v=4fc7023e" srcset="/img/stocks/TSLA@64.webp?v=4fc7023e 1x, /img/stocks/TSLA.webp?v=22ed67da 2x" alt="" width="28" height="28" loading="lazy" decoding="async"></span><span class="mono">Buy TSLA</span><span class="num tx-out" data-tsla-out>—</span></div>
+            <dl class="tx-kv mono"><dt>side</dt><dd>buy</dd><dt>usd</dt><dd class="num">50</dd><dt>to</dt><dd>JUP6…89kL</dd><dt>network</dt><dd class="mono">solana</dd><dt>data</dt><dd>5xK9mR3p…</dd></dl>
+            <p class="route" data-route data-slot="tools.build_trade.route">Routes via Jupiter</p>
+          </div>
+        </div>
+      </article>
+      <article class="tc" id="tFund" style="--c:var(--c-fund)">
+        <div class="tc-txt"><h3 class="tc-t"><span class="tool-dot"></span><span data-slot="tools.fund_agent.title">Fund your agent’s wallet</span></h3><p class="tc-p" data-slot="tools.fund_agent.text">From Ethereum, Base, Arbitrum and 12 more networks to your agent’s wallet, arriving <span class="nw">as <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span>.</span></p></div>
+        <div class="tscr">
+          <!--F:photos--><div class="qph" data-bg="/img/archive/card-bridge-telephone-switchboards-harris-ewing-1280.webp?v=f58f37b5" aria-hidden="true"></div><!--/F:photos-->
+          <div class="tscr-bar"><span class="tchip"><span class="tool-dot"></span>fund_agent</span></div>
+          <div class="tw">
+            <div class="fa">
+              <div class="fa-src"><span><img src="/img/chains/ethereum.svg?v=bd61892d" alt="Ethereum" width="22" height="22" loading="lazy" decoding="async"></span><span><img src="/img/chains/base.svg?v=2c83ae11" alt="Base" width="22" height="22" loading="lazy" decoding="async"></span><span><img src="/img/chains/arbitrum.svg?v=35cebc7f" alt="Arbitrum" width="22" height="22" loading="lazy" decoding="async"></span><span><img src="/img/chains/optimism.svg?v=31521544" alt="Optimism" width="22" height="22" loading="lazy" decoding="async"></span><span><img src="/img/chains/bnb.svg?v=8a253298" alt="BNB Chain" width="22" height="22" loading="lazy" decoding="async"></span><span><img src="/img/chains/polygon.svg?v=342be777" alt="Polygon" width="22" height="22" loading="lazy" decoding="async"></span></div>
+              <div class="fa-line" aria-hidden="true"><i></i></div>
+              <div class="fa-dst" id="faMascot" aria-hidden="true"></div>
+            </div>
+            <div class="fa-bal"><img src="/img/tokens/sol.svg" alt="" width="28" height="28"><b data-fa-bal>0.05</b><span class="sym">SOL</span><span class="ok-c"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5 6.5 11.5 12.5 5"/></svg></span></div>
+            <p class="route" data-route data-slot="tools.fund_agent.route">Routes via Jupiter</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS — ref 33-home-stats-news-1440 -->
+<section class="sec stats" id="models">
+  <div class="wide">
+    <div class="srow">
+      <div class="stat"><b>300+</b><span data-slot="stats.1.label">AI models</span></div>
+      <div class="stat"><b>60+</b><span data-slot="stats.2.label">stock tokens and ETFs</span></div>
+      <div class="stat"><b>100 ms</b><span data-slot="stats.3.label">block time</span></div>
+      <div class="stat"><b data-tools-n>4</b><span data-slot="stats.4.label">MCP and REST tools</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS — ref 07-pricing-1440 -->
+<section class="sec plans-sec qrows" id="plans">
+  <div class="wrap sec-head">
+    <h2 class="h2" data-slot="plans.title">Try it free. <em class="acc">Holders get more model calls.</em></h2>
+  </div>
+  <div class="wide">
+    <!--SNAP:plans--><div class="plans q1p"><article class="plan" data-plan="trial"><!--F:photos--><div class="qph" aria-hidden="true"><img src="/img/archive/pricing-mercury-control-room-1964-1280.webp?v=e758c40a" srcset="/img/archive/pricing-mercury-control-room-1964-1280.webp?v=e758c40a 1280w, /img/archive/pricing-mercury-control-room-1964-1920.webp?v=0a7fd257 1920w" sizes="(max-width:767px) 100vw, 40vw" width="1920" height="1080" alt="" loading="lazy" decoding="async"></div><!--/F:photos--><div class="plan-in"><p class="eyebrow plan-label" data-slot="plans.trial.label">Try it now</p><p class="plan-val" data-slot="plans.trial.value">No sign-in</p><p class="plan-unit" data-slot="plans.trial.unit">A free daily allowance. No wallet.</p><a class="btn btn-1 plan-btn" href="/connect" data-slot="plans.trial.cta">Get a trial key</a></div></article><article class="plan" data-plan="holder"><p class="eyebrow plan-label"><span data-slot="plans.holder.label">Hold <span class="kfw"><span class="tk keyfo in" aria-hidden="true"></span>$KEYDEX</span></span><span class="chip ok" data-st="token">Live</span></p><p class="plan-val" data-slot="plans.holder.value">$0.40 to $15</p><p class="plan-unit" data-slot="plans.holder.unit">of model calls a day, by the value you hold</p><figure class="lad" role="img" aria-label="Daily allowance by holding: $25 gives $0.40, $100 gives $1.25, $500 gives $5, $2,500 or more gives $15." data-slot="plans.scale.aria" data-slot-attr="aria-label"><span class="lad-y" aria-hidden="true" data-slot="plans.scale.y">A day</span><div class="lad-cols" aria-hidden="true"><div class="lad-c"><b data-slot="page.token.tier.1.allow">$0.40</b><i style="--h:16.3%"></i><span data-slot="page.token.tier.1.hold">$25</span></div><div class="lad-c"><b data-slot="page.token.tier.2.allow">$1.25</b><i style="--h:28.9%"></i><span data-slot="page.token.tier.2.hold">$100</span></div><div class="lad-c"><b data-slot="page.token.tier.3.allow">$5</b><i style="--h:57.7%"></i><span data-slot="page.token.tier.3.hold">$500</span></div><div class="lad-c"><b data-slot="page.token.tier.4.allow">$15</b><i style="--h:100.0%"></i><span data-slot="page.token.tier.4.hold">$2,500+</span></div></div><span class="lad-x" aria-hidden="true" data-slot="plans.scale.x">You hold</span></figure><a class="btn btn-2 plan-btn" data-href="/app?tab=balance" href="/token"><span data-slot="plans.holder.cta">Buy <span class="kfw"><span class="tk keyfo in" aria-hidden="true"></span>$KEYDEX</span></span></a></article></div><!--/SNAP-->
+  </div>
+</section>
+
+<!-- SOON — one compact line (owner 28.10) -->
+<section class="sec soon-sec" id="soon">
+  <div class="wide">
+    <div class="soon">
+      <span class="chip dim" data-slot="soon.title">Soon</span>
+      <p class="soon-items"><span data-slot="soon.items" data-slot-i="0">Agent passport</span><span class="sep" aria-hidden="true">·</span><span data-slot="soon.items" data-slot-i="1">One-click claude.ai and ChatGPT connectors</span><span class="sep" aria-hidden="true">·</span><span data-slot="soon.items" data-slot-i="2">Withdrawals from agent wallets to other networks</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ — two columns; ref 09-faq-1440 -->
+<section class="sec faq qrows" id="faq">
+  <div class="wide faq-in">
+    <h2 class="h2" data-slot="faq.title">Common questions</h2>
+    <div class="faq-list">
+      <details><summary><span data-slot="faq.q1">Who holds the private keys?</span></summary><p data-slot="faq.a1">Your agent does. Transactions come back unsigned, and your agent signs them itself. No Keydex AI API or MCP tool asks for a private key.</p></details>
+      <details><summary><span data-slot="faq.q2">Do I need to buy credits?</span></summary><p data-slot="faq.a2">No. There are no credits or top-ups. Tools are free, and model calls run on a daily allowance that resets at 00:00 UTC.</p></details>
+      <details><summary><span data-slot="faq.wallet.q">Do I need a wallet?</span></summary><p data-slot="faq.wallet.a">No. A trial key works without one. Sign in with a wallet to create, name and revoke your own keys; until the token launches, they get the same free daily allowance.</p></details>
+      <details><summary><span data-slot="faq.q3">What do you log?</span></summary><p data-slot="faq.a3">Prompts and replies are not stored. For each call we log the time, key, model or tool, tokens, cost and status, as you see in Usage. Our server log also keeps IP addresses and request paths.</p></details>
+      <details><summary><span data-slot="faq.q4">Is Keydex AI built on Solana?</span></summary><p data-slot="faq.a4">Yes. Keydex AI is built independently on Solana Mainnet.</p></details>
+      <details><summary><span data-slot="faq.q5">Can anyone use stock tokens?</span></summary><p data-slot="faq.a5">No. Stock tokens are not available to US persons and are restricted in Canada, the UK, Switzerland and other countries. This service shows data and builds transactions. It does not sell stock tokens.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA — outline Keyhole giant, 1px line; ref 10-final-cta-1440-f1/f2 -->
+<section class="sec cta qrows q2" id="start">
+  <div class="wide"><div class="cta-box">
+    <h2 class="h2" data-slot="cta.title">Connect your agent <em class="acc">in a minute.</em></h2>
+    <div class="hero-cta">
+    <button class="btn btn-n" type="button" data-connect="claude"><img class="ic" src="/img/models/claude-color.svg?v=a3101f30" alt="" width="18" height="18"><span data-slot="hero.cta.claude">Connect to Claude</span></button>
+    <button class="btn btn-2" type="button" data-connect="openai"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span><span data-slot="hero.cta.openai">Connect to OpenAI</span></button>
+  </div>
+    <p class="cta-note" data-slot="cta.lead">Works with Claude, ChatGPT, Cursor, VS Code and any OpenAI SDK.</p>
+  </div></div>
+</section>
+</main>
+
+<!--FTR-->
+<footer class="ftr qrows">
+  <div class="wide">
+    <div class="ftr-grid">
+      <div class="ftr-col ftr-brand">
+        <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+        <p class="ftr-brandline" data-slot="footer.col.line">AI models and stock trading for your agent.</p>
+        <div class="ftr-ca" data-postlaunch>   <!-- owner 09.11: the contract line shows only once /health says launched -->
+          <span class="ftr-ca-h"><span class="tk keyfo" aria-hidden="true"></span><span data-slot="footer.ca.label">Token contract</span></span>
+          <span class="addr set" id="caAddr">live now on pump.fun</span>
+          <button class="btn btn-sm btn-2 copy" id="caCopy" type="button" data-copy-target="caAddr"><span data-slot="connect.copy">Copy</span></button>
+        </div>
+      </div>
+      <nav class="ftr-col" aria-labelledby="fh-product">
+        <p class="ftr-h" id="fh-product" data-slot="footer.col.product.title">Product</p>
+        <a href="/tools" data-slot="nav.product.tools">Tools</a>
+        <a href="/models" data-slot="nav.product.models">Models</a>
+        <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+        <a href="/connect" data-slot="nav.product.connect">Connect</a>
+        <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-developers">
+        <p class="ftr-h" id="fh-developers" data-slot="footer.col.developers.title">Developers</p>
+        <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+        <a href="/status" data-slot="nav.developers.status">Status</a>
+        <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+        <a href="/app" data-slot="nav.app">Open app</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-trust">
+        <p class="ftr-h" id="fh-trust" data-slot="footer.col.trust.title">Trust</p>
+        <a href="/security" data-slot="nav.security">Security</a>
+        <a href="/privacy" data-slot="page.privacy.title">Privacy</a>
+        <a href="/terms" data-slot="page.terms.title">Terms</a>
+        <a href="/risks" data-slot="footer.risks">Risks</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-community" data-x-link>
+        <p class="ftr-h" id="fh-community" data-slot="footer.col.community.title">Community</p>
+        <a class="ftr-x" href="https://x.com/keydexai" data-x-link target="_blank" rel="noopener" data-slot="footer.links.x" data-slot-attr="aria-label" aria-label="Keydex AI on X"><span class="i" style="--src:url(/img/brand/x.svg?v=be03adbf)"></span></a>
+      </nav>
+    </div>
+    <div class="ftr-meta">
+      <span data-slot="footer.copy">© 2026 Keydex AI</span>
+      <span class="ftr-live" data-state="checking"><i></i><a href="/status" id="ftrLive" data-slot="page.status.all.checking">Checking…</a></span>
+    </div>
+    <p class="ftr-disc" data-slot="footer.disclaimer">Independent project built on Solana. Stock tokens are not available to US persons and are restricted in Canada, the UK, Switzerland and other countries. This service shows data and builds transactions. It does not sell stock tokens. Nothing on Keydex AI is investment advice.</p>
+    <!--F:credits--><p class="ftr-disc ftr-credit" data-slot="footer.photos">Archive photos: NASA, Library of Congress, U.S. Army.</p><!--/F:credits-->
+  </div>
+</footer>
+<div class="sr" aria-live="polite" id="kfLive"></div>
+<div class="toasts" id="kfToasts" aria-live="polite"></div>
+<!--/FTR-->
+
+<!-- CONNECT TO CLAUDE -->
+<div class="modal" id="m-claude" role="dialog" aria-modal="true" aria-labelledby="m-claude-t" data-provider="claude">
+  <div class="modal-box cx">
+    <button class="modal-x" type="button" data-close aria-label="Close" data-slot="ui.close" data-slot-attr="aria-label"><svg aria-hidden="true" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 2l10 10M12 2 2 12"/></svg></button>
+    <h2 class="modal-title" id="m-claude-t"><img class="ic cx-logo" src="/img/models/claude-color.svg?v=a3101f30" alt="" width="24" height="24"><span data-slot="connect.claude.title">Connect Keydex AI to Claude</span></h2>
+
+    <div class="cx-key">
+      <div class="cx-need" data-need>
+        <div class="cx-need-txt"><p class="h4" data-slot="connect.claude.key.title">First, get a key</p><p class="modal-text" data-slot="connect.claude.key.text">It goes straight into the steps below.</p></div>
+        <div class="cx-need-act">
+          <button class="btn btn-sm btn-1" type="button" data-trial><span data-slot="connect.claude.key.cta">Get a trial key</span></button>
+          <a class="cx-signin" href="/app" data-slot="connect.claude.key.signin">or sign in and create your own</a>
+        </div>
+      </div>
+      <div class="cx-have" data-have hidden>
+        <p class="cx-ready"><svg aria-hidden="true" class="ok-ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.5 12 13 4.5"/></svg><span data-slot="connect.claude.key.ready">Key added to the steps below.</span><span class="chip dim num" data-keyexp data-slot="connect.trial.expires" data-hold data-tpl="Expires {time} UTC">—</span></p><p class="cx-keep muted" data-slot="connect.key.keep">Copy it now. Only this tab keeps it. Closing the tab removes it from this browser, but the key works until it expires.</p>
+        <p class="cx-keyline mono"><span data-keyval></span><span class="cx-meta muted" data-keymeta></span></p>
+      </div>
+      <p class="cx-err" data-err role="alert" hidden></p>
+    </div>
+
+    <p class="cx-warn"><span class="chip wait"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg></span><span data-slot="connect.claude.warning">Your key works like a password. Don’t share the URL or the command.</span></p>
+
+    <div class="tabs cx-tabs" role="tablist" aria-label="Claude setup" data-slot="connect.claude.tabs" data-slot-attr="aria-label">
+      <button class="tab" type="button" role="tab" aria-selected="true" data-tab="app"><img class="ic" src="/img/models/claude-color.svg?v=a3101f30" alt="" width="14" height="14"><span data-slot="connect.claude.tab.app">Claude app</span></button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="code"><img class="ic" src="/img/models/claudecode-color.svg?v=670b3d8d" alt="" width="14" height="14"><span data-slot="connect.claude.tab.code">Claude Code</span></button>
+    </div>
+    <div class="cx-panels">
+      <div class="cx-panel" data-panel="app" role="tabpanel">
+        <ol class="cx-steps">
+          <li data-slot="connect.claude.app.step1">Open Customize → Connectors.</li>
+          <li data-slot="connect.claude.app.step2">Choose + Add, then Add custom connector.</li>
+          <li data-slot="connect.claude.app.step3">Name it Keydex AI, paste this URL and choose Add.</li>
+        </ol>
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.mcpurl">MCP URL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="url"></pre></div>
+        <ol class="cx-steps" start="4"><li data-slot="connect.claude.app.step4">In a chat, turn on Keydex AI under + → Connectors.</li></ol>
+        <p class="cx-plan muted"><span data-slot="connect.claude.tab.app.sub">claude.ai and Claude Desktop</span><span aria-hidden="true"> · </span><span data-slot="connect.claude.app.plan">Works where your Claude plan allows custom connectors.</span></p>
+      </div>
+      <div class="cx-panel" data-panel="code" role="tabpanel" hidden>
+        <ol class="cx-steps">
+          <li data-slot="connect.claude.code.step1">Run this in your terminal.</li>
+        </ol>
+        <div class="code"><div class="code-h"><span class="code-l mono">claude mcp add</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="cli"></pre></div>
+        <ol class="cx-steps" start="2">
+          <li data-slot="connect.claude.code.step2">Start a new session in any folder. Tools are ready.</li>
+        </ol>
+        <p class="cx-plan muted cx-hint"><span data-slot="connect.claude.code.refresh">New key? Run <code class="sf">claude mcp remove Keydex AI -s user</code> first.</span> <span data-slot="connect.claude.code.check">Check with <code class="sf">claude mcp list</code>: Keydex AI shows Connected.</span></p>
+      </div>
+    </div>
+    <div class="cx-done">
+      <p class="muted" data-slot="connect.claude.done">Then ask your agent:</p>
+      <button class="cx-prompt mono" type="button" data-copy-text><span data-slot="connect.claude.done.prompt">What is NVDA trading at on Solana?</span><span class="cx-prompt-copy" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span></button>
+      <p class="muted" data-slot="connect.prompts.hint">If Claude can’t see the Keydex AI tools, ask it to load them, then repeat the task.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECT TO OPENAI -->
+<div class="modal" id="m-openai" role="dialog" aria-modal="true" aria-labelledby="m-openai-t" data-provider="openai">
+  <div class="modal-box cx">
+    <button class="modal-x" type="button" data-close aria-label="Close" data-slot="ui.close" data-slot-attr="aria-label"><svg aria-hidden="true" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 2l10 10M12 2 2 12"/></svg></button>
+    <h2 class="modal-title" id="m-openai-t"><span class="cx-logo dark"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span></span><span data-slot="connect.openai.title">Connect Keydex AI to OpenAI</span></h2>
+
+    <div class="cx-key">
+      <div class="cx-need" data-need>
+        <div class="cx-need-txt"><p class="h4" data-slot="connect.openai.key.title">First, get a key</p><p class="modal-text" data-slot="connect.openai.key.text">It goes straight into the steps below.</p></div>
+        <div class="cx-need-act">
+          <button class="btn btn-sm btn-1" type="button" data-trial><span data-slot="connect.openai.key.cta">Get a trial key</span></button>
+          <a class="cx-signin" href="/app" data-slot="connect.openai.key.signin">or sign in and create your own</a>
+        </div>
+      </div>
+      <div class="cx-have" data-have hidden>
+        <p class="cx-ready"><svg aria-hidden="true" class="ok-ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 6.5 12 13 4.5"/></svg><span data-slot="connect.openai.key.ready">Key added to the steps below.</span><span class="chip dim num" data-keyexp data-slot="connect.trial.expires" data-hold data-tpl="Expires {time} UTC">—</span></p><p class="cx-keep muted" data-slot="connect.key.keep">Copy it now. Only this tab keeps it. Closing the tab removes it from this browser, but the key works until it expires.</p>
+        <p class="cx-keyline mono"><span data-keyval></span><span class="cx-meta muted" data-keymeta></span></p>
+      </div>
+      <p class="cx-err" data-err role="alert" hidden></p>
+    </div>
+
+    <p class="cx-warn"><span class="chip wait"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"/></svg></span><span data-slot="connect.openai.warning">Your key works like a password. Don’t share the URL or the code.</span></p>
+
+    <div class="tabs cx-tabs" role="tablist" aria-label="OpenAI setup" data-slot="connect.openai.tabs" data-slot-attr="aria-label">
+      <button class="tab" type="button" role="tab" aria-selected="true" data-tab="chatgpt"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span><span data-slot="connect.openai.tab.chatgpt">ChatGPT</span></button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-tab="api"><svg aria-hidden="true" class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 4 2 8l3.5 4M10.5 4 14 8l-3.5 4"/></svg><span data-slot="connect.openai.tab.api">OpenAI API</span></button>
+    </div>
+    <div class="cx-panels">
+      <div class="cx-panel" data-panel="chatgpt" role="tabpanel">
+        <ol class="cx-steps">
+          <li data-slot="connect.openai.chatgpt.step1">Open Settings → Apps → Advanced settings.</li>
+          <li data-slot="connect.openai.chatgpt.step2">Turn on Developer mode.</li>
+          <li data-slot="connect.openai.chatgpt.step3">Choose Create app, name it Keydex AI and paste this URL.</li>
+        </ol>
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.mcpurl">MCP URL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="url"></pre></div>
+        <ol class="cx-steps" start="4">
+          <li data-slot="connect.openai.chatgpt.step4">Choose no authentication, confirm and create.</li>
+          <li data-slot="connect.openai.chatgpt.step5">In a chat, pick Developer mode from the + menu and turn on keyfo.</li>
+        </ol>
+        <p class="cx-plan muted" data-slot="connect.openai.chatgpt.plan">Works where your ChatGPT plan allows developer mode.</p>
+      </div>
+      <div class="cx-panel" data-panel="api" role="tabpanel" hidden>
+        <ol class="cx-steps">
+          <li data-slot="connect.openai.api.step1">Add Keydex AI as an MCP tool in the Responses API.</li>
+        </ol>
+        <div class="code"><div class="code-h"><span class="code-l mono">tools[ ]</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-tpl="json"></pre></div>
+        <ol class="cx-steps" start="2">
+          <li data-slot="connect.openai.api.step2">Your key goes in the Authorization header. Keep it on your server.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="cx-done">
+      <p class="muted" data-slot="connect.openai.done">Then ask your agent:</p>
+      <button class="cx-prompt mono" type="button" data-copy-text><span data-slot="connect.openai.done.prompt">What is NVDA trading at on Solana?</span><span class="cx-prompt-copy" aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3.5a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2"/></svg></span></button>
+    </div>
+  </div>
+</div>
+
+<div hidden id="str"><span id="s-trial-limit-h" data-slot="connect.trial.limit.h">You’ve had 3 trial keys in 24 hours. Next one in {h} h.</span><span id="s-signin-cta" data-slot="page.connect.key.signin.cta">Sign in to create a key</span><span id="s-trial-cap" data-slot="connect.trial.cap">No trial keys are left for now. Try again later.</span><span id="s-trial-limit-n" data-slot="connect.trial.limit.n">You’ve had 3 trial keys in 24 hours. Next one in {n} min.</span><span id="s-trial-models" data-slot="connect.trial.models">{n} models</span><span id="s-ftr-routes" data-slot="page.status.all.routes">Routes busy, everything else operational</span><span id="s-code-region" data-slot="ui.code.region">{label} code</span><span id="s-key-ready-sr" data-slot="connect.trial.ready.sr">Trial key ready and added to every step. Expires {time} UTC.</span><span id="s-mo-pause" data-slot="ui.motion.pause">Pause animations</span><span id="s-mo-play" data-slot="ui.motion.play">Play animations</span><span id="s-thin" data-slot="page.stocks.thin">Thin pool</span><span id="s-thin-t" data-slot="page.stocks.thin.title">Under $50K in the pool. A large trade moves the price.</span><span id="s-copy" data-slot="connect.copy">Copy</span><span id="s-copied" data-slot="connect.copied">Copied</span><span id="s-error" data-slot="demo.error">The request didn’t go through.</span><span id="s-ftr-ok" data-slot="page.status.all.ok">All systems operational</span><span id="s-ftr-deg" data-slot="page.status.all.degraded">Partially degraded service</span><span id="s-ftr-down" data-slot="page.status.all.down">Some systems down</span><span id="s-ftr-chk" data-slot="page.status.all.checking">Checking…</span><span id="s-trial-limit" data-slot="connect.trial.limit">You’ve had 3 trial keys in the last 24 hours.</span></div>
+
+<script src="/js/common.js?v=644ec142"></script>
+<script src="/js/connect.js?v=c1e6ef13"></script>
+<script src="/js/mascot.js?v=2ecd7c70"></script>
+<script src="/js/landing.js?v=d164394b"></script>
+</body>
+</html>

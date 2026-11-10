@@ -1,0 +1,12 @@
+{
+  "name": "keydexai",
+  "version": "1.0.0",
+  "description": "Keydex AI ($KEYDEX) — One key for AI models and Solana stock trading",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "serve ."
+  },
+  "author": "WerelayAgent",
+  "license": "MIT"
+}

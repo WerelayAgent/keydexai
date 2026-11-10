@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>document.documentElement.classList.add("js")</script>
+<title>App · Keydex AI</title>
+<meta name="description" content="Sign in with your wallet to create API keys and see your token balance, daily allowance and recent calls.">
+<link rel="canonical" href="https://keydex.ai/app">
+<meta name="kf-site" content="https://keydex.ai">
+<meta name="kf-model" content="openai/gpt-4.1-mini">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Keydex AI">
+<meta property="og:title" content="App · Keydex AI">
+<meta property="og:description" content="Sign in with your wallet to create API keys and see your token balance, daily allowance and recent calls.">
+<meta property="og:url" content="https://keydex.ai/app">
+<meta property="og:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="App · Keydex AI">
+<meta name="twitter:description" content="Sign in with your wallet to create API keys and see your token balance, daily allowance and recent calls.">
+<meta name="twitter:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta name="twitter:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="theme-color" content="#0f1013">
+<link rel="icon" href="/img/brand/favicon.svg?v=ba49f76b" type="image/svg+xml">
+<link rel="icon" href="/img/brand/favicon-32.png?v=7a31a482" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/img/brand/apple-touch-icon.png?v=7ccf5817">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/fonts/Inter-latin.woff2?v=c9407645" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/base.css?v=14960b84">
+<link rel="stylesheet" href="/css/app.css?v=7a026ed0">
+</head>
+<body class="app is-app" data-page="app">
+
+<!--HDR-->
+<a class="skip" href="#main" data-slot="ui.skip">Skip to content</a>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+    <div class="hdr-cta">
+      <a class="btn btn-2 btn-nav" href="/docs"><span data-slot="nav.docs">Docs</span></a>
+      <a class="app-st" id="appSt" href="/status" data-state="checking" data-slot="app.nav.status" data-slot-attr="aria-label" aria-label="Service status"><i></i><span class="app-st-l" data-slot="app.nav.status.label">Status</span></a>
+      <div class="wallet" id="wallet" hidden>
+      <button class="wallet-btn" id="walletBtn" type="button" aria-haspopup="menu" aria-expanded="false"><span class="wallet-ic" id="walletIc"></span><span class="mono" id="walletAddr"></span><svg aria-hidden="true" class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4 6 7l3-3"/></svg></button>
+      <div class="menu" id="walletMenu" role="menu" hidden>
+        <button role="menuitem" type="button" id="copyAddr" data-slot="app.wallet.copy">Copy address</button>
+        <button role="menuitem" type="button" id="signOut" data-slot="app.wallet.signout">Sign out</button>
+      </div>
+      </div>
+    </div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet" data-slot="nav.menu" data-slot-attr="aria-label" aria-label="Open menu"><span></span></button>
+    <span hidden id="s-menu-close" data-slot="nav.menu.close">Close menu</span>
+  </div>
+</header>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" data-slot="nav.sheet" data-slot-attr="aria-label" aria-label="Site menu">
+  <a href="/app?tab=keys" data-tab="keys" data-slot="app.keys.title">Keys</a>
+  <a href="/app?tab=balance" data-tab="balance" data-slot="app.balance.title">Allowance</a>
+  <a href="/app?tab=usage" data-tab="usage" data-slot="app.usage.title">Usage</a>
+  <a href="/docs" data-slot="nav.docs">Docs</a>
+</div>
+<!--/HDR-->
+<!--EXTRA:<div class="wallet" id="wallet" hidden>
+      <button class="wallet-btn" id="walletBtn" type="button" aria-haspopup="menu" aria-expanded="false"><span class="wallet-ic" id="walletIc"></span><span class="mono" id="walletAddr"></span><svg aria-hidden="true" class="chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4 6 7l3-3"/></svg></button>
+      <div class="menu" id="walletMenu" role="menu" hidden>
+        <button role="menuitem" type="button" id="copyAddr" data-slot="app.wallet.copy">Copy address</button>
+        <button role="menuitem" type="button" id="signOut" data-slot="app.wallet.signout">Sign out</button>
+      </div>
+      </div>:EXTRA-->
+
+<main class="shell" id="main" aria-label="Keydex AI app" data-slot="app.main" data-slot-attr="aria-label">
+  <!-- loading -->
+  <section class="state" id="stLoading" hidden><div class="center-card ld"><span class="kmark-md"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><p class="muted" data-slot="app.loading">Loading your account…</p></div></section>
+
+  <!-- signed out -->
+  <section class="state" id="stSignin" hidden>
+    <div class="center-card">
+      <span class="kmark-lg"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span>
+      <h1 class="h3" data-slot="app.signin.title">Sign in to Keydex AI</h1>
+      <p class="muted" data-slot="app.signin.text">Sign a message with your wallet to create and manage API keys. No transaction, no gas.</p>
+      <button class="btn btn-1 btn-block" id="signinBtn" type="button" data-slot="app.signin.cta">Sign in with wallet</button>
+      <button class="btn btn-2 btn-block" id="trialBtn" type="button" data-trial><span data-slot="app.signin.trial">Get a trial key</span></button>
+      <p class="err-line" id="trialErr" role="alert" hidden></p>
+    </div>
+  </section>
+
+
+  <!-- page error -->
+  <section class="state" id="stError" hidden>
+    <div class="center-card err-card">
+      <span class="err-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></svg></span>
+      <h1 class="h3" data-slot="app.error.title">Couldn’t load this page</h1>
+      <p class="muted" data-slot="app.error.text">Check your connection.</p>
+      <button class="btn btn-1" id="retryBtn" type="button" data-slot="app.error.retry">Try again</button>
+    </div>
+  </section>
+
+  <!-- dashboard -->
+  <section class="state dash" id="stDash" hidden>
+    <nav class="side" aria-label="App sections" data-slot="app.nav.aria" data-slot-attr="aria-label">
+      <button class="side-a" type="button" data-tab="keys" aria-current="page"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="5" cy="8" r="2.6"/><path d="M7.6 8H14M11.5 8v2.2M14 8v1.8"/></svg><span data-slot="app.keys.title">Keys</span></button>
+      <button class="side-a" type="button" data-tab="balance"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="12" height="9" rx="2"/><path d="M2 7h12"/></svg><span data-slot="app.balance.title">Allowance</span></button>
+      <button class="side-a" type="button" data-tab="usage"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 13V8M8 13V3M13 13V6"/></svg><span data-slot="app.usage.title">Usage</span></button>
+      <a class="side-a" href="/docs"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 2.5h6l2.5 2.5v8.5H4z"/><path d="M6 8h4.5M6 10.5h4.5"/></svg><span data-slot="nav.docs">Docs</span></a>
+    </nav>
+
+    <div class="content">
+      <!-- KEYS -->
+      <div class="pane" data-pane="keys">
+        <div class="pane-head"><h1 class="h3" data-slot="app.keys.title">Keys</h1><button class="btn btn-md btn-1" id="createKey" type="button"><svg aria-hidden="true" class="ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg><span data-slot="app.keys.create">Create key</span></button></div>
+        <div class="block has-menu" id="keysBlock">
+          <table class="tbl keys-tbl"><caption class="sr" data-slot="app.keys.caption">Your API keys</caption>
+            <thead><tr><th data-slot="app.keys.col.name">Name</th><th data-slot="app.keys.col.key">Key</th><th data-slot="app.keys.col.spent">Spent today</th><th class="r" data-slot="app.keys.col.total">Spent in total</th><th data-slot="app.keys.col.created">Created</th><th data-slot="app.keys.col.lastused">Last used (UTC)</th><th><span class="sr">Actions</span></th></tr></thead>
+            <tbody id="keysBody"></tbody>
+          </table>
+          <div class="empty" id="keysEmpty" hidden>
+            <div><p class="h4" data-slot="app.keys.empty.title">No keys yet</p><p class="muted" data-slot="app.keys.empty.text">One key is all your first agent needs.</p></div>
+            <button class="btn btn-sm btn-1" type="button" data-create><span data-slot="app.keys.create">Create key</span></button>
+          </div>
+        </div>
+        <p class="keys-note" id="keysNote" data-slot="app.allowance.line" data-hold data-tpl="${usd} a day for model calls, with ${held} held. Resets at 00:00 UTC.">—</p>
+        <p class="keys-note" data-prelaunch data-slot="app.allowance.prelaunch">Free daily allowance for now, as with a trial key. From the token launch, $0.40 to $15 a day by the value you hold.</p>
+        <span hidden id="s-resets-in" data-slot="app.keys.resets.in">Resets in {time}</span>
+      </div>
+
+      <!-- BALANCE -->
+      <div class="pane" data-pane="balance" hidden>
+        <div class="pane-head"><h1 class="h3" data-slot="app.balance.title">Allowance</h1></div>
+        <div class="cards2">
+          <div class="card">
+            <p class="card-l"><span data-slot="app.balance.keyfo.title">Token balance</span></p>
+            <p class="big num" id="kfBal">—</p>
+            <!--FX:not_buy:<div class="buy-row"><button class="btn btn-sm btn-2" id="buyBtn" type="button" disabled aria-describedby="buySoon"><span data-slot="app.buy.cta">Buy <span class="kfw"><span class="tk keyfo in" aria-hidden="true"></span>$KEYDEX</span></span></button><span class="chip dim" id="buySoon" data-slot="app.buy.soon">Soon</span></div>:FX--><!--F:buy--><div class="buy-row"><button class="btn btn-sm btn-1" id="buyOpen" type="button"><span data-slot="app.buy.cta">Buy <span class="kfw"><span class="tk keyfo in" aria-hidden="true"></span>$KEYDEX</span></span></button><span class="chip dim" data-prelaunch data-slot="app.buy.soon">Soon</span></div><!--/F:buy-->
+          </div>
+          <div class="card">
+            <p class="card-l"><span data-slot="app.balance.allowance.title">Daily allowance</span></p>
+            <p class="small muted" id="alPre" data-prelaunch data-slot="app.allowance.prelaunch">Free daily allowance for now, as with a trial key. From the token launch, $0.40 to $15 a day by the value you hold.</p>
+            <div id="quotaOn">
+              <p class="quota-n num"><span id="qLeft">—</span><span class="muted"> / <span id="qTotal">—</span></span></p>
+              <div class="bar"><i id="qBar" style="width:0%"></i></div>
+              <p class="small muted" id="alLine" data-slot="app.allowance.line" data-hold data-tpl="${usd} a day for model calls, with ${held} held. Resets at 00:00 UTC.">—</p>
+              <p class="small muted" data-slot="app.allowance.counting">Counted: the lowest balance of the last 24 hours.</p>
+              <p class="small wait-t" id="qOut" data-slot="app.allowance.out" hidden>Today’s allowance is used up. It resets at 00:00 UTC.</p>
+            </div>
+            <p class="muted small" id="quotaNone" data-slot="app.allowance.none" hidden>Under $25 held, this wallet works like a trial key: low-cost models, free.</p>
+            <p class="small wait-t" id="qPool" data-slot="app.allowance.pool" hidden>Today’s pool for all holders is used up. Your key works under the free rules until 00:00 UTC.</p>
+            <p class="small muted" id="alNext" data-slot="app.allowance.next" data-hold hidden data-tpl="Hold ${more} more to reach ${usd} a day.">—</p>
+            <p class="small muted" id="alPending" data-slot="app.allowance.pending" data-hold hidden data-tpl="{n} tokens count later: tokens sent to you count after 7 days, and a balance counts at its lowest of the last 24 hours.">—</p>
+            <!--FX:boost:<div class="buy-row"><button class="btn btn-sm btn-2" id="boostOpen" type="button"><span data-slot="app.boost.cta">Buy more allowance</span></button></div><p class="small muted" id="boostLeft" data-slot="app.boost.left" data-hold hidden data-tpl="Bought allowance left: ${usd}. It is used after your daily allowance.">—</p>:FX-->
+          </div>
+        </div>
+      </div>
+
+      <!-- USAGE -->
+      <div class="pane" data-pane="usage" hidden>
+        <div class="pane-head"><h1 class="h3" data-slot="app.usage.title">Usage</h1></div>
+        <!-- W1-3: totals, filters (client-side over /api/usage), axis; refs Anthropic Console Usage 865a7bf8, Cost 84d12459, Cursor billing 6a25a1b5 -->
+        <div class="u-bar">
+          <div class="u-kpis">
+            <div class="kpi"><p class="kpi-l" data-slot="app.usage.kpi.spent">Spent</p><p class="kpi-v num" id="kSpent">—</p></div>
+            <div class="kpi"><p class="kpi-l" data-slot="app.usage.kpi.requests">Requests</p><p class="kpi-v num" id="kReq">—</p></div>
+            <div class="kpi"><p class="kpi-l" data-slot="app.usage.kpi.tokens">Tokens</p><p class="kpi-v num" id="kTok">—</p></div>
+          </div>
+          <div class="u-filt">
+            <label class="upill"><select id="fKey" data-slot="app.usage.filter.key" data-slot-attr="aria-label" aria-label="All keys"><option value="" data-slot="app.usage.filter.key">All keys</option></select></label>
+            <label class="upill"><select id="fModel" data-slot="app.usage.filter.model" data-slot-attr="aria-label" aria-label="All models and tools"><option value="" data-slot="app.usage.filter.model">All models and tools</option></select></label>
+            <div class="useg" id="fPeriod" role="group" data-slot="app.usage.period" data-slot-attr="aria-label" aria-label="Period"><button type="button" aria-pressed="false" data-p="1" data-slot="app.usage.period.today">Today</button><button type="button" aria-pressed="true" data-p="7" data-slot="app.usage.period.7d">7 days</button><button type="button" aria-pressed="false" data-p="30" data-slot="app.usage.period.30d">30 days</button></div>
+          </div>
+        </div>
+        <p class="u-scope"><button class="u-day" type="button" id="uDay" hidden aria-label="Close" data-slot="ui.close" data-slot-attr="aria-label"><span></span><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M2 2l6 6M8 2 2 8"/></svg></button><span data-slot="app.usage.scope.rows">The table lists your last 100 calls.</span></p>
+        <div class="u-err" id="usageErr" hidden><p data-slot="app.usage.error">Couldn’t load usage.</p><button class="btn btn-sm btn-2" type="button" id="usageRetry" data-slot="app.error.retry">Try again</button></div>
+        <div class="card chart-card"><div class="chart-w"><div class="chart-y num" id="chartY" aria-hidden="true"><span>—</span><span>—</span><span>—</span></div><div class="chart" id="chart" role="group" data-slot="app.usage.chart" data-slot-attr="aria-label" aria-label="Spend by day, UTC"></div><span></span><div class="chart-x mono" id="chartX"></div></div></div>
+        <div class="block" id="usageBlock">
+          <table class="tbl usage-tbl"><caption class="sr" data-slot="app.usage.caption">Your last 100 calls</caption>
+            <thead><tr><th data-slot="app.usage.col.time">Time (UTC)</th><th data-slot="app.usage.col.key">Key</th><th data-slot="app.usage.col.model">Model or tool</th><th class="r" data-slot="app.usage.col.tokensin">Tokens in</th><th class="r" data-slot="app.usage.col.tokensout">Tokens out</th><th class="r" data-slot="app.usage.col.cost">Cost</th><th data-slot="app.usage.col.status">Status</th></tr></thead>
+            <tbody id="usageBody"></tbody>
+          </table>
+          <p class="empty-line muted" id="usageEmpty" data-slot="app.usage.empty" hidden>Calls show up here after your agent’s first request.</p>
+          <p class="empty-line muted" id="usageNone" data-slot="app.usage.nomatch" hidden>No calls match these filters.</p>
+          <div class="u-show" id="uShow" hidden><button class="btn btn-sm btn-2" type="button" id="uShowBtn"><span data-slot="page.stocks.showall" data-hold data-tpl="Show all {n}">—</span></button></div>
+        </div>
+        <div hidden><span id="s-free" data-slot="app.usage.free">Free</span><span id="s-kind-model" data-slot="app.usage.kind.model">Model call</span><span id="s-kind-tool" data-slot="app.usage.kind.tool">Tool call</span><span id="s-key-created" data-slot="app.key.created.toast">Key created.</span><span id="s-key-actions" data-slot="app.keys.actions">Actions for {name}</span></div>
+      </div>
+      <!-- W1-2: the console's own footer line in the content column (no marketing footer on /app) -->
+      <footer class="app-ftr">
+        <p data-slot="footer.disclaimer">Independent project built on Solana. Stock tokens are not available to US persons and are restricted in Canada, the UK, Switzerland and other countries. This service shows data and builds transactions. It does not sell stock tokens. Nothing on Keydex AI is investment advice.</p>
+        <p class="app-ftr-l"><a href="/terms" data-slot="page.terms.title">Terms</a><span aria-hidden="true"> · </span><a href="/privacy" data-slot="page.privacy.title">Privacy</a><span aria-hidden="true"> · </span><a href="/risks" data-slot="footer.risks">Risks</a></p>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<!--FTR-->
+<div class="sr" aria-live="polite" id="kfLive"></div>
+<div class="toasts" id="kfToasts" aria-live="polite"></div>
+<!--/FTR-->
+
+<!-- wallet pick + sign -->
+<div class="modal" id="mWallet" role="dialog" aria-modal="true" aria-labelledby="mWalletT">
+  <div class="modal-box w440">
+    <button class="modal-x" type="button" data-close aria-label="Close" data-slot="ui.close" data-slot-attr="aria-label"><svg aria-hidden="true" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 2l10 10M12 2 2 12"/></svg></button>
+    <div id="wPick">
+      <h2 class="modal-title" id="mWalletT" data-slot="app.wallet.pick">Choose a wallet</h2>
+      <ul class="wlist" id="wList"></ul>
+      <div id="wNone" hidden>
+        <p class="modal-text" data-slot="app.wallet.none">No browser wallet found.</p>
+        <!-- V1-16 (P2-F10): on a phone the way in is the wallet's own browser; WalletConnect waits for the owner (§В-5). Coinbase connecting 46565025, Parallel db019b40 -->
+        <p class="modal-text" data-slot="app.wallet.none.open">Open Keydex AI in your wallet’s browser:</p>
+        <ul class="wlist wopen">
+          <li><a data-wl="metamask" rel="noopener"><img src="/img/brand/metamask.svg?v=9f34b072" width="28" height="28" data-slot="app.wallet.open.metamask" data-slot-attr="alt" alt="Open in MetaMask"><span data-slot="app.wallet.open.metamask">Open in MetaMask</span></a></li>
+          <li><a data-wl="coinbase" rel="noopener"><img src="/img/brand/coinbase-wallet.svg?v=f882108a" width="28" height="28" data-slot="app.wallet.open.coinbase" data-slot-attr="alt" alt="Open in Coinbase Wallet"><span data-slot="app.wallet.open.coinbase">Open in Coinbase Wallet</span></a></li>
+          <li><a href="https://rabby.io/" target="_blank" rel="noopener"><img src="/img/brand/rabby.svg?v=e5775fc5" width="28" height="28" alt=""><span data-slot="app.wallet.get.rabby">Rabby website</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="wSign" hidden>
+      <div class="wsign-ic"><span class="ring"></span><span class="wallet-ic lg" id="wSignIc"></span></div>
+      <p class="h4 center" data-slot="app.wallet.confirm">Confirm the signature in your wallet.</p>
+      <pre class="msg mono" id="wMsg"></pre>
+      <p class="modal-text center" data-slot="app.wallet.free">Signing is free. No transaction is sent.</p>
+      <p class="err-line center" id="wErr" role="alert" hidden><span data-slot="app.wallet.error">Signature declined or failed.</span> <span id="wErrMsg"></span></p>
+      <div class="modal-actions center" id="wRetryRow" hidden><button class="btn btn-md btn-1" id="wRetry" type="button" data-slot="app.wallet.retry">Try again</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- new key -->
+<div class="modal" id="mNew" role="dialog" aria-modal="true" aria-labelledby="mNewT">
+  <form class="modal-box w480" id="newForm">
+    <button class="modal-x" type="button" data-close aria-label="Close" data-slot="ui.close" data-slot-attr="aria-label"><svg aria-hidden="true" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 2l10 10M12 2 2 12"/></svg></button>
+    <h2 class="modal-title" id="mNewT" data-slot="app.key.new.title">New key</h2>
+    <label class="field"><span data-slot="app.key.new.name">Name</span><input class="input" id="nName" placeholder="trading-bot" data-slot="app.key.new.name.placeholder" data-slot-attr="placeholder" maxlength="40" autocomplete="off" autofocus></label>
+    <p class="err-line" id="nErr" role="alert" hidden></p>
+    <div class="modal-actions"><button class="btn btn-md btn-2" type="button" data-close data-slot="app.wallet.cancel">Cancel</button><button class="btn btn-md btn-1" type="submit" data-slot="app.key.new.create">Create</button></div>
+  </form>
+</div>
+
+<!-- key shown once -->
+<div class="modal" id="mOnce" role="dialog" aria-modal="true" aria-labelledby="mOnceT">
+  <div class="modal-box">
+    <!-- V1-19 (P2-F14, X4-F3): a live key — «Shown once»; a trial key — its expiry and $0.05 (it stays in this tab, «shown once» would be untrue). Steel 764f128f, Exa b3e2c5d7 -->
+    <div class="once-live"><p class="once-chip"><span class="chip wait" data-slot="app.key.once.badge">Shown once</span></p>
+    <h2 class="modal-title" id="mOnceT"><span data-slot="app.key.once.title">Copy your key now</span></h2>
+    <p class="modal-text" data-slot="app.key.once.text">We can’t show it again. Keep it in your agent’s environment, not in client code.</p></div>
+    <div class="once-trial" hidden><p class="once-chip"><span class="chip dim num" id="onceExp" data-slot="connect.trial.expires" data-hold data-tpl="Expires {time} UTC">—</span></p>
+    <h2 class="modal-title" id="mOnceTT"><span data-slot="app.key.trial.title">Your trial key</span></h2>
+    <p class="modal-text" data-slot="app.key.trial.text">It draws from your free daily allowance, for low-cost models. It stays in this tab until you close the tab or it expires.</p></div>
+    <div class="code inline once-key"><pre id="onceKey"></pre><button class="btn btn-sm btn-2 copy" type="button" data-copy-target="onceKey" id="onceCopy" data-slot="app.key.copy" data-slot-attr="aria-label" aria-label="Copy key"><span data-slot="connect.copy">Copy</span></button></div>
+        <div class="code"><div class="code-h"><span class="code-l once-l"><img class="ic" src="/img/models/claudecode-color.svg?v=670b3d8d" alt="" width="14" height="14"><span data-slot="connect.tab.claude">Claude Code</span></span><button class="btn btn-sm btn-2 copy" type="button" data-copy-target="onceCli" data-slot="app.key.copy.cli" data-slot-attr="aria-label" aria-label="Copy command"><span data-slot="connect.copy">Copy</span></button></div><pre id="onceCli"></pre></div>
+    <div class="modal-actions"><button class="btn btn-md btn-2" type="button" id="onceDone" data-close data-slot="app.key.once.done">Done</button></div>
+  </div>
+</div>
+
+<!-- edit limit -->
+
+
+<!--F:buy--><div class="modal" id="mBuy" role="dialog" aria-modal="true" aria-labelledby="mBuyT">
+  <form class="modal-box w480 bx" id="buyForm" novalidate>
+    <button class="modal-x" type="button" data-close aria-label="Close" data-slot="ui.close" data-slot-attr="aria-label"><svg aria-hidden="true" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 2l10 10M12 2 2 12"/></svg></button>
+    <h2 class="modal-title" id="mBuyT"><span data-slot="app.buy.title">Buy <span class="kfw"><span class="tk keyfo in" aria-hidden="true"></span>$KEYDEX</span></span></h2>
+    <p class="modal-text" data-slot="app.buy.text">Pay from any network. The route runs through LI.FI or Relay, and you sign it in your wallet.</p>
+    <div class="bx-f">
+      <p class="bx-l" data-slot="app.buy.pay">You pay</p>
+      <div class="bx-v"><input class="bx-amt num" id="bAmt" inputmode="decimal" placeholder="0" autocomplete="off" data-slot="app.buy.amount" data-slot-attr="aria-label" aria-label="Amount to pay"><button class="bx-tok" type="button" id="bFrom" aria-haspopup="listbox" aria-expanded="false" aria-controls="bList"></button></div>
+      <ul class="bx-list" id="bList" role="listbox" aria-labelledby="bFromL" tabindex="0" hidden></ul><span hidden id="bFromL" data-slot="app.buy.from">Pay from</span>
+    </div>
+    <div class="bx-f">
+      <p class="bx-l" data-slot="app.buy.get">You receive</p>
+      <div class="bx-v"><span class="bx-amt num dim" id="bOut">0</span><span class="bx-tok bx-fix"><span class="tk keyfo" aria-hidden="true"></span>$KEYDEX</span></div>
+      <p class="bx-min" id="bMin"></p>
+    </div>
+    <dl class="bx-route" id="bRoute">
+      <div><dt data-slot="app.buy.route">Route</dt><dd id="bProv">—</dd></div>
+      <div><dt data-slot="app.buy.sigs">Signatures</dt><dd class="num" id="bSigs">—</dd></div>
+    </dl>
+    <p class="bx-note" id="bNote" aria-live="polite"></p>
+    <ol class="steps" id="bSteps" hidden></ol>
+    <p class="err-line" id="bErr" role="alert" hidden></p>
+    <div class="modal-actions"><button class="btn btn-md btn-2" type="button" data-close data-slot="app.wallet.cancel">Cancel</button><button class="btn btn-md btn-1" type="submit" id="bGo" aria-disabled="true"><span data-slot="app.buy.cta">Buy <span class="kfw"><span class="tk keyfo in" aria-hidden="true"></span>$KEYDEX</span></span></button></div>
+    <div hidden><span id="s-buy-min" data-slot="app.buy.min">At least {n} <span class="kfw"><span class="tk keyfo in" aria-hidden="true"></span>$KEYDEX</span></span><span id="s-buy-row" data-slot="app.buy.row">{coin} on {chain}</span><span id="s-buy-eta" data-slot="app.buy.eta">About {t}</span><span id="s-buy-finding" data-slot="app.buy.finding">Finding a route…</span><span id="s-buy-expired" data-slot="app.buy.expired">This quote expired. Getting a new one.</span><span id="s-buy-wait" data-slot="app.buy.step.wait">Confirm in your wallet</span><span id="s-buy-sent" data-slot="app.buy.step.sent">Sent</span><span id="s-buy-done" data-slot="app.buy.step.done">Received</span><span id="s-buy-declined" data-slot="app.wallet.error">Signature declined or failed.</span><span id="s-buy-ok" data-slot="app.buy.done">Done. The tokens are on their way to your wallet.</span></div>
+  </form>
+</div><!--/F:buy-->
+
+<!--FX:boost:<div class="modal" id="mBoost" role="dialog" aria-modal="true" aria-labelledby="mBoostT">
+  <form class="modal-box w480 bx" id="boostForm" novalidate>
+    <button class="modal-x" type="button" data-close aria-label="Close" data-slot="ui.close" data-slot-attr="aria-label"><svg aria-hidden="true" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 2l10 10M12 2 2 12"/></svg></button>
+    <h2 class="modal-title" id="mBoostT" data-slot="app.boost.title">Buy more allowance</h2>
+    <p class="modal-text" data-slot="app.boost.text">$1 in <span class="kfw"><span class="tk keyfo in" aria-hidden="true"></span>$KEYDEX</span> buys $1 of allowance for 30 days, at the lower of the spot price and the 1-hour median. The tokens go to the team address, and 10% of them are burned once a day.</p>
+    <div class="bx-f">
+      <p class="bx-l" id="boostAmtL" data-slot="app.buy.pay">You pay</p>
+      <div class="bx-v"><input class="bx-amt num" id="boostAmt" inputmode="decimal" placeholder="0" autocomplete="off" aria-labelledby="boostAmtL"><span class="bx-tok"><span class="tk keyfo" aria-hidden="true"></span>$KEYDEX</span></div>
+    </div>
+    <p class="bx-note" data-slot="app.boost.limit">Limit: $100 per wallet and $2,000 for everyone a day.</p>
+    <p class="bx-note" data-slot="app.boost.nontransfer">Bought allowance is a payment for the service. It is not refunded, transferred or withdrawn.</p>
+    <p class="bx-note" id="boostSt" aria-live="polite" hidden></p><p class="err-line" id="boostErr" role="alert" hidden></p><span hidden id="s-boost-pending" data-slot="app.boost.pending">Your purchase is visible. Waiting for the network to confirm it.</span><span hidden id="s-boost-credited" data-slot="app.boost.credited">Done. Allowance added for 30 days.</span>
+    <div class="modal-actions"><button class="btn btn-md btn-2" type="button" data-close data-slot="app.wallet.cancel">Cancel</button><button class="btn btn-md btn-1" type="submit" id="boostGo" aria-disabled="true"><span data-slot="app.boost.cta">Buy more allowance</span></button></div>
+  </form>
+</div>:FX-->
+
+<div class="modal" id="mRevoke" role="dialog" aria-modal="true" aria-labelledby="mRevokeT">
+  <div class="modal-box w420">
+    <h2 class="modal-title" id="mRevokeT" data-slot="app.key.revoke.title">Revoke this key</h2>
+    <p class="modal-text mono revoke-name" id="revokeName"></p>
+    <p class="modal-text" data-slot="app.key.revoke.text">Agents using this key stop working at once. This can’t be undone.</p>
+    <p class="err-line" id="rErr" role="alert" hidden></p>
+    <div class="modal-actions"><button class="btn btn-md btn-2" type="button" data-close data-slot="app.wallet.cancel">Cancel</button><button class="btn btn-md btn-danger" type="button" id="revokeGo" data-slot="app.key.revoke.cta">Revoke</button></div>
+  </div>
+</div>
+
+<!-- session expired -->
+<div class="modal" id="mExpired" role="dialog" aria-modal="true" aria-labelledby="mExpiredT">
+  <div class="modal-box w420">
+    <h2 class="modal-title" id="mExpiredT" data-slot="app.session.expired">Session ended</h2>
+    <p class="modal-text" data-slot="app.session.text">Sign in with your wallet to continue.</p>
+    <div class="modal-actions"><button class="btn btn-md btn-1" type="button" id="expiredGo" data-slot="app.session.signin">Sign in again</button></div>
+  </div>
+</div>
+
+<div hidden id="str"><span id="s-trial-limit-h" data-slot="connect.trial.limit.h">You’ve had 3 trial keys in 24 hours. Next one in {h} h.</span><span id="s-trial-cap" data-slot="connect.trial.cap">No trial keys are left for now. Try again later.</span><span id="s-trial-limit-n" data-slot="connect.trial.limit.n">You’ve had 3 trial keys in 24 hours. Next one in {n} min.</span><span id="s-w-browser" data-slot="app.wallet.browser">Browser wallet</span><span id="s-trial-limit" data-slot="connect.trial.limit">You’ve had 3 trial keys in the last 24 hours.</span><span id="s-ftr-routes" data-slot="page.status.all.routes">Routes busy, everything else operational</span><span id="s-code-region" data-slot="ui.code.region">{label} code</span><span id="s-soon" data-slot="soon.badge">Soon</span><span id="s-limit-full" data-slot="app.keys.limit.full">Allowance used · resets in {time}</span><span id="s-bar" data-slot="app.usage.bar">{day} · {cost}</span><span id="s-bar-none" data-slot="app.usage.bar.none">{day} · No calls</span><span id="s-st-ok" data-slot="app.usage.status.ok">OK</span><span id="s-st-limited" data-slot="app.usage.status.limited">Limited</span><span id="s-st-upstream" data-slot="app.usage.status.upstream">Provider error</span><span id="s-st-error" data-slot="app.usage.status.error">Error</span><span id="s-copy" data-slot="connect.copy">Copy</span><span id="s-copied" data-slot="connect.copied">Copied</span><span id="s-error" data-slot="demo.error">The request didn’t go through.</span><span id="s-ftr-ok" data-slot="page.status.all.ok">All systems operational</span><span id="s-ftr-deg" data-slot="page.status.all.degraded">Partially degraded service</span><span id="s-ftr-down" data-slot="page.status.all.down">Some systems down</span><span id="s-ftr-chk" data-slot="page.status.all.checking">Checking…</span><span id="s-toast" data-slot="app.key.revoke.toast">Key revoked.</span><span id="s-revoke" data-slot="app.key.revoke.cta">Revoke</span></div>
+
+<script src="/js/common.js?v=644ec142"></script>
+<script src="/js/wallet.js?v=d53cf7f7"></script>
+<script src="/js/app.js?v=cd4b0ac0"></script>
+</body>
+</html>

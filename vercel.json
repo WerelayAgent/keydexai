@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "https://keyfo.xyz/api/$1" },
+    { "source": "/v1/(.*)", "destination": "https://keyfo.xyz/v1/$1" },
+    { "source": "/tools", "destination": "/tools.html" },
+    { "source": "/models", "destination": "/models.html" },
+    { "source": "/stocks", "destination": "/stocks.html" },
+    { "source": "/connect", "destination": "/connect.html" },
+    { "source": "/docs", "destination": "/docs.html" },
+    { "source": "/status", "destination": "/status.html" },
+    { "source": "/changelog", "destination": "/changelog.html" },
+    { "source": "/pricing", "destination": "/pricing.html" },
+    { "source": "/security", "destination": "/security.html" },
+    { "source": "/token", "destination": "/token.html" },
+    { "source": "/app", "destination": "/app.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/risks", "destination": "/risks.html" },
+    { "source": "/terms", "destination": "/terms.html" }
+  ]
+}

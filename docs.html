@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>document.documentElement.classList.add("js")</script>
+<title>Docs · Keydex AI</title>
+<meta name="description" content="Connect Keydex AI over MCP or REST: quickstart, models, stock token tools, the daily allowance and every error code.">
+<link rel="canonical" href="https://keydex.ai/docs">
+<meta name="kf-site" content="https://keydex.ai">
+<meta name="kf-model" content="openai/gpt-4.1-mini">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Keydex AI">
+<meta property="og:title" content="Docs · Keydex AI">
+<meta property="og:description" content="Connect Keydex AI over MCP or REST: quickstart, models, stock token tools, the daily allowance and every error code.">
+<meta property="og:url" content="https://keydex.ai/docs">
+<meta property="og:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Docs · Keydex AI">
+<meta name="twitter:description" content="Connect Keydex AI over MCP or REST: quickstart, models, stock token tools, the daily allowance and every error code.">
+<meta name="twitter:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta name="twitter:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="theme-color" content="#0f1013">
+<link rel="icon" href="/img/brand/favicon.svg?v=ba49f76b" type="image/svg+xml">
+<link rel="icon" href="/img/brand/favicon-32.png?v=7a31a482" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/img/brand/apple-touch-icon.png?v=7ccf5817">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/fonts/Inter-latin.woff2?v=c9407645" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/base.css?v=14960b84">
+<link rel="stylesheet" href="/css/docs.css?v=a300322f">
+</head>
+<body class="is-docs" data-page="docs">
+
+<!--HDR-->
+<a class="skip" href="#main" data-slot="ui.skip">Skip to content</a>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+    <nav class="nav" aria-label="Main" data-slot="nav.main" data-slot-attr="aria-label">
+      <div class="dd" data-dd="product">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-product"><span data-slot="nav.product">Product</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-product">
+          <div class="ddp-list">
+            <a class="ddi" href="/tools" data-prev="tools"><span class="ddi-ic ddi-km"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="ddi-t"><b data-slot="nav.product.tools">Tools</b><small data-slot="nav.product.tools.sub">Tools for stock tokens on Solana</small></span></a>
+            <a class="ddi" href="/models" data-prev="models"><span class="ddi-ic"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="16" height="16" loading="lazy" decoding="async"></span><span class="ddi-t"><b data-slot="nav.product.models">Models</b><small data-slot="nav.product.models.sub">Prices, context sizes and model IDs</small></span></a>
+            <a class="ddi" href="/stocks" data-prev="stocks"><span class="ddi-ic" style="--c:var(--c-port)"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 11.5 6 8l2.5 2.5 5-5"/><path d="M10.5 5.5h3v3"/></svg></span><span class="ddi-t"><b data-slot="nav.product.stocks">Stocks</b><small data-slot="nav.product.stocks.sub">Stock tokens and ETFs, with pool prices</small></span></a>
+            <a class="ddi" href="/connect" data-prev="connect"><span class="ddi-ic" style="--c:var(--c-trade)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.5v3M10 2.5v3M4.5 5.5h7v2.5a3.5 3.5 0 0 1-7 0zM8 11.5v2"/></svg></span><span class="ddi-t"><b data-slot="nav.product.connect">Connect</b><small data-slot="nav.product.connect.sub">Claude, ChatGPT, Cursor, VS Code and REST</small></span></a>
+          </div>
+        </div>
+      </div>
+      <div class="dd" data-dd="dev">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-dev"><span data-slot="nav.developers">Developers</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-dev">
+          <div class="ddp-list">
+            <a class="ddi" href="/docs" data-prev="docs"><span class="ddi-ic" style="--c:var(--c-quote)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v10H4.5A1.5 1.5 0 0 0 3 13.5zM3 13.5A1.5 1.5 0 0 0 4.5 15H13v-3"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.docs">Docs</b><small data-slot="nav.developers.docs.sub">Quickstart, API, MCP and tool reference</small></span></a>
+            <a class="ddi" href="/status" data-prev="status"><span class="ddi-ic" style="--c:var(--ok-fg)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8.5h3l1.5-4 3 8 1.5-4h4"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.status">Status</b><small data-slot="nav.developers.status.sub">Current state of each Keydex AI service</small></span></a>
+            <a class="ddi" href="/changelog" data-prev="changelog"><span class="ddi-ic" style="--c:var(--c-fund)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5.5 4h8M5.5 8h8M5.5 12h8M2.5 4h.01M2.5 8h.01M2.5 12h.01"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.changelog">Changelog</b><small data-slot="nav.developers.changelog.sub">Every release, newest first</small></span></a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-a" href="/pricing" data-slot="nav.pricing">Pricing</a>
+      <a class="nav-a" href="/security" data-slot="nav.security">Security</a>
+      <a class="nav-a" href="/token"><span data-slot="nav.token">Token</span></a>
+    </nav>
+    <div class="hdr-cta">
+      
+      <a class="btn btn-2 btn-nav" href="/docs" data-slot="nav.docs">Docs</a>
+      <a class="btn btn-1 btn-nav" href="/app" data-slot="nav.app">Open app</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet" data-slot="nav.menu" data-slot-attr="aria-label" aria-label="Open menu"><span></span></button>
+    <span hidden id="s-menu-close" data-slot="nav.menu.close">Close menu</span>
+  </div>
+</header>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" data-slot="nav.sheet" data-slot-attr="aria-label" aria-label="Site menu">
+  <p class="sheet-h" data-slot="nav.product">Product</p>
+  <a href="/tools" data-slot="nav.product.tools">Tools</a>
+  <a href="/models" data-slot="nav.product.models">Models</a>
+  <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+  <a href="/connect" data-slot="nav.product.connect">Connect</a>
+  <p class="sheet-h" data-slot="nav.developers">Developers</p>
+  <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+  <a href="/status" data-slot="nav.developers.status">Status</a>
+  <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+  <p class="sheet-h" data-slot="nav.more">More</p>
+  <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+  <a href="/security" data-slot="nav.security">Security</a>
+  <a href="/token"><span data-slot="nav.token">Token</span></a>
+  <a class="btn btn-1 btn-block" href="/app" data-slot="nav.app">Open app</a>
+</div>
+<!--/HDR-->
+
+<div class="dx">
+  <nav class="dnav" aria-label="Go to section" data-slot="docs.toc.pick" data-slot-attr="aria-label">
+    <a href="#quickstart" data-slot="docs.quickstart.title">Quickstart</a>
+    <a class="sub step" href="#add-tools" data-slot="docs.qs.next.title">Add the tools</a>
+    <a class="sub step" href="#streaming" data-slot="docs.stream.title">Streaming</a>
+    <a href="#auth" data-slot="docs.auth.title">Authentication</a>
+    <a href="#trial" data-slot="docs.trial.title">Trial keys</a>
+    <a href="#models" data-slot="docs.models.title">Models</a>
+    <a href="#mcp" data-slot="docs.mcp.title">MCP</a>
+    <a href="#tools" data-slot="docs.tools.title">Tools</a>
+    <a class="sub" href="#stock_quote" style="--c:var(--c-quote)">stock_quote</a>
+    <a class="sub" href="#stock_portfolio" style="--c:var(--c-port)">stock_portfolio</a>
+    <a class="sub" href="#build_trade" style="--c:var(--c-trade)">build_trade</a>
+    <a class="sub" href="#fund_agent" style="--c:var(--c-fund)">fund_agent</a>
+    <a class="sub step" href="#stocks" data-slot="docs.stocks.title">Stock token list</a>
+    <!--F:prompts--><a href="#prompts" data-slot="docs.prompts.title">Prompts</a><!--/F:prompts-->
+    <!--F:resources--><a href="#resources" data-feature="resources" data-slot="docs.resources.title">Resources</a><!--/F:resources-->
+    <a href="#sign-and-send" data-slot="docs.sign.title">Sign and send</a>
+    <a href="#chat-with-tools" data-slot="docs.loop.title">Chat with tools</a>
+    <a href="#errors" data-slot="docs.errors.title">Errors</a>
+    <a href="#chain" data-slot="docs.chain.title">Solana</a>
+  </nav>
+  <nav class="dpick" aria-label="Go to section" data-slot="docs.toc.pick" data-slot-attr="aria-label"><label><span class="sr" data-slot="docs.toc.pick">Go to section</span>
+    <select id="dpick">
+      <option value="quickstart" data-slot="docs.quickstart.title">Quickstart</option>
+      <option value="add-tools" data-slot="docs.qs.next.title">Add the tools</option>
+      <option value="streaming" data-slot="docs.stream.title">Streaming</option>
+      <option value="auth" data-slot="docs.auth.title">Authentication</option>
+      <option value="trial" data-slot="docs.trial.title">Trial keys</option>
+      <option value="models" data-slot="docs.models.title">Models</option>
+      <option value="mcp" data-slot="docs.mcp.title">MCP</option>
+      <option value="tools" data-slot="docs.tools.title">Tools</option>
+      <option value="stock_quote">stock_quote</option><option value="stock_portfolio">stock_portfolio</option><option value="build_trade">build_trade</option><option value="fund_agent">fund_agent</option><option value="stocks" data-slot="docs.stocks.title">Stock token list</option>
+      <!--F:prompts--><option value="prompts" data-slot="docs.prompts.title">Prompts</option><!--/F:prompts-->
+      <!--F:resources--><option value="resources" data-feature="resources" data-slot="docs.resources.title">Resources</option><!--/F:resources-->
+      <option value="sign-and-send" data-slot="docs.sign.title">Sign and send</option>
+      <option value="chat-with-tools" data-slot="docs.loop.title">Chat with tools</option>
+      <option value="errors" data-slot="docs.errors.title">Errors</option>
+      <option value="chain" data-slot="docs.chain.title">Solana</option>
+    </select>
+  </label></nav>
+
+  <main class="dmain" id="main">
+    <header class="dhead">
+      <h1 class="h2p" data-slot="docs.title">Keydex AI docs</h1>
+      <p class="lead" data-slot="docs.intro">One API key for AI models and stock trading on Solana. Start with the quickstart, then connect over MCP or REST.</p>
+    </header>
+
+    <section class="ds" id="quickstart">
+      <div class="dt">
+        <h2 class="h3"><a href="#quickstart" data-slot="docs.quickstart.title">Quickstart</a></h2>
+        <p data-slot="docs.quickstart.text">Get a key, make your first call, then add the tools to your agent. About a minute end to end.</p>
+        <!-- V0-11 (P3-F4): step 1 — a key right here, the same .cx-key as /connect (WOW-03); the key lands in every example on this page -->
+        <div class="cx-key dq-key" id="dqKey">
+          <div class="cx-need" data-need>
+            <div class="cx-need-txt"><p class="h4" data-slot="docs.qs.key.title">Get a key</p><p class="modal-text" data-slot="docs.qs.key.text">A trial key needs no sign-in. It goes into every code sample on this page.</p></div>
+            <div class="cx-need-act"><button class="btn btn-sm btn-1" type="button" data-trial><span data-slot="page.connect.key.cta">Get a trial key</span></button><a class="cx-signin" href="/app" data-slot="page.connect.key.signin">or sign in and create your own</a></div>
+          </div>
+          <div class="cx-have" data-have hidden>
+            <p class="cx-ready"><svg class="ok-ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5"/></svg><span data-slot="docs.qs.key.ready">Key added to every code sample.</span><span class="chip dim num" data-keyexp data-slot="connect.trial.expires" data-hold data-tpl="Expires {time} UTC">—</span></p><p class="cx-keep muted" data-slot="connect.key.keep">Copy it now. Only this tab keeps it. Closing the tab removes it from this browser, but the key works until it expires.</p>
+            <div class="code inline cx-keycode"><pre class="cx-keyline"><span data-keyval id="dqKeyVal"></span></pre><button class="btn btn-sm btn-2 copy" type="button" data-copy-target="dqKeyVal" data-slot="app.key.copy" data-slot-attr="aria-label" aria-label="Copy key"><span data-slot="connect.copy">Copy</span></button></div>
+          </div>
+          <p class="cx-err" data-err role="alert" hidden></p>
+        </div>
+        <p class="ep"><span class="m">POST</span><span class="mono">/v1/chat/completions</span></p>
+      </div>
+      <div class="dc">
+        <!-- V1-26 (P3-F10): the SDK install for the active language, the TS file name, streaming (OpenAI quickstart ad593840) -->
+        <div class="code install" id="qsInstall" hidden><div class="code-h"><span class="code-l" data-slot="docs.install.label">Install the SDK</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre data-lang="py">pip install openai</pre><pre data-lang="ts" hidden>npm install openai</pre></div>
+        <div class="code" data-group="qs"><div class="code-h"><div class="tabs" role="tablist" data-for="qs" aria-label="Quickstart language" data-slot="docs.qs.tabs" data-slot-attr="aria-label"><button class="tab" type="button" role="tab" id="t-qs-curl" aria-controls="p-qs-curl" aria-selected="true" tabindex="0" data-lang="curl">cURL</button><button class="tab" type="button" role="tab" id="t-qs-py" aria-controls="p-qs-py" aria-selected="false" tabindex="-1" data-lang="py">Python</button><button class="tab" type="button" role="tab" id="t-qs-ts" aria-controls="p-qs-ts" aria-selected="false" tabindex="-1" data-lang="ts">TypeScript</button></div><span class="code-file mono"></span><button class="btn btn-sm btn-2 copy" type="button" data-copy-visible><span data-slot="connect.copy">Copy</span></button></div><pre id="p-qs-curl" role="tabpanel" aria-labelledby="t-qs-curl" data-lang="curl">curl https://keydex.ai/v1/chat/completions \
+  -H <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "In one sentence, what is a stock token?"
+      }
+    ]
+  }'</span></pre><pre id="p-qs-py" role="tabpanel" aria-labelledby="t-qs-py" data-lang="py" hidden>import os
+from openai import OpenAI
+
+client = OpenAI(base_url=<span class="s">"https://keydex.ai/v1"</span>, api_key=os.environ.get(<span class="s">"KEYDEX_KEY"</span>, <span class="s">"<span class="key ph">YOUR_KEYDEX_KEY</span>"</span>))
+r = client.chat.completions.create(
+    model=<span class="s">"openai/gpt-4.1-mini"</span>,
+    messages=[{<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: <span class="s">"In one sentence, what is a stock token?"</span>}],
+)
+print(r.choices[0].message.content)</pre><pre id="p-qs-ts" role="tabpanel" aria-labelledby="t-qs-ts" data-lang="ts" data-file="quickstart.mts" hidden><span class="k">import</span> OpenAI <span class="k">from</span> <span class="s">"openai"</span>;
+
+<span class="k">const</span> client = <span class="k">new</span> OpenAI({ baseURL: <span class="s">"https://keydex.ai/v1"</span>, apiKey: process.env.KEYDEX_KEY ?? <span class="s">"<span class="key ph">YOUR_KEYDEX_KEY</span>"</span> });
+<span class="k">const</span> r = <span class="k">await</span> client.chat.completions.create({
+  model: <span class="s">"openai/gpt-4.1-mini"</span>,
+  messages: [{ role: <span class="s">"user"</span>, content: <span class="s">"In one sentence, what is a stock token?"</span> }],
+});
+console.log(r.choices[0].message.content);</pre></div>
+      </div>
+    </section>
+
+    <section class="ds ds-step" id="add-tools">
+      <div class="dt">
+        <h3 class="h3"><a href="#add-tools" data-slot="docs.qs.next.title">Add the tools</a></h3>
+        <p data-slot="docs.qs.next.text" data-cl>The chat endpoint doesn’t call Keydex AI tools, so the model can’t see prices. One stock_quote call returns a stock token’s pool price, 24h change and pool depth.</p>
+        <p class="ep"><span class="m">GET</span><span class="mono">/v1/tools/stock_quote</span></p>
+      </div>
+      <div class="dc">
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.curl">cURL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>curl <span class="s">"https://keydex.ai/v1/tools/stock_quote?ticker=NVDA"</span> \
+  -H <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span></pre></div>
+        <a class="link-more" href="#mcp" data-slot="docs.qs.next.mcp">Over MCP, your agent calls the tools itself.</a>
+      </div>
+    </section>
+
+    <section class="ds ds-step" id="streaming">
+      <div class="dt">
+        <h3 class="h3"><a href="#streaming" data-slot="docs.stream.title">Streaming</a></h3>
+        <p data-slot="docs.stream.text">Set stream to true to get the reply as server-sent events. The stream ends with data: [DONE].</p>
+      </div>
+      <div class="dc">
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.curl">cURL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>curl https://keydex.ai/v1/chat/completions \
+  -H <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "model": "openai/gpt-4.1-mini",
+    "stream": true,
+    "messages": [
+      {
+        "role": "user",
+        "content": "In one sentence, what is a stock token?"
+      }
+    ]
+  }'</span></pre></div>
+        <div class="code resp sse"><div class="code-h"><span class="code-l" data-slot="docs.code.response">Response</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>data: {"id": "kf-1793359030-UCNVXSuIHo27", "object": "chat.completion.chunk", "created": 1793359030, "model": "openai/gpt-4.1-mini", "choices": [{"index": 0, "delta": {"content": "A", "role": "assistant"}, "finish_reason": null}]}
+
+data: {"id": "kf-1793359030-UCNVXSuIHo27", "object": "chat.completion.chunk", "created": 1793359030, "model": "openai/gpt-4.1-mini", "choices": [{"index": 0, "delta": {"content": " stock", "role": "assistant"}, "finish_reason": null}]}
+
+data: [DONE]</pre></div>
+      </div>
+    </section>
+
+    <section class="ds" id="auth">
+      <div class="dt">
+        <h2 class="h3"><a href="#auth" data-slot="docs.auth.title">Authentication</a></h2>
+        <p data-slot="docs.auth.text">Send your key in the Authorization header or as X-API-Key. MCP clients that take only a URL can pass it as ?key=. Keep the key on your server.</p>
+      </div>
+      <div class="dc">
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.request">Request</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>
+<span class="c"># MCP clients that take only a URL:</span>
+https://keydex.ai/mcp?key=<span class="key ph">YOUR_KEYDEX_KEY</span></pre></div>
+      </div>
+    </section>
+
+    <section class="ds" id="trial">
+      <div class="dt">
+        <h2 class="h3"><a href="#trial" data-slot="docs.trial.title">Trial keys</a></h2>
+        <p data-slot="docs.trial.text">A trial key needs no sign-in. It draws from a free daily allowance for each visitor, expires after 24 hours and works with low-cost models only. Replies are capped at 512 tokens. GET /v1/models with a trial key lists the models it can use.</p>
+        <p data-slot="docs.trial.images">With a trial key, send images as data:image/… URLs. Links need your own key.</p>
+        <p class="ep"><span class="m">POST</span><span class="mono">/api/trial</span></p>
+      </div>
+      <div class="dc">
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.curl">cURL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>curl -X POST https://keydex.ai/api/trial</pre></div>
+        <div class="code resp"><div class="code-h"><span class="code-l">200 OK</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>{
+  <span class="s">"key"</span>: <span class="s">"YOUR_KEYDEX_KEY"</span>,
+  <span class="s">"id"</span>: <span class="s">"hG7kQ2mXp9Tz"</span>,
+  <span class="s">"allowance"</span>: {
+    <span class="s">"type"</span>: <span class="s">"free"</span>,
+    <span class="s">"period"</span>: <span class="s">"daily"</span>,
+    <span class="s">"remaining"</span>: true,
+    <span class="s">"resets_at"</span>: 1793433600
+  },
+  <span class="s">"expires_at"</span>: 1793424125,
+  <span class="s">"max_tokens"</span>: 512,
+  <span class="s">"example_model"</span>: <span class="s">"openai/gpt-4.1-mini"</span>,
+  <span class="s">"models_count"</span>: 172,
+  <span class="s">"models"</span>: [
+    <span class="s">"openai/gpt-4.1-mini"</span>,
+    <span class="s">"anthropic/claude-haiku-5.5"</span>,
+    <span class="s">"deepseek/deepseek-v4.1-flash-1017"</span>
+  ],
+  <span class="s">"mcp_url"</span>: <span class="s">"https://keydex.ai/mcp"</span>
+}</pre></div>
+      </div>
+    </section>
+    <section class="ds ds-step" id="limits" data-nav="trial">
+      <div class="dt">
+        <h3 class="h4 sub-h" data-slot="docs.limits.title">Daily allowance</h3>
+        <p data-slot="docs.limits.text">Tool calls are free. Model calls draw from a daily allowance that resets at 00:00 UTC. A trial key uses the free allowance each visitor gets. A wallet key uses its holder tier first, then the free trial rules. There are no limits to set.</p>
+        <p data-prelaunch data-slot="docs.limits.pre">Until the token launches, wallet keys get the same free daily allowance as a trial key.</p>
+        <h3 class="h4 sub-h" id="check-key" data-slot="docs.key.title">Check a key</h3>
+        <p data-slot="docs.key.text"><code class="sf">GET /v1/key</code> shows a key’s allowance. For a trial key, allowance has <code class="sf">type free</code>, <code class="sf">period daily</code>, <code class="sf">remaining</code> (true while some is left) and <code class="sf">resets_at</code> (00:00 UTC). A wallet key returns the same until the token launches, then its holder allowance. It also gives <code class="sf">expires_at</code> and <code class="sf">max_tokens</code>.</p>
+        <p class="ep"><span class="m">GET</span><span class="mono">/v1/key</span></p>
+      </div>
+      <div class="dc">
+        <div class="code" id="check-key-req"><div class="code-h"><span class="code-l" data-slot="docs.code.curl">cURL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>curl https://keydex.ai/v1/key \
+  -H <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span></pre></div>
+        <div class="code resp"><div class="code-h"><span class="code-l">200 OK</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>{
+  <span class="s">"object"</span>: <span class="s">"key"</span>,
+  <span class="s">"trial"</span>: true,
+  <span class="s">"allowance"</span>: {
+    <span class="s">"type"</span>: <span class="s">"free"</span>,
+    <span class="s">"period"</span>: <span class="s">"daily"</span>,
+    <span class="s">"remaining"</span>: true,
+    <span class="s">"resets_at"</span>: 1793433600
+  },
+  <span class="s">"expires_at"</span>: 1793424125,
+  <span class="s">"max_tokens"</span>: 512
+}</pre></div>
+      </div>
+    </section>
+
+    <section class="ds" id="models">
+      <div class="dt">
+        <h2 class="h3"><a href="#models" data-slot="docs.models.title">Models</a></h2>
+        <p data-slot="docs.models.text">Models run through an OpenAI-compatible API. Point any OpenAI SDK at Keydex AI and pick a model by its ID.</p>
+        <p class="ep"><span class="m">GET</span><span class="mono">/v1/models</span></p>
+        <div class="mtable" data-loading>
+          <table class="tbl"><caption class="sr" data-slot="docs.models.caption">Example models with ID and context size</caption>
+            <thead><tr><th>Model</th><th>id</th><th class="r">Context</th></tr></thead>
+            <tbody id="mBody"><!--SNAP:docmodels--><tr><td><span class="mrow-n"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span><span>GPT-4.1 Mini</span></span></td><td class="mono">openai/gpt-4.1-mini</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span><span>GPT-6.1 Terra Pro</span></span></td><td class="mono">openai/gpt-6.1-terra-pro</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><span class="i" style="--src:url(/img/models/openai.svg?v=a595df6b)"></span><span>GPT-6.1 Terra</span></span></td><td class="mono">openai/gpt-6.1-terra</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="16" height="16"><span>Claude Fable 5.2</span></span></td><td class="mono">anthropic/claude-fable-5.2</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="16" height="16"><span>Claude Haiku 5.5</span></span></td><td class="mono">anthropic/claude-haiku-5.5</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><img src="/img/models/gemini-color.svg?v=8ab0a9ba" alt="" width="16" height="16"><span>Gemini Omni 1.2 Flash</span></span></td><td class="mono">google/gemini-omni-1.2-flash</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><img src="/img/models/gemini-color.svg?v=8ab0a9ba" alt="" width="16" height="16"><span>Gemini Omni 1.1 Flash</span></span></td><td class="mono">google/gemini-omni-1.1-flash</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><span class="i" style="--src:url(/img/models/grok.svg?v=9175fc90)"></span><span>Grok 4.7</span></span></td><td class="mono">x-ai/grok-4.7</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><span class="i" style="--src:url(/img/models/grok.svg?v=9175fc90)"></span><span>Grok 4.6</span></span></td><td class="mono">x-ai/grok-4.6</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><img src="/img/models/deepseek-color.svg?v=deba5f98" alt="" width="16" height="16"><span>DeepSeek V4.1 Flash</span></span></td><td class="mono">deepseek/deepseek-v4.1-flash</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><img src="/img/models/deepseek-color.svg?v=deba5f98" alt="" width="16" height="16"><span>DeepSeek V4 Pro 0423</span></span></td><td class="mono">deepseek/deepseek-v4-pro</td><td class="r num" aria-busy="true"></td></tr><tr><td><span class="mrow-n"><img src="/img/models/qwen-color.svg?v=a158a0e3" alt="" width="16" height="16"><span>Qwen3.8 Max Prime</span></span></td><td class="mono">qwen/qwen3.8-max-prime</td><td class="r num" aria-busy="true"></td></tr><!--/SNAP--></tbody>
+          </table>
+          <p hidden><span id="s-m-err" data-slot="docs.models.error">Couldn’t load the model list.</span><span id="s-m-retry" data-slot="page.models.retry">Try again</span></p>
+          <p class="mcount wait" id="mCount"><span data-slot="page.models.count" data-hold data-tpl="{n} models">—</span></p>
+        </div>
+      </div>
+      <div class="dc">
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.curl">cURL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>curl https://keydex.ai/v1/models</pre></div>
+      </div>
+    </section>
+
+    <section class="ds" id="mcp">
+      <div class="dt">
+        <h2 class="h3"><a href="#mcp" data-slot="docs.mcp.title">MCP</a></h2>
+        <p data-slot="docs.mcp.text">One MCP server gives your agent every Keydex AI tool. Add it to Claude Code, Cursor or VS Code with your key in the header.</p>
+        <p class="ep"><span class="m">HTTP</span><span class="mono">/mcp</span></p>
+      </div>
+      <div class="dc">
+        <div class="code" data-group="mcpc"><div class="code-h"><div class="tabs" role="tablist" data-for="mcpc" aria-label="Ways to connect" data-slot="page.connect.tabs" data-slot-attr="aria-label"><button class="tab" type="button" role="tab" id="t-mcpc-claude" aria-controls="p-mcpc-claude" aria-selected="true" tabindex="0" data-lang="claude"><img class="ic" src="/img/models/claudecode-color.svg?v=670b3d8d" alt="" width="14" height="14"><span data-slot="connect.tab.claude">Claude Code</span></button><!--FX:cli:<button class="tab" type="button" role="tab" id="t-mcpc-codex" aria-controls="p-mcpc-codex" aria-selected="false" tabindex="-1" data-lang="codex"><span class="i" style="--src:url(/img/models/codex.svg?v=d08b4e82)"></span><span data-slot="page.connect.codex.title">Codex</span></button><button class="tab" type="button" role="tab" id="t-mcpc-gemini" aria-controls="p-mcpc-gemini" aria-selected="false" tabindex="-1" data-lang="gemini"><img class="ic" src="/img/models/gemini-color.svg?v=8ab0a9ba" alt="" width="14" height="14"><span data-slot="page.connect.gemini.title">Gemini CLI</span></button>:FX--><button class="tab" type="button" role="tab" id="t-mcpc-cursor" aria-controls="p-mcpc-cursor" aria-selected="false" tabindex="-1" data-lang="cursor"><span class="i" style="--src:url(/img/models/cursor.svg?v=0cb51bdd)"></span><span data-slot="connect.tab.cursor">Cursor</span></button><button class="tab" type="button" role="tab" id="t-mcpc-vscode" aria-controls="p-mcpc-vscode" aria-selected="false" tabindex="-1" data-lang="vscode"><span data-slot="connect.tab.vscode">VS Code</span></button><button class="tab" type="button" role="tab" id="t-mcpc-rest" aria-controls="p-mcpc-rest" aria-selected="false" tabindex="-1" data-lang="rest"><span data-slot="connect.tab.rest">REST</span></button></div><span class="code-l code-file"></span><button class="btn btn-sm btn-2 copy" type="button" data-copy-visible><span data-slot="connect.copy">Copy</span></button></div><pre id="p-mcpc-claude" role="tabpanel" aria-labelledby="t-mcpc-claude" data-lang="claude">claude mcp add -s user --transport http Keydex AI https://keydex.ai/mcp \
+  --header <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span></pre><!--FX:cli:<pre id="p-mcpc-codex" role="tabpanel" aria-labelledby="t-mcpc-codex" data-lang="codex" data-file="~/.codex/config.toml" hidden>[mcp_servers.keydex]
+url = <span class="s">"https://keydex.ai/mcp"</span>
+http_headers = { <span class="s">"Authorization"</span> = <span class="s">"Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span> }</pre><pre id="p-mcpc-gemini" role="tabpanel" aria-labelledby="t-mcpc-gemini" data-lang="gemini" hidden>gemini mcp add -s user --transport http \
+  -H <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span> \
+  Keydex AI https://keydex.ai/mcp</pre>:FX--><pre id="p-mcpc-cursor" role="tabpanel" aria-labelledby="t-mcpc-cursor" data-lang="cursor" data-file="~/.cursor/mcp.json" hidden>{
+  <span class="s">"mcpServers"</span>: {
+    <span class="s">"Keydex AI"</span>: {
+      <span class="s">"url"</span>: <span class="s">"https://keydex.ai/mcp"</span>,
+      <span class="s">"headers"</span>: {
+        <span class="s">"Authorization"</span>: <span class="s">"Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span>
+      }
+    }
+  }
+}</pre><pre id="p-mcpc-vscode" role="tabpanel" aria-labelledby="t-mcpc-vscode" data-lang="vscode" data-file=".vscode/mcp.json" hidden>{
+  <span class="s">"servers"</span>: {
+    <span class="s">"Keydex AI"</span>: {
+      <span class="s">"type"</span>: <span class="s">"http"</span>,
+      <span class="s">"url"</span>: <span class="s">"https://keydex.ai/mcp"</span>,
+      <span class="s">"headers"</span>: {
+        <span class="s">"Authorization"</span>: <span class="s">"Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span>
+      }
+    }
+  }
+}</pre><pre id="p-mcpc-rest" role="tabpanel" aria-labelledby="t-mcpc-rest" data-lang="rest" hidden>curl <span class="s">"https://keydex.ai/v1/tools/stock_quote?ticker=NVDA"</span> \
+  -H <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span></pre></div>
+        <p class="note cx-hint mcpc-claude"><span data-slot="page.connect.claudecode.refresh">New key? Run <code class="sf">claude mcp remove Keydex AI -s user</code> first.</span> <span data-slot="page.connect.claudecode.check">Check with <code class="sf">claude mcp list</code>: Keydex AI shows Connected.</span></p>
+      </div>
+    </section>
+
+    <section class="ds" id="tools">
+      <div class="dt">
+        <h2 class="h3"><a href="#tools" data-slot="docs.tools.title">Tools</a></h2>
+        <p data-slot="docs.tools.text">Four core tools below; the Tools page lists all. Same names and inputs over MCP and REST.</p>
+        <p data-slot="docs.tools.methods">Every tool takes GET with query parameters or POST with a JSON body.</p>
+        <p data-slot="docs.tools.shape">REST wraps the result in data. Over MCP, a tool returns the same object without the wrapper.</p>
+        <p class="ep"><span class="m">GET · POST</span><span class="mono">/v1/tools/&lt;name&gt;</span></p>
+      </div>
+      <div class="dc"></div>
+    </section>
+
+    <section class="ds tool" id="stock_quote" style="--c:var(--c-quote)">
+      <div class="dt">
+        <h3 class="h4"><a href="#stock_quote">stock_quote</a></h3>
+        <p data-slot="docs.tools.stock_quote.text">Returns price, 24h change and pool depth for a stock token on Solana.</p>
+        <p class="ep"><span class="m">GET · POST</span><span class="mono">/v1/tools/stock_quote?ticker=NVDA</span></p>
+        <div class="params" role="list" aria-label="Parameters of stock_quote"><div class="prm" role="listitem"><p class="prm-h"><code class="mono">ticker</code><span class="prm-t mono">string</span><span class="chip wait" data-slot="docs.params.required">Required</span></p><p class="prm-d" data-slot="docs.param.stock_quote.ticker">Ticker of a stock token or ETF, like NVDA. A token address works too.</p></div></div>
+        <p class="note" data-slot="docs.tools.stock_quote.key">No key needed, up to 30 calls an hour.</p>
+        <p class="note" data-slot="docs.tools.stock_quote.note">Stock tokens are not available to US persons and are restricted in Canada, the UK, Switzerland and other countries. This service shows data and builds transactions. It does not sell stock tokens.</p>
+      </div>
+      <div class="dc">
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.curl">cURL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>curl <span class="s">"https://keydex.ai/v1/tools/stock_quote?ticker=NVDA"</span> \
+  -H <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span></pre></div>
+        <div class="code resp"><div class="code-h"><span class="code-l">200 OK</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>{
+  <span class="s">"data"</span>: {
+    <span class="s">"ticker"</span>: <span class="s">"NVDA"</span>,
+    <span class="s">"name"</span>: <span class="s">"NVIDIA"</span>,
+    <span class="s">"type"</span>: <span class="s">"stock"</span>,
+    <span class="s">"token"</span>: <span class="s">"0xd0601ce157db5bdc3162bbac2a2c8af5320d9eec"</span>,
+    <span class="s">"price_usd"</span>: 210.127,
+    <span class="s">"change_24h_pct"</span>: -1.89,
+    <span class="s">"depth_usd"</span>: 35229786,
+    <span class="s">"logo"</span>: <span class="s">"https://cdn.jsdelivr.net/…/NVDA.png"</span>,
+    <span class="s">"chain_id"</span>: 4663,
+    <span class="s">"as_of"</span>: 1793318233,
+    <span class="s">"price_note"</span>: null,
+    <span class="s">"note"</span>: <span class="s">"Stock tokens are not available to US persons…"</span>
+  }
+}</pre></div>
+      </div>
+    </section>
+
+    <section class="ds tool" id="stock_portfolio" style="--c:var(--c-port)">
+      <div class="dt">
+        <h3 class="h4"><a href="#stock_portfolio">stock_portfolio</a></h3>
+        <p data-slot="docs.tools.stock_portfolio.text">Returns every stock token and ETF in an agent wallet with amounts and value in dollars, plus <span class="nw">its <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span></span> balance.</p>
+        <p class="ep"><span class="m">GET · POST</span><span class="mono">/v1/tools/stock_portfolio?wallet=0xd8dA…6045</span></p>
+        <div class="params" role="list" aria-label="Parameters of stock_portfolio"><div class="prm" role="listitem"><p class="prm-h"><code class="mono">wallet</code><span class="prm-t mono">string</span><span class="chip wait" data-slot="docs.params.required">Required</span></p><p class="prm-d" data-slot="docs.param.stock_portfolio.wallet">Wallet address on Solana.</p></div></div>
+        <p class="note" data-slot="docs.tools.stock_portfolio.key">No key needed, up to 30 calls an hour.</p>
+      </div>
+      <div class="dc">
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.curl">cURL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>curl -G <span class="s">https://keydex.ai/v1/tools/stock_portfolio</span> \
+  --data-urlencode <span class="s">wallet=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045</span> \
+  -H <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span></pre></div>
+        <div class="code resp"><div class="code-h"><span class="code-l">200 OK</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>{
+  <span class="s">"data"</span>: {
+    <span class="s">"wallet"</span>: <span class="s">"0xd8da6bf26964af9d7eed9e03e53415d37aa96045"</span>,
+    <span class="s">"chain_id"</span>: 4663,
+    <span class="s">"holdings"</span>: [
+      {
+        <span class="s">"ticker"</span>: <span class="s">"NVDA"</span>,
+        <span class="s">"name"</span>: <span class="s">"NVIDIA"</span>,
+        <span class="s">"token"</span>: <span class="s">"0xd0601ce157db5bdc3162bbac2a2c8af5320d9eec"</span>,
+        <span class="s">"amount"</span>: 0.57243038,
+        <span class="s">"amount_raw"</span>: <span class="s">"572430380000000000"</span>,
+        <span class="s">"amount_dec"</span>: <span class="s">"0.57243038"</span>,
+        <span class="s">"price_usd"</span>: 210.127,
+        <span class="s">"price_note"</span>: null,
+        <span class="s">"value_usd"</span>: 120.28,
+        <span class="s">"change_24h_pct"</span>: -1.89,
+        <span class="s">"logo"</span>: <span class="s">"https://cdn.jsdelivr.net/…/NVDA.png"</span>
+      }
+    ],
+    <span class="s">"holdings_count"</span>: 1,
+    <span class="s">"priced_count"</span>: 1,
+    <span class="s">"unpriced_count"</span>: 0,
+    <span class="s">"stocks_value_usd"</span>: 120.28,
+    <span class="s">"unpriced"</span>: 0,
+    <span class="s">"eth"</span>: 0.05,
+    <span class="s">"eth_raw"</span>: <span class="s">"50000000000000000"</span>,
+    <span class="s">"eth_dec"</span>: <span class="s">"0.05"</span>,
+    <span class="s">"eth_value_usd"</span>: 112.54,
+    <span class="s">"as_of"</span>: 1793318233,
+    <span class="s">"note"</span>: <span class="s">"Stock tokens are not available to US persons…"</span>
+  }
+}</pre></div>
+        <p class="note" data-slot="docs.tools.stock_portfolio.raw">amount_raw and eth_raw are exact whole numbers in the smallest unit. amount_dec and eth_dec are the same amounts as exact decimals. Use them for arithmetic.</p>
+        <p class="note" data-slot="docs.tools.stock_portfolio.price_note">price_note is null when a price is known, otherwise no_liquidity or unavailable.</p>
+      </div>
+    </section>
+
+    <section class="ds tool" id="build_trade" style="--c:var(--c-trade)">
+      <div class="dt">
+        <h3 class="h4"><a href="#build_trade">build_trade</a></h3>
+        <p data-slot="docs.tools.build_trade.text">Returns an unsigned buy of a stock token <span class="nw">for <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span>,</span> sized <span class="nw">in <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span></span> or in dollars, or a sale of a percentage of a position <span class="nw">for <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span>.</span> Your agent signs and sends it.</p>
+        <p data-slot="docs.tools.build_trade.funds">A buy needs <span class="nw">the <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span>,</span> plus gas, already in the wallet. If it is short, fund it with fund_agent first.</p>
+        <p class="ep"><span class="m">GET · POST</span><span class="mono">/v1/tools/build_trade</span></p>
+        <p class="callout"><span class="chip dim" data-slot="tools.build_trade.badge">unsigned · agent signs</span><span data-slot="docs.tools.build_trade.warning">This transaction is unsigned. Your agent signs it with private keys it holds itself.</span><span data-slot="docs.tools.build_trade.approval">A sale may first need a token approval. Your agent signs that transaction too.</span></p>
+        <p class="note"><a class="link" href="#sign-and-send" data-slot="docs.tools.build_trade.sign">See Sign and send for how your agent submits these calls.</a></p>
+        <p class="route" data-route data-slot="docs.tools.build_trade.route">Trades route through LI.FI.</p>
+        <div class="params" role="list" aria-label="Parameters of build_trade"><div class="prm" role="listitem"><p class="prm-h"><code class="mono">token</code><span class="prm-t mono">string</span><span class="chip wait" data-slot="docs.params.required">Required</span></p><p class="prm-d" data-slot="docs.param.build_trade.token">Ticker, like TSLA, or the token address.</p></div><div class="prm" role="listitem"><p class="prm-h"><code class="mono">side</code><span class="prm-t mono" data-slot="docs.params.type.enum">enum</span><span class="chip wait" data-slot="docs.params.required">Required</span></p><p class="prm-d" data-slot="docs.param.build_trade.side">buy or sell.</p></div><div class="prm" role="listitem"><p class="prm-h"><code class="mono">wallet</code><span class="prm-t mono">string</span><span class="chip wait" data-slot="docs.params.required">Required</span></p><p class="prm-d" data-slot="docs.param.build_trade.wallet">The wallet that signs and sends. The route is quoted for it.</p></div><div class="prm" role="listitem"><p class="prm-h"><code class="mono">usd</code><span class="prm-t mono">number</span><span class="chip dim" data-slot="docs.params.buy">Buy: eth or usd</span></p><p class="prm-d" data-slot="docs.param.build_trade.usd">Dollars <span class="nw">of <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span></span> to spend, at the <span class="nw">current <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span></span> price.</p></div><div class="prm" role="listitem"><p class="prm-h"><code class="mono">eth</code><span class="prm-t mono">number</span><span class="chip dim" data-slot="docs.params.buy">Buy: eth or usd</span></p><p class="prm-d" data-slot="docs.param.build_trade.eth"><span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span> to spend on a buy, up to 10.</p></div><div class="prm" role="listitem"><p class="prm-h"><code class="mono">pct</code><span class="prm-t mono">number</span><span class="chip dim" data-slot="docs.params.sell">Sell: required</span></p><p class="prm-d" data-slot="docs.param.build_trade.pct">Share of the holding to sell, above 0 and up to 100.</p></div><div class="prm" role="listitem"><p class="prm-h"><code class="mono">slippage_pct</code><span class="prm-t mono">number</span><span class="chip dim" data-slot="docs.params.optional">Optional</span></p><p class="prm-d" data-slot="docs.param.build_trade.slippage_pct">Price tolerance in percent: 1 by default, from 0.1 to 10.</p></div></div>
+      </div>
+      <div class="dc">
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.curl">cURL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>curl -X POST https://keydex.ai/v1/tools/build_trade \
+  -H <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "token": "TSLA",
+    "side": "buy",
+    "wallet": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+    "usd": 50
+  }'</span></pre></div>
+        <div class="code resp"><div class="code-h"><span class="code-l">200 OK</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>{
+  <span class="s">"data"</span>: {
+    <span class="s">"chain_id"</span>: 4663,
+    <span class="s">"side"</span>: <span class="s">"buy"</span>,
+    <span class="s">"ticker"</span>: <span class="s">"TSLA"</span>,
+    <span class="s">"token"</span>: <span class="s">"0x322f0929c4625ed5bad873c95208d54e1c003b2d"</span>,
+    <span class="s">"wallet"</span>: <span class="s">"0xd8da6bf26964af9d7eed9e03e53415d37aa96045"</span>,
+    <span class="s">"amount_in"</span>: 0.022301,
+    <span class="s">"amount_in_raw"</span>: <span class="s">"22300621295309287"</span>,
+    <span class="s">"amount_in_usd"</span>: 50.05,
+    <span class="s">"expected_out"</span>: 0.126576,
+    <span class="s">"expected_out_raw"</span>: <span class="s">"126576214763029118"</span>,
+    <span class="s">"min_out"</span>: 0.125311,
+    <span class="s">"min_out_raw"</span>: <span class="s">"125310452615398827"</span>,
+    <span class="s">"expected_out_usd"</span>: 49.92,
+    <span class="s">"fees_usd"</span>: 0.1251,
+    <span class="s">"quoted_at"</span>: 1793318233,
+    <span class="s">"valid_until"</span>: 1793318278,
+    <span class="s">"valid_for_s"</span>: 45,
+    <span class="s">"calls"</span>: [
+      {
+        <span class="s">"label"</span>: <span class="s">"Buy TSLA"</span>,
+        <span class="s">"to"</span>: <span class="s">"0xB477751B76CF82d00a686A1232f5fCD772414Af3"</span>,
+        <span class="s">"data"</span>: <span class="s">"5xK9mR3p…"</span>,
+        <span class="s">"value"</span>: <span class="s">"22300621295309287"</span>,
+        <span class="s">"gas"</span>: 669595
+      }
+    ],
+    <span class="s">"how_to_sign"</span>: <span class="s">"Send each call in order from the wallet address…"</span>,
+    <span class="s">"simulated"</span>: true,
+    <span class="s">"note"</span>: <span class="s">"Stock tokens are not available to US persons…"</span>
+  }
+}</pre></div>
+        <p class="note" data-slot="docs.tools.build_trade.valid"><code class="sf">valid_until</code> is the time the quoted route expires; <code class="sf">quoted_at</code> is when it was quoted. Send the calls before <code class="sf">valid_until</code>, or build the trade again.</p>
+        <p class="note" data-slot="docs.tools.build_trade.simulated"><code class="sf">simulated</code> is true when the calls passed a test on the network just before the reply, and false when that test could not run. If it is false, build the trade again or check the calls yourself before signing.</p>
+        <p class="note" data-slot="docs.tools.build_trade.raw">amount_in_raw, expected_out_raw and min_out_raw are exact whole numbers in the token’s smallest unit, as strings. Use them for arithmetic.</p>
+      </div>
+    </section>
+
+    <section class="ds tool" id="fund_agent" style="--c:var(--c-fund)">
+      <div class="dt">
+        <h3 class="h4"><a href="#fund_agent">fund_agent</a></h3>
+        <p data-slot="docs.tools.fund_agent.text">Returns a quote and ready transactions that fund an agent wallet on Solana from another network, such as Ethereum, Base, Arbitrum, Optimism, BNB Chain or Polygon. Funds arrive <span class="nw">as <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span>.</span> The payer signs.</p>
+        <p class="ep"><span class="m">GET · POST</span><span class="mono">/v1/tools/fund_agent</span></p>
+        <p class="note" data-slot="docs.params.chains">origin_chain accepts these networks:</p>
+        <ul class="chainrow"><li title="Ethereum"><img src="/img/chains/ethereum.svg?v=bd61892d" alt="" width="20" height="20" loading="lazy"><span class="mono">ethereum</span></li><li title="Base"><img src="/img/chains/base.svg?v=2c83ae11" alt="" width="20" height="20" loading="lazy"><span class="mono">base</span></li><li title="Arbitrum"><img src="/img/chains/arbitrum.svg?v=35cebc7f" alt="" width="20" height="20" loading="lazy"><span class="mono">arbitrum</span></li><li title="Optimism"><img src="/img/chains/optimism.svg?v=31521544" alt="" width="20" height="20" loading="lazy"><span class="mono">optimism</span></li><li title="BNB Chain"><img src="/img/chains/bnb.svg?v=8a253298" alt="" width="20" height="20" loading="lazy"><span class="mono">bnb</span></li><li title="Polygon"><img src="/img/chains/polygon.svg?v=342be777" alt="" width="20" height="20" loading="lazy"><span class="mono">polygon</span></li><li title="Avalanche"><img src="/img/chains/avalanche.png?v=e87af480" alt="" width="20" height="20" loading="lazy"><span class="mono">avalanche</span></li><li title="Linea"><img src="/img/chains/linea.svg?v=20888c6a" alt="" width="20" height="20" loading="lazy"><span class="mono">linea</span></li><li title="Scroll"><img src="/img/chains/scroll.svg?v=41701f1f" alt="" width="20" height="20" loading="lazy"><span class="mono">scroll</span></li><li title="zkSync"><img src="/img/chains/zksync.svg?v=1e29d115" alt="" width="20" height="20" loading="lazy"><span class="mono">zksync</span></li><li title="Mode"><img src="/img/chains/mode.svg?v=522fd4b8" alt="" width="20" height="20" loading="lazy"><span class="mono">mode</span></li><li title="Zora"><img src="/img/chains/zora.png?v=c275e42e" alt="" width="20" height="20" loading="lazy"><span class="mono">zora</span></li><li title="Mantle"><img src="/img/chains/mantle.png?v=2ee71bf3" alt="" width="20" height="20" loading="lazy"><span class="mono">mantle</span></li><li title="Unichain"><img src="/img/chains/unichain.svg?v=669e1e5b" alt="" width="20" height="20" loading="lazy"><span class="mono">unichain</span></li><li title="Ink"><img src="/img/chains/ink.svg?v=76898117" alt="" width="20" height="20" loading="lazy"><span class="mono">ink</span></li></ul>
+        <div class="params" role="list" aria-label="Parameters of fund_agent"><div class="prm" role="listitem"><p class="prm-h"><code class="mono">wallet</code><span class="prm-t mono">string</span><span class="chip wait" data-slot="docs.params.required">Required</span></p><p class="prm-d" data-slot="docs.param.fund_agent.wallet">Agent wallet on Solana that receives <span class="nw">the <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span>.</span></p></div><div class="prm" role="listitem"><p class="prm-h"><code class="mono">payer</code><span class="prm-t mono">string</span><span class="chip wait" data-slot="docs.params.required">Required</span></p><p class="prm-d" data-slot="docs.param.fund_agent.payer">Wallet that pays on the origin network and signs there. Usually not the agent wallet.</p></div><div class="prm" role="listitem"><p class="prm-h"><code class="mono">origin_chain</code><span class="prm-t mono">string or number</span><span class="chip wait" data-slot="docs.params.required">Required</span></p><p class="prm-d" data-slot="docs.param.fund_agent.origin_chain">Network to pay from: a name, like base, or its chain ID, like 8453.</p></div><div class="prm" role="listitem"><p class="prm-h"><code class="mono">amount</code><span class="prm-t mono">string or number</span><span class="chip wait" data-slot="docs.params.required">Required</span></p><p class="prm-d" data-slot="docs.param.fund_agent.amount">Amount in the smallest unit of what you pay with, like wei <span class="nw">for <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span>.</span></p></div><div class="prm" role="listitem"><p class="prm-h"><code class="mono">currency</code><span class="prm-t mono">string</span><span class="chip dim" data-slot="docs.params.optional">Optional</span></p><p class="prm-d" data-slot="docs.param.fund_agent.currency">Token address to pay with on the origin network. Empty pays in its native coin.</p></div></div>
+      </div>
+      <div class="dc">
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.curl">cURL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>curl -X POST https://keydex.ai/v1/tools/fund_agent \
+  -H <span class="s">"Authorization: Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "wallet": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+    "payer": "0x71C7656EC7ab88b098defB751B7401B5f6d8976F",
+    "origin_chain": "base",
+    "amount": "1000000000000000"
+  }'</span></pre></div>
+        <div class="code resp"><div class="code-h"><span class="code-l">200 OK</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>{
+  <span class="s">"data"</span>: {
+    <span class="s">"origin_chain_id"</span>: 8453,
+    <span class="s">"destination_chain_id"</span>: 4663,
+    <span class="s">"recipient"</span>: <span class="s">"0xd8da6bf26964af9d7eed9e03e53415d37aa96045"</span>,
+    <span class="s">"payer"</span>: <span class="s">"0x71c7656ec7ab88b098defb751b7401b5f6d8976f"</span>,
+    <span class="s">"amount_in"</span>: <span class="s">"0.001"</span>,
+    <span class="s">"amount_out_eth"</span>: <span class="s">"0.000990057421606488"</span>,
+    <span class="s">"eta_s"</span>: 1,
+    <span class="s">"transactions"</span>: [
+      {
+        <span class="s">"step"</span>: <span class="s">"deposit"</span>,
+        <span class="s">"action"</span>: <span class="s">"Confirm transaction in your wallet"</span>,
+        <span class="s">"chain_id"</span>: 8453,
+        <span class="s">"to"</span>: <span class="s">"0x4cd00e387622c35bddb9b4c962c136462338bc31"</span>,
+        <span class="s">"data"</span>: <span class="s">"0x49290c1c…"</span>,
+        <span class="s">"value"</span>: <span class="s">"1000000000000000"</span>
+      }
+    ],
+    <span class="s">"how_to_sign"</span>: <span class="s">"The payer signs and sends each transaction on the origin chain."</span>
+  }
+}</pre></div>
+      </div>
+    </section>
+
+    <section class="ds" id="stocks">
+      <div class="dt">
+        <h3 class="h4"><a href="#stocks" data-slot="docs.stocks.title">Stock token list</a></h3>
+        <p data-slot="docs.stocks.text">GET /v1/stocks returns stock tokens and ETFs on Solana with pool price, 24h change and pool depth, deepest pool first. No key needed. Unknown values are null, never 0.</p>
+        <p class="ep"><span class="m">GET</span><span class="mono">/v1/stocks</span></p>
+      </div>
+      <div class="dc">
+        <div class="code"><div class="code-h"><span class="code-l" data-slot="docs.code.curl">cURL</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>curl https://keydex.ai/v1/stocks</pre></div>
+        <div class="code resp"><div class="code-h"><span class="code-l">200 OK</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>{
+  <span class="s">"data"</span>: [
+    {
+      <span class="s">"ticker"</span>: <span class="s">"NVDA"</span>,
+      <span class="s">"name"</span>: <span class="s">"NVIDIA"</span>,
+      <span class="s">"type"</span>: <span class="s">"stock"</span>,
+      <span class="s">"token"</span>: <span class="s">"0xd0601ce157db5bdc3162bbac2a2c8af5320d9eec"</span>,
+      <span class="s">"price_usd"</span>: 209.062,
+      <span class="s">"change_24h_pct"</span>: -2.03,
+      <span class="s">"depth_usd"</span>: 14871922,
+      <span class="s">"logo"</span>: <span class="s">"https://cdn.jsdelivr.net/…/NVDA.png"</span>,
+      <span class="s">"price_note"</span>: null
+    }
+  ],
+  <span class="s">"count"</span>: 64,
+  <span class="s">"chain_id"</span>: 4663,
+  <span class="s">"as_of"</span>: 1793344758,
+  <span class="s">"note"</span>: <span class="s">"Stock tokens are not available to US persons…"</span>
+}</pre></div>
+      </div>
+    </section>
+
+    <!--F:prompts--><section class="ds" id="prompts">
+      <div class="dt">
+        <h2 class="h3"><a href="#prompts" data-slot="docs.prompts.title">Prompts</a></h2>
+        <p data-slot="docs.prompts.lead">Keydex AI publishes ready-made tasks as MCP prompts. Your client lists them with <code class="sf">prompts/list</code> and sends one with <code class="sf">prompts/get</code>. A prompt only writes the request: it calls nothing itself.</p>
+        <dl class="pr-list"><div class="pr-r"><dt class="mono">buy_stock</dt><dd data-slot="docs.prompts.buy_stock.desc">Quotes a stock token, builds an unsigned buy and waits for your approval before anything is signed. Arguments: ticker, usd, wallet.</dd></div><div class="pr-r"><dt class="mono">portfolio_checkup</dt><dd data-slot="docs.prompts.portfolio_checkup.desc">Reads a wallet’s stock tokens and quotes every position. When issuer data is available, it adds upcoming dividends and splits. Argument: wallet.</dd></div><div class="pr-r"><dt class="mono">rebalance</dt><dd data-slot="docs.prompts.rebalance.desc">Reads the portfolio and builds the unsigned trades that move it toward a target mix, such as 50% <span class="tkr"><span class="tk txt mono1" aria-hidden="true">S</span>SPY</span> and 50% <span class="tkr"><span class="tk txt mono1" aria-hidden="true">Q</span>QQQ</span>. Arguments: wallet, target.</dd></div><div class="pr-r"><dt class="mono">fund_my_agent</dt><dd data-slot="docs.prompts.fund_my_agent.desc">Quotes moving funds from another network to the agent wallet and returns the transactions the payer signs. Arguments: wallet, payer, origin_chain, amount.</dd></div><div class="pr-r"><dt class="mono">market_now</dt><dd data-slot="docs.prompts.market_now.desc">Shows today’s stock movers and quotes <span class="tkr"><span class="tk txt mono1" aria-hidden="true">S</span>SPY</span> and <span class="tkr"><span class="tk txt mono1" aria-hidden="true">Q</span>QQQ</span>. Movers rank by the pool’s 24h change, and by issuer data when it is available.</dd></div><div class="pr-r" data-feature="morpho"><dt class="mono">usdg_vault</dt><dd data-slot="docs.prompts.usdg_vault.desc">Compares <span class="nw">Morpho <span class="tkr"><img src="/img/tokens/usdg.png?v=a4bd50f0" alt="" width="20" height="20" loading="lazy">USDG</span></span> vaults by rate, size and curator, names the risks and builds an unsigned deposit. Arguments: wallet, amount.</dd></div><div class="pr-r" data-feature="models"><dt class="mono">cheapest_model</dt><dd data-slot="docs.prompts.cheapest_model.desc">Finds the lowest-cost model that can do a task and shows the cost of a typical call. Argument: task.</dd></div><div class="pr-r" data-feature="wallet"><dt class="mono">check_approvals</dt><dd data-slot="docs.prompts.check_approvals.desc">Lists a wallet’s open approvals to the spenders Keydex AI knows and builds unsigned revokes for the ones you pick. Argument: wallet.</dd></div><div class="pr-r" data-feature="rhj"><dt class="mono">dividends_ahead</dt><dd data-slot="docs.prompts.dividends_ahead.desc">Lists scheduled dividends and splits, for one wallet’s holdings or for all stock tokens. Argument: wallet, optional.</dd></div></dl>
+      </div>
+      <div class="dc"></div>
+    </section><!--/F:prompts-->
+
+    <!--F:resources--><section class="ds" id="resources" data-feature="resources">
+      <div class="dt">
+        <h2 class="h3"><a href="#resources" data-slot="docs.resources.title">Resources</a></h2>
+        <p data-slot="docs.resources.lead">Reference data your agent can read without a tool call. List it with <code class="sf">resources/list</code> and read it with <code class="sf">resources/read</code>.</p>
+        <dl class="pr-list"><div class="pr-r"><dt class="mono">keydex://stocks</dt><dd data-slot="docs.resources.stocks">Stock tokens Keydex AI covers: ticker, name, token address and type. JSON.</dd></div><div class="pr-r"><dt class="mono">keydex://chain</dt><dd data-slot="docs.resources.chain">Solana facts: chain ID, RPC, block explorer, Multicall3 and <span class="nw">the <span class="tkr"><img src="/img/tokens/usdg.png?v=a4bd50f0" alt="" width="20" height="20" loading="lazy">USDG</span></span> address. JSON.</dd></div><div class="pr-r"><dt class="mono">keydex://guide/signing</dt><dd data-slot="docs.resources.signing">How to sign and send the calls Keydex AI tools return. Markdown.</dd></div><div class="pr-r" data-feature="models"><dt class="mono">keydex://models</dt><dd data-slot="docs.resources.models">The model catalog: prices per 1M tokens, context and what each model supports. JSON.</dd></div></dl>
+      </div>
+      <div class="dc"></div>
+    </section><!--/F:resources-->
+
+    <section class="ds" id="sign-and-send">
+      <div class="dt">
+        <h2 class="h3"><a href="#sign-and-send" data-slot="docs.sign.title">Sign and send</a></h2>
+        <p data-slot="docs.sign.lead">build_trade and fund_agent return unsigned transactions. Your agent’s wallet signs and sends them, one by one.</p>
+        <ol class="cx-steps sign-steps">
+          <li data-slot="docs.sign.step1">Take each item of <code class="sf">calls</code> in the order given. A sale may start with an approval.</li>
+          <li data-slot="docs.sign.valid">Check <code class="sf">valid_until</code>. If it has passed, build the trade again.</li>
+          <li data-slot="docs.sign.step2">Sign and send it from the wallet address on Solana (chain ID 4663), with <code class="sf">to</code>, <code class="sf">data</code> and <code class="sf">value</code> as returned, and <code class="sf">gas</code> when present.</li>
+          <li data-slot="docs.sign.step3">Wait for its receipt before the next one. An approval has to confirm before the swap.</li>
+          <li data-slot="docs.sign.step4">The last receipt is the trade. Read the new balance with stock_portfolio.</li>
+        </ol>
+        <p class="note" data-slot="docs.sign.fund">fund_agent is different: the payer signs its transactions on the origin network, not on Solana.</p>
+      </div>
+      <div class="dc">
+        <p class="note sign-cap" data-slot="docs.sign.code.caption">Example with viem. Any wallet library works.</p>
+        <div class="code"><div class="code-h"><span class="code-l mono">sign.mts</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre><span class="k">import</span> { createWalletClient, createPublicClient, http, defineChain } <span class="k">from</span> <span class="s">"viem"</span>;
+<span class="k">import</span> { privateKeyToAccount } <span class="k">from</span> <span class="s">"viem/accounts"</span>;
+
+<span class="k">const</span> chain = defineChain({
+  id: 4663,
+  name: <span class="s">"Solana"</span>,
+  nativeCurrency: { name: <span class="s">"Ether"</span>, symbol: <span class="s">"SOL"</span>, decimals: 18 },
+  rpcUrls: { default: { http: [<span class="s">"https://api.mainnet-beta.solana.com"</span>] } },
+});
+<span class="k">const</span> account = privateKeyToAccount(process.env.AGENT_KEY <span class="k">as</span> `0x${string}`);
+<span class="k">const</span> wallet = createWalletClient({ account, chain, transport: http() });
+<span class="k">const</span> client = createPublicClient({ chain, transport: http() });
+
+<span class="k">const</span> res = <span class="k">await</span> fetch(<span class="s">"https://keydex.ai/v1/tools/build_trade"</span>, {
+  method: <span class="s">"POST"</span>,
+  headers: {
+    Authorization: <span class="s">"Bearer <span class="key ph">YOUR_KEYDEX_KEY</span>"</span>,
+    <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>,
+  },
+  body: JSON.stringify({
+    token: <span class="s">"TSLA"</span>, side: <span class="s">"buy"</span>, wallet: account.address, usd: 50,
+  }),
+});
+<span class="k">const</span> body = <span class="k">await</span> res.json();
+<span class="k">if</span> (!res.ok) <span class="k">throw</span> <span class="k">new</span> Error(body.error.message);
+<span class="k">const</span> trade = body.data;
+<span class="k">if</span> (Date.now() / 1000 &gt; trade.valid_until) {
+  <span class="k">throw</span> <span class="k">new</span> Error(<span class="s">"Quote expired: build the trade again"</span>);
+}
+
+<span class="k">for</span> (<span class="k">const</span> c <span class="k">of</span> trade.calls) {
+  <span class="k">const</span> hash = <span class="k">await</span> wallet.sendTransaction({
+    to: c.to,
+    data: c.data,
+    value: BigInt(c.value),
+    gas: c.gas ? BigInt(c.gas) : <span class="k">undefined</span>,
+  });
+  <span class="k">const</span> receipt = <span class="k">await</span> client.waitForTransactionReceipt({ hash });
+  <span class="k">if</span> (receipt.status !== <span class="s">"success"</span>) <span class="k">throw</span> <span class="k">new</span> Error(c.label);
+}</pre></div>
+        <p class="note run-note" data-slot="docs.sign.run">Run it with <code class="sf">npx tsx sign.mts</code> (Node 22 or newer) after <code class="sf">npm install viem</code>.</p>
+      </div>
+    </section>
+
+    <section class="ds" id="chat-with-tools">
+      <div class="dt">
+        <h2 class="h3"><a href="#chat-with-tools" data-slot="docs.loop.title">Chat with tools</a></h2>
+        <p data-slot="docs.loop.lead">Give a model the Keydex AI tools in one chat request, then run each tool call it makes on /v1/tools/{name} and send the result back. Your agent loops until the model answers.</p>
+      </div>
+      <div class="dc">
+        <p class="note sign-cap" data-slot="docs.loop.code.caption">Example with the OpenAI SDK, Keydex AI as base URL.</p>
+        <div class="code"><div class="code-h"><span class="code-l mono">agent.mts</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre><span class="k">import</span> OpenAI <span class="k">from</span> <span class="s">"openai"</span>;
+
+<span class="k">const</span> BASE = <span class="s">"https://keydex.ai"</span>;
+<span class="k">const</span> KEY = process.env.KEYDEX_KEY ?? <span class="s">"<span class="key ph">YOUR_KEYDEX_KEY</span>"</span>;
+<span class="k">const</span> client = <span class="k">new</span> OpenAI({ baseURL: <span class="s">`${BASE}/v1`</span>, apiKey: KEY });
+
+<span class="k">const</span> list = <span class="k">await</span> fetch(<span class="s">`${BASE}/mcp`</span>, {
+  method: <span class="s">"POST"</span>,
+  headers: {
+    Authorization: <span class="s">`Bearer ${KEY}`</span>,
+    <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>,
+    Accept: <span class="s">"application/json, text/event-stream"</span>,
+  },
+  body: JSON.stringify({ jsonrpc: <span class="s">"2.0"</span>, id: 1, method: <span class="s">"tools/list"</span> }),
+}).then((r) =&gt; r.json());
+<span class="k">const</span> tools = list.result.tools.map((t) =&gt; ({
+  type: <span class="s">"function"</span> <span class="k">as const</span>,
+  function: {
+    name: t.name,
+    description: t.description,
+    parameters: t.inputSchema,
+  },
+}));
+
+<span class="k">const</span> messages: OpenAI.ChatCompletionMessageParam[] = [
+  { role: <span class="s">"user"</span>, content: <span class="s">"What is NVDA trading at on Solana?"</span> },
+];
+
+<span class="k">while</span> (<span class="k">true</span>) {
+  <span class="k">const</span> r = <span class="k">await</span> client.chat.completions.create({
+    model: <span class="s">"openai/gpt-4.1-mini"</span>,
+    messages,
+    tools,
+  });
+  <span class="k">const</span> msg = r.choices[0].message;
+  messages.push(msg);
+  <span class="k">if</span> (!msg.tool_calls?.length) { console.log(msg.content); <span class="k">break</span>; }
+  <span class="k">for</span> (<span class="k">const</span> call <span class="k">of</span> msg.tool_calls) {
+    <span class="k">const</span> url = <span class="s">`${BASE}/v1/tools/${call.function.name}`</span>;
+    <span class="k">const</span> res = <span class="k">await</span> fetch(url, {
+      method: <span class="s">"POST"</span>,
+      headers: {
+        Authorization: <span class="s">`Bearer ${KEY}`</span>,
+        <span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>,
+      },
+      body: call.function.arguments,
+    });
+    <span class="k">const</span> content = <span class="k">await</span> res.text();
+    messages.push({ role: <span class="s">"tool"</span>, tool_call_id: call.id, content });
+  }
+}</pre></div>
+        <p class="note run-note" data-slot="docs.loop.run">Run it with <code class="sf">npx tsx agent.mts</code> (Node 22 or newer) after <code class="sf">npm install openai</code>.</p>
+      </div>
+    </section>
+
+    <section class="ds" id="errors">
+      <div class="dt">
+        <h2 class="h3"><a href="#errors" data-slot="docs.errors.title">Errors</a></h2>
+        <p data-slot="docs.errors.text">Each error says what went wrong and what to do next.</p>
+        <table class="tbl errs"><caption class="sr" data-slot="docs.errors.caption">Error codes, HTTP status and what to do</caption><thead><tr><th>code</th><th>HTTP</th><th>meaning</th></tr></thead>
+          <tbody>
+            <tr class="grp"><td colspan="3" data-slot="docs.errors.group.api">API and MCP</td></tr><tr><td class="mono">bad_request</td><td class="mono muted">400</td><td data-slot="docs.errors.bad_request">A parameter is missing or invalid, a message part is a file, or the body is too large (413). The message names it. LI.FI and Relay refusals add lifi_code or relay_code.</td></tr><tr><td class="mono">no_route</td><td class="mono muted">400</td><td data-slot="docs.errors.no_route">LI.FI has no route for this trade right now. Change the amount or retry later.</td></tr><tr><td class="mono">no_holding</td><td class="mono muted">400</td><td data-slot="docs.errors.no_holding">The wallet holds none of this stock token, so there is nothing to sell.</td></tr><tr><td class="mono">insufficient_eth</td><td class="mono muted">400</td><td data-slot="docs.errors.insufficient_eth">The wallet holds <span class="nw">less <span class="tkr"><img src="/img/tokens/sol.svg" alt="" width="20" height="20" loading="lazy">SOL</span></span> than the buy needs with gas. The message gives both amounts. Fund it with fund_agent.</td></tr><tr data-feature="morpho"><td class="mono">insufficient_usdg</td><td class="mono muted">400</td><td data-slot="docs.errors.insufficient_usdg">The wallet holds <span class="nw">less <span class="tkr"><img src="/img/tokens/usdg.png?v=a4bd50f0" alt="" width="20" height="20" loading="lazy">USDG</span></span> than the Morpho deposit needs. The message gives both amounts.</td></tr><tr><td class="mono">invalid_api_key</td><td class="mono muted http2"><span>401 REST</span><span>403 MCP</span></td><td data-slot="docs.errors.invalidkey">Key missing, wrong, revoked or expired. Check it, or get a new one on the Connect page.</td></tr><tr><td class="mono">key_limit_reached</td><td class="mono muted">402</td><td data-slot="docs.errors.keylimit">Today’s allowance is used up. It resets at 00:00 UTC, see resets_at.</td></tr><tr><td class="mono">insufficient_balance</td><td class="mono muted">402</td><td data-slot="docs.errors.balance">Not enough allowance left today. Use a cheaper model, lower max_tokens or wait for 00:00 UTC.</td></tr><tr><td class="mono">cost_over_limit</td><td class="mono muted">402</td><td data-slot="docs.errors.cost_over_limit">The call could cost more than today’s allowance has left. Lower max_tokens or use a cheaper model.</td></tr><tr><td class="mono">model_not_allowed</td><td class="mono muted">403</td><td data-slot="docs.errors.model_not_allowed">Trial keys use low-cost models only. See GET /v1/models with your key.</td></tr><tr><td class="mono">model_not_found</td><td class="mono muted">404</td><td data-slot="docs.errors.model_not_found">Unknown model ID. See GET /v1/models.</td></tr><tr><td class="mono">not_found</td><td class="mono muted">404</td><td data-slot="docs.errors.not_found">No such stock token, key or page.</td></tr><tr><td class="mono">tool_not_found</td><td class="mono muted">404</td><td data-slot="docs.errors.tool_not_found">No tool with that name. The message lists the tools you can call.</td></tr><tr><td class="mono">method_not_allowed</td><td class="mono muted">405</td><td data-slot="docs.errors.method_not_allowed">This route doesn’t accept that HTTP method. Check GET or POST in the docs.</td></tr><tr><td class="mono">rate_limit_exceeded</td><td class="mono muted">429</td><td data-slot="docs.errors.rate">Too many requests; scope names the limit: keyless reads (30 an hour), trade quotes, trial keys (3 per visitor in 24 hours), sign-ins (20 a minute) or today’s free allowance. See Retry-After.</td></tr><tr><td class="mono">upstream_error</td><td class="mono muted">502</td><td data-slot="docs.errors.model">The model provider or a data source returned an error. Retry, or pick another model.</td></tr><tr><td class="mono">upstream_unavailable</td><td class="mono muted">503</td><td data-slot="docs.errors.upstream_unavailable">A provider or route is busy, rate-limited or down. Retry after the Retry-After time.</td></tr><tr><td class="mono">service_unavailable</td><td class="mono muted">503</td><td data-slot="docs.errors.service_unavailable">Models are unavailable on Keydex AI right now. Tool calls still work.</td></tr>
+            <tr class="grp"><td colspan="3" data-slot="docs.errors.group.app">App</td></tr><tr><td class="mono">not_launched</td><td class="mono muted">409</td><td data-slot="docs.errors.not_launched">The token is not launched yet, so it can’t be bought.</td></tr><tr><td class="mono">sign_in_required</td><td class="mono muted">401</td><td data-slot="docs.errors.sign_in_required">Sign in with your wallet first.</td></tr><tr><td class="mono">nonce_expired</td><td class="mono muted">401</td><td data-slot="docs.errors.nonce_expired">The sign-in request expired after 10 minutes. Start again.</td></tr><tr><td class="mono">bad_signature</td><td class="mono muted">401</td><td data-slot="docs.errors.bad_signature">The signature can’t be read or doesn’t match the sign-in message.</td></tr><tr><td class="mono">limit_reached</td><td class="mono muted">409</td><td data-slot="docs.errors.limit_reached">A wallet can have up to 10 active keys. Revoke one first.</td></tr><tr><td class="mono">gone</td><td class="mono muted">410</td><td data-slot="docs.errors.gone">This route is retired. There are no deposits; model calls use the daily allowance.</td></tr>
+          </tbody></table>
+      </div>
+      <div class="dc">
+        <div class="code resp"><div class="code-h"><span class="code-l">402</span><button class="btn btn-sm btn-2 copy" type="button" data-copy><span data-slot="connect.copy">Copy</span></button></div><pre>{
+  <span class="s">"error"</span>: {
+    <span class="s">"code"</span>: <span class="s">"key_limit_reached"</span>,
+    <span class="s">"message"</span>: <span class="s">"Today’s allowance is used up. It resets at 00:00 UTC, and tool calls are still free."</span>,
+    <span class="s">"resets_at"</span>: 1793404800
+  }
+}</pre></div>
+      </div>
+    </section>
+
+    <section class="ds" id="chain">
+      <div class="dt">
+        <h2 class="h3"><a href="#chain" data-slot="docs.chain.title">Solana</a></h2>
+        <p data-slot="docs.chain.text">The Keydex AI tools work on Solana, a “permissionless, AI-native Layer 2… built for financial services and real-world assets”, as Solana describes it. Its infrastructure comes from Arbitrum.</p>
+        <p><a class="link" href="https://Solana.com/us/en/crypto/chain/" target="_blank" rel="noopener">Solana.com/us/en/crypto/chain</a></p>
+      </div>
+      <div class="dc"></div>
+    </section>
+
+  </main>
+  <nav class="dtoc" aria-labelledby="dtocT"><p class="dtoc-h" id="dtocT" data-slot="docs.toc.title">On this page</p><div id="dtoc"></div></nav>
+</div>
+
+<!--FTR-->
+<footer class="ftr qrows">
+  <div class="wide">
+    <div class="ftr-grid">
+      <div class="ftr-col ftr-brand">
+        <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+        <p class="ftr-brandline" data-slot="footer.col.line">AI models and stock trading for your agent.</p>
+        <div class="ftr-ca" data-postlaunch>   <!-- owner 09.11: the contract line shows only once /health says launched -->
+          <span class="ftr-ca-h"><span class="tk keyfo" aria-hidden="true"></span><span data-slot="footer.ca.label">Token contract</span></span>
+          <span class="addr set" id="caAddr">live now on pump.fun</span>
+          <button class="btn btn-sm btn-2 copy" id="caCopy" type="button" data-copy-target="caAddr"><span data-slot="connect.copy">Copy</span></button>
+        </div>
+      </div>
+      <nav class="ftr-col" aria-labelledby="fh-product">
+        <p class="ftr-h" id="fh-product" data-slot="footer.col.product.title">Product</p>
+        <a href="/tools" data-slot="nav.product.tools">Tools</a>
+        <a href="/models" data-slot="nav.product.models">Models</a>
+        <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+        <a href="/connect" data-slot="nav.product.connect">Connect</a>
+        <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-developers">
+        <p class="ftr-h" id="fh-developers" data-slot="footer.col.developers.title">Developers</p>
+        <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+        <a href="/status" data-slot="nav.developers.status">Status</a>
+        <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+        <a href="/app" data-slot="nav.app">Open app</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-trust">
+        <p class="ftr-h" id="fh-trust" data-slot="footer.col.trust.title">Trust</p>
+        <a href="/security" data-slot="nav.security">Security</a>
+        <a href="/privacy" data-slot="page.privacy.title">Privacy</a>
+        <a href="/terms" data-slot="page.terms.title">Terms</a>
+        <a href="/risks" data-slot="footer.risks">Risks</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-community" data-x-link>
+        <p class="ftr-h" id="fh-community" data-slot="footer.col.community.title">Community</p>
+        <a class="ftr-x" href="https://x.com/keydexai" data-x-link target="_blank" rel="noopener" data-slot="footer.links.x" data-slot-attr="aria-label" aria-label="Keydex AI on X"><span class="i" style="--src:url(/img/brand/x.svg?v=be03adbf)"></span></a>
+      </nav>
+    </div>
+    <div class="ftr-meta">
+      <span data-slot="footer.copy">© 2026 Keydex AI</span>
+      <span class="ftr-live" data-state="checking"><i></i><a href="/status" id="ftrLive" data-slot="page.status.all.checking">Checking…</a></span>
+    </div>
+    <p class="ftr-disc" data-slot="footer.disclaimer">Independent project built on Solana. Stock tokens are not available to US persons and are restricted in Canada, the UK, Switzerland and other countries. This service shows data and builds transactions. It does not sell stock tokens. Nothing on Keydex AI is investment advice.</p>
+    <!--F:credits--><p class="ftr-disc ftr-credit" data-slot="footer.photos">Archive photos: NASA, Library of Congress, U.S. Army.</p><!--/F:credits-->
+  </div>
+</footer>
+<div class="sr" aria-live="polite" id="kfLive"></div>
+<div class="toasts" id="kfToasts" aria-live="polite"></div>
+<!--/FTR-->
+
+<div hidden id="str"><span id="s-trial-limit-h" data-slot="connect.trial.limit.h">You’ve had 3 trial keys in 24 hours. Next one in {h} h.</span><span id="s-signin-cta" data-slot="page.connect.key.signin.cta">Sign in to create a key</span><span id="s-trial-cap" data-slot="connect.trial.cap">No trial keys are left for now. Try again later.</span><span id="s-trial-limit-n" data-slot="connect.trial.limit.n">You’ve had 3 trial keys in 24 hours. Next one in {n} min.</span><span id="s-ftr-routes" data-slot="page.status.all.routes">Routes busy, everything else operational</span><span id="s-code-region" data-slot="ui.code.region">{label} code</span><span id="s-key-ready-sr" data-slot="docs.qs.key.sr">Key added to every code sample. Expires {time} UTC.</span><span id="s-trial-limit" data-slot="connect.trial.limit">You’ve had 3 trial keys in the last 24 hours.</span><span id="s-toc-request" data-slot="docs.toc.request">Request</span><span id="s-toc-params" data-slot="docs.toc.params">Parameters</span><span id="s-toc-response" data-slot="docs.toc.response">Response</span><span id="s-copy" data-slot="connect.copy">Copy</span><span id="s-copied" data-slot="connect.copied">Copied</span><span id="s-error" data-slot="demo.error">The request didn’t go through.</span><span id="s-ftr-ok" data-slot="page.status.all.ok">All systems operational</span><span id="s-ftr-deg" data-slot="page.status.all.degraded">Partially degraded service</span><span id="s-ftr-down" data-slot="page.status.all.down">Some systems down</span><span id="s-ftr-chk" data-slot="page.status.all.checking">Checking…</span></div>
+<script src="/js/common.js?v=644ec142"></script>
+<script src="/js/docs.js?v=f55eafcd"></script>
+</body>
+</html>

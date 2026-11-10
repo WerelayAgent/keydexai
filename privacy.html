@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>document.documentElement.classList.add("js")</script>
+<title>Privacy · Keydex AI</title>
+<meta name="description" content="What Keydex AI stores and what it doesn’t: no prompts, replies or private keys, API keys only as salted hashes, no analytics.">
+<link rel="canonical" href="https://keydex.ai/privacy">
+<meta name="kf-site" content="https://keydex.ai">
+<meta name="kf-model" content="openai/gpt-4.1-mini">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Keydex AI">
+<meta property="og:title" content="Privacy · Keydex AI">
+<meta property="og:description" content="What Keydex AI stores and what it doesn’t: no prompts, replies or private keys, API keys only as salted hashes, no analytics.">
+<meta property="og:url" content="https://keydex.ai/privacy">
+<meta property="og:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy · Keydex AI">
+<meta name="twitter:description" content="What Keydex AI stores and what it doesn’t: no prompts, replies or private keys, API keys only as salted hashes, no analytics.">
+<meta name="twitter:image" content="https://keydex.ai/img/og.png?v=050289f0">
+<meta name="twitter:image:alt" content="The Keydex AI logo and the line “One key for AI models and stock trading.” on a dark background">
+<meta name="theme-color" content="#0f1013">
+<link rel="icon" href="/img/brand/favicon.svg?v=ba49f76b" type="image/svg+xml">
+<link rel="icon" href="/img/brand/favicon-32.png?v=7a31a482" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/img/brand/apple-touch-icon.png?v=7ccf5817">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preload" href="/fonts/Inter-latin.woff2?v=c9407645" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/base.css?v=14960b84">
+<link rel="stylesheet" href="/css/pages.css?v=805645db">
+</head>
+<body data-page="privacy">
+
+<!--HDR-->
+<a class="skip" href="#main" data-slot="ui.skip">Skip to content</a>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+    <nav class="nav" aria-label="Main" data-slot="nav.main" data-slot-attr="aria-label">
+      <div class="dd" data-dd="product">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-product"><span data-slot="nav.product">Product</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-product">
+          <div class="ddp-list">
+            <a class="ddi" href="/tools" data-prev="tools"><span class="ddi-ic ddi-km"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="ddi-t"><b data-slot="nav.product.tools">Tools</b><small data-slot="nav.product.tools.sub">Tools for stock tokens on Solana</small></span></a>
+            <a class="ddi" href="/models" data-prev="models"><span class="ddi-ic"><img src="/img/models/claude-color.svg?v=a3101f30" alt="" width="16" height="16" loading="lazy" decoding="async"></span><span class="ddi-t"><b data-slot="nav.product.models">Models</b><small data-slot="nav.product.models.sub">Prices, context sizes and model IDs</small></span></a>
+            <a class="ddi" href="/stocks" data-prev="stocks"><span class="ddi-ic" style="--c:var(--c-port)"><svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 11.5 6 8l2.5 2.5 5-5"/><path d="M10.5 5.5h3v3"/></svg></span><span class="ddi-t"><b data-slot="nav.product.stocks">Stocks</b><small data-slot="nav.product.stocks.sub">Stock tokens and ETFs, with pool prices</small></span></a>
+            <a class="ddi" href="/connect" data-prev="connect"><span class="ddi-ic" style="--c:var(--c-trade)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.5v3M10 2.5v3M4.5 5.5h7v2.5a3.5 3.5 0 0 1-7 0zM8 11.5v2"/></svg></span><span class="ddi-t"><b data-slot="nav.product.connect">Connect</b><small data-slot="nav.product.connect.sub">Claude, ChatGPT, Cursor, VS Code and REST</small></span></a>
+          </div>
+        </div>
+      </div>
+      <div class="dd" data-dd="dev">
+        <button class="nav-t" type="button" aria-expanded="false" aria-controls="dd-dev"><span data-slot="nav.developers">Developers</span><svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.5 3.75 5 6.25 7.5 3.75" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="ddp" id="dd-dev">
+          <div class="ddp-list">
+            <a class="ddi" href="/docs" data-prev="docs"><span class="ddi-ic" style="--c:var(--c-quote)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3.5A1.5 1.5 0 0 1 4.5 2H13v10H4.5A1.5 1.5 0 0 0 3 13.5zM3 13.5A1.5 1.5 0 0 0 4.5 15H13v-3"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.docs">Docs</b><small data-slot="nav.developers.docs.sub">Quickstart, API, MCP and tool reference</small></span></a>
+            <a class="ddi" href="/status" data-prev="status"><span class="ddi-ic" style="--c:var(--ok-fg)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 8.5h3l1.5-4 3 8 1.5-4h4"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.status">Status</b><small data-slot="nav.developers.status.sub">Current state of each Keydex AI service</small></span></a>
+            <a class="ddi" href="/changelog" data-prev="changelog"><span class="ddi-ic" style="--c:var(--c-fund)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M5.5 4h8M5.5 8h8M5.5 12h8M2.5 4h.01M2.5 8h.01M2.5 12h.01"/></svg></span><span class="ddi-t"><b data-slot="nav.developers.changelog">Changelog</b><small data-slot="nav.developers.changelog.sub">Every release, newest first</small></span></a>
+          </div>
+        </div>
+      </div>
+      <a class="nav-a" href="/pricing" data-slot="nav.pricing">Pricing</a>
+      <a class="nav-a" href="/security" data-slot="nav.security">Security</a>
+      <a class="nav-a" href="/token"><span data-slot="nav.token">Token</span></a>
+    </nav>
+    <div class="hdr-cta">
+      
+      <a class="btn btn-2 btn-nav" href="/docs" data-slot="nav.docs">Docs</a>
+      <a class="btn btn-1 btn-nav" href="/app" data-slot="nav.app">Open app</a>
+    </div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet" data-slot="nav.menu" data-slot-attr="aria-label" aria-label="Open menu"><span></span></button>
+    <span hidden id="s-menu-close" data-slot="nav.menu.close">Close menu</span>
+  </div>
+</header>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" data-slot="nav.sheet" data-slot-attr="aria-label" aria-label="Site menu">
+  <p class="sheet-h" data-slot="nav.product">Product</p>
+  <a href="/tools" data-slot="nav.product.tools">Tools</a>
+  <a href="/models" data-slot="nav.product.models">Models</a>
+  <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+  <a href="/connect" data-slot="nav.product.connect">Connect</a>
+  <p class="sheet-h" data-slot="nav.developers">Developers</p>
+  <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+  <a href="/status" data-slot="nav.developers.status">Status</a>
+  <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+  <p class="sheet-h" data-slot="nav.more">More</p>
+  <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+  <a href="/security" data-slot="nav.security">Security</a>
+  <a href="/token"><span data-slot="nav.token">Token</span></a>
+  <a class="btn btn-1 btn-block" href="/app" data-slot="nav.app">Open app</a>
+</div>
+<!--/HDR-->
+
+<main id="main" class="pg">
+  <section class="pg-hero wide">
+    <p class="pg-kicker"><span class="dot"></span><span data-slot="page.privacy.kicker">Your data</span></p>
+    <h1 class="pg-h1" data-slot="page.privacy.title">Privacy</h1>
+    <p class="lead" data-slot="page.privacy.lead">What we keep, what we don’t, and where requests go.</p>
+    <p class="pg-upd" data-slot="page.privacy.updated">Last updated November 9, 2026</p>
+    <nav class="lg-sw lg-top" aria-label="Legal pages"><a href="/terms" data-slot="page.terms.title">Terms</a><a href="/privacy" aria-current="page" data-slot="page.privacy.title">Privacy</a><a href="/risks" data-slot="footer.risks">Risks</a></nav>
+  </section>
+  <section class="wide pg-body lg"><div class="lg-side"><nav class="lg-sw" aria-label="Legal"><a href="/terms" data-slot="page.terms.title">Terms</a><a href="/privacy" aria-current="page" data-slot="page.privacy.title">Privacy</a><a href="/risks" data-slot="footer.risks">Risks</a></nav><p class="dtoc-h" data-slot="docs.toc.title">On this page</p><nav class="lg-toc" aria-label="On this page" data-slot="docs.toc.title" data-slot-attr="aria-label"></nav></div><article class="pg-col prose">
+    <h2 id="store" data-slot="page.privacy.store.title">What we store</h2><p data-slot="page.privacy.store.text">The wallet you sign in with and the IP address of its first sign-in. API keys as salted hashes, with name, spend and dates. Your counted token balance. Per call: time, key, model or tool, tokens, cost and status. Unfinished sign-in requests.</p>
+    <h2 id="nostore" data-slot="page.privacy.nostore.title">What we don’t store</h2><p data-slot="page.privacy.nostore.text">Prompts, replies and private keys.</p>
+    <h2 id="trial" data-slot="page.privacy.trial.title">Trial keys</h2><p data-slot="page.privacy.trial.text">For trial keys we keep your IP address, to limit them to 3 per visitor in 24 hours and to count the free daily allowance. The key stays in your browser tab until you close it or it expires.</p>
+    <h2 id="cookies" data-slot="page.privacy.cookies.title">Cookies and analytics</h2><p data-slot="page.privacy.cookies.text">One cookie, kf_session, keeps you signed in for 30 days. It is HttpOnly. There is no analytics, no ad cookies and no tracking.</p>
+    <h2 id="quota" data-slot="page.privacy.quota.title">Token balance</h2><p data-slot="page.privacy.quota.text">Once the token launches, we read your wallet’s token balance at each model call and index the token’s public transfers on Solana. We keep the counted balance with that day’s allowance.</p>
+    <h2 id="logs" data-slot="page.privacy.logs.title">Server logs</h2><p data-slot="page.privacy.logs.text">Our server logs each request’s IP address as the server sees it, with the path and time. A path can include tool inputs such as a wallet address. API keys sent in a URL are removed before the log is written.</p>
+    <h2 id="retention" data-slot="page.privacy.retention.title">How long we keep data</h2><p data-slot="page.privacy.retention.text">We keep call records and IP addresses to run Keydex AI and limit trial keys and new wallets. Once a day we delete call records, trial keys with their IP addresses, allowance records and daily trial totals older than 90 days. After 90 days we also erase the IP address a wallet first signed in from; the wallet address and its account records stay until we delete them. Server logs are kept by our hosting provider under its terms.</p>
+    <h2 id="onchain" data-slot="page.privacy.onchain.title">Onchain data</h2><p data-slot="page.privacy.onchain.text">Trades, funding and token purchases are public onchain, like any transaction.</p>
+    <h2 id="thirdparty" data-slot="page.privacy.thirdparty.title">Where requests go</h2><p data-slot="page.privacy.thirdparty.text">Model requests pass through a model routing service to the provider of the model you pick, and each handles them under its own policies. Trade, funding and token purchase requests, with the wallet addresses in them, go to LI.FI and Relay. Wallet balances are read from Solana nodes.</p>
+    <h2 id="hosting" data-slot="page.privacy.hosting.title">Where data is stored</h2><p data-slot="page.privacy.hosting.text">The server, database and logs run on a cloud hosting provider.</p>
+    <h2 id="choices" data-slot="page.privacy.choices.title">Your choices</h2><p data-slot="page.privacy.choices.text">Revoke any key you created in the app, and calls with it stop. Sign out to end your session in this browser. A trial key can’t be revoked: closing the tab removes it from this browser, and it expires within 24 hours.</p>
+    <p class="prose-end" data-contact><span data-slot="page.privacy.contact.lead">Questions or data deletion requests:</span> <span data-x-link data-slot="page.privacy.contact.xpart">message <a href="https://x.com/keydexai" target="_blank" rel="noopener">keydexai</a> on X</span><span data-x-link data-email> </span><span data-x-link data-email data-slot="page.contact.or">or</span><span data-x-link data-email> </span><span data-email data-slot="page.privacy.contact.mailpart">write to <a href="mailto:support@keydex.ai">support@keydex.ai</a></span>.</p>
+    <p class="lg-next"><span class="lg-l" data-slot="page.legal.next">Also read</span><a class="link" href="/terms" data-slot="page.terms.title">Terms</a> <a class="link" href="/risks" data-slot="footer.risks">Risks</a></p>
+  </article></section>
+</main>
+
+<!--FTR-->
+<footer class="ftr qrows">
+  <div class="wide">
+    <div class="ftr-grid">
+      <div class="ftr-col ftr-brand">
+        <a class="brand" href="/" aria-label="Keydex AI home" data-slot="nav.home" data-slot-attr="aria-label"><span class="bm" aria-hidden="true"><svg class="kk" viewBox="0 0 400 400" aria-hidden="true" focusable="false"><path fill="currentColor" d="M92 62H156V218L224 150H314L224 240L322 338H230L156 264V338H92Z"/></svg></span><span class="wm-txt">Keydex<span class="wm-ai">AI</span></span></a>
+        <p class="ftr-brandline" data-slot="footer.col.line">AI models and stock trading for your agent.</p>
+        <div class="ftr-ca" data-postlaunch>   <!-- owner 09.11: the contract line shows only once /health says launched -->
+          <span class="ftr-ca-h"><span class="tk keyfo" aria-hidden="true"></span><span data-slot="footer.ca.label">Token contract</span></span>
+          <span class="addr set" id="caAddr">live now on pump.fun</span>
+          <button class="btn btn-sm btn-2 copy" id="caCopy" type="button" data-copy-target="caAddr"><span data-slot="connect.copy">Copy</span></button>
+        </div>
+      </div>
+      <nav class="ftr-col" aria-labelledby="fh-product">
+        <p class="ftr-h" id="fh-product" data-slot="footer.col.product.title">Product</p>
+        <a href="/tools" data-slot="nav.product.tools">Tools</a>
+        <a href="/models" data-slot="nav.product.models">Models</a>
+        <a href="/stocks" data-slot="nav.product.stocks">Stocks</a>
+        <a href="/connect" data-slot="nav.product.connect">Connect</a>
+        <a href="/pricing" data-slot="nav.pricing">Pricing</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-developers">
+        <p class="ftr-h" id="fh-developers" data-slot="footer.col.developers.title">Developers</p>
+        <a href="/docs" data-slot="nav.developers.docs">Docs</a>
+        <a href="/status" data-slot="nav.developers.status">Status</a>
+        <a href="/changelog" data-slot="nav.developers.changelog">Changelog</a>
+        <a href="/app" data-slot="nav.app">Open app</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-trust">
+        <p class="ftr-h" id="fh-trust" data-slot="footer.col.trust.title">Trust</p>
+        <a href="/security" data-slot="nav.security">Security</a>
+        <a href="/privacy" data-slot="page.privacy.title">Privacy</a>
+        <a href="/terms" data-slot="page.terms.title">Terms</a>
+        <a href="/risks" data-slot="footer.risks">Risks</a>
+      </nav>
+      <nav class="ftr-col" aria-labelledby="fh-community" data-x-link>
+        <p class="ftr-h" id="fh-community" data-slot="footer.col.community.title">Community</p>
+        <a class="ftr-x" href="https://x.com/keydexai" data-x-link target="_blank" rel="noopener" data-slot="footer.links.x" data-slot-attr="aria-label" aria-label="Keydex AI on X"><span class="i" style="--src:url(/img/brand/x.svg?v=be03adbf)"></span></a>
+      </nav>
+    </div>
+    <div class="ftr-meta">
+      <span data-slot="footer.copy">© 2026 Keydex AI</span>
+      <span class="ftr-live" data-state="checking"><i></i><a href="/status" id="ftrLive" data-slot="page.status.all.checking">Checking…</a></span>
+    </div>
+    <p class="ftr-disc" data-slot="footer.disclaimer">Independent project built on Solana. Stock tokens are not available to US persons and are restricted in Canada, the UK, Switzerland and other countries. This service shows data and builds transactions. It does not sell stock tokens. Nothing on Keydex AI is investment advice.</p>
+    <!--F:credits--><p class="ftr-disc ftr-credit" data-slot="footer.photos">Archive photos: NASA, Library of Congress, U.S. Army.</p><!--/F:credits-->
+  </div>
+</footer>
+<div class="sr" aria-live="polite" id="kfLive"></div>
+<div class="toasts" id="kfToasts" aria-live="polite"></div>
+<!--/FTR-->
+
+<div hidden id="str"><span id="s-code-region" data-slot="ui.code.region">{label} code</span><span id="s-copy" data-slot="connect.copy">Copy</span><span id="s-copied" data-slot="connect.copied">Copied</span><span id="s-error" data-slot="demo.error">The request didn’t go through.</span><span id="s-block" data-slot="hero.facts">Latest block {n}</span><span id="s-trial-limit-h" data-slot="connect.trial.limit.h">You’ve had 3 trial keys in 24 hours. Next one in {h} h.</span><span id="s-trial-limit-n" data-slot="connect.trial.limit.n">You’ve had 3 trial keys in 24 hours. Next one in {n} min.</span><span id="s-ftr-ok" data-slot="page.status.all.ok">All systems operational</span><span id="s-ftr-deg" data-slot="page.status.all.degraded">Partially degraded service</span><span id="s-ftr-down" data-slot="page.status.all.down">Some systems down</span><span id="s-ftr-chk" data-slot="page.status.all.checking">Checking…</span><span id="s-ftr-routes" data-slot="page.status.all.routes">Routes busy, everything else operational</span></div>
+<script src="/js/common.js?v=644ec142"></script>
+<script src="/js/pages.js?v=76356316"></script>
+</body>
+</html>

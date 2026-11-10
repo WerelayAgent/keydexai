@@ -1,0 +1,89 @@
+{
+ "id": "/",
+ "name": "Keydex AI",
+ "short_name": "Keydex AI",
+ "description": "An API key and MCP server for AI agents: 300+ models, plus quotes and trades for stock tokens on Solana. Your agent signs every trade.",
+ "lang": "en",
+ "dir": "ltr",
+ "start_url": "/app",
+ "scope": "/",
+ "display": "standalone",
+ "background_color": "#0f1013",
+ "theme_color": "#0f1013",
+ "icons": [
+  {
+   "src": "/img/brand/pwa-192.png?v=ca67648f",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "/img/brand/pwa-512.png?v=994e2a0f",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "/img/brand/pwa-mask-192.png?v=efcae2c3",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "maskable"
+  },
+  {
+   "src": "/img/brand/pwa-mask-512.png?v=c0cb0b92",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ],
+ "shortcuts": [
+  {
+   "name": "API keys",
+   "url": "/app",
+   "icons": [
+    {
+     "src": "/img/brand/pwa-192.png?v=ca67648f",
+     "sizes": "192x192",
+     "type": "image/png",
+     "purpose": "any"
+    }
+   ]
+  },
+  {
+   "name": "Status",
+   "url": "/status",
+   "icons": [
+    {
+     "src": "/img/brand/pwa-192.png?v=ca67648f",
+     "sizes": "192x192",
+     "type": "image/png",
+     "purpose": "any"
+    }
+   ]
+  },
+  {
+   "name": "Connect",
+   "url": "/connect",
+   "icons": [
+    {
+     "src": "/img/brand/pwa-192.png?v=ca67648f",
+     "sizes": "192x192",
+     "type": "image/png",
+     "purpose": "any"
+    }
+   ]
+  },
+  {
+   "name": "Tools",
+   "url": "/tools",
+   "icons": [
+    {
+     "src": "/img/brand/pwa-192.png?v=ca67648f",
+     "sizes": "192x192",
+     "type": "image/png",
+     "purpose": "any"
+    }
+   ]
+  }
+ ]
+}
