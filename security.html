@@ -122,11 +122,11 @@
       <li class="sx-r"><p class="sx-rt" data-slot="page.security.deposits.title">No deposits</p><p class="muted" data-slot="page.security.deposits.text">There is nothing to deposit. The token stays in your wallet, and we only read its balance.</p></li>
     </ul>
     <!-- W1-11: Verify — only when /health gives the addresses -->
-    <section class="sx-verify" id="sxVerify" hidden>
+    <section class="sx-verify" id="sxVerify">
       <h2 class="h3" data-slot="page.security.verify.title">Verify addresses</h2>
       <p class="muted" data-slot="page.security.verify.text">Compare any address you’re given with these before you send anything.</p>
       <ul class="sx-addr">
-        <li data-addr="token" hidden><span class="sx-al"><span class="tk keyfo xs" aria-hidden="true"></span><span data-slot="page.security.verify.token">Token contract</span></span><span class="addr mono" id="sxToken"></span><button class="btn btn-sm btn-2 copy" type="button" data-copy-target="sxToken"><span data-slot="connect.copy">Copy</span></button><a class="sx-ex" target="_blank" rel="noopener" data-slot="page.security.verify.explorer">View on explorer</a></li>
+        <li data-addr="token"><span class="sx-al"><span class="tk keyfo xs" aria-hidden="true"></span><span data-slot="page.security.verify.token">Token contract</span></span><span class="addr mono" id="sxToken">2LVMLvpjqt1pXQ2hWy8SSG38YXE79GUjvBTrLxmxpump</span><button class="btn btn-sm btn-2 copy" type="button" data-copy-target="sxToken"><span data-slot="connect.copy">Copy</span></button><a class="sx-ex" href="https://solscan.io/token/2LVMLvpjqt1pXQ2hWy8SSG38YXE79GUjvBTrLxmxpump" target="_blank" rel="noopener" data-slot="page.security.verify.explorer">View on explorer</a></li>
       </ul>
     </section>
     <!-- W1-11 / §В-4: report a vulnerability — rendered only with a contact (X handle or e-mail) -->
@@ -143,7 +143,7 @@
         <p class="ftr-brandline" data-slot="footer.col.line">AI models and stock trading for your agent.</p>
         <div class="ftr-ca" data-postlaunch>   <!-- owner 09.11: the contract line shows only once /health says launched -->
           <span class="ftr-ca-h"><span class="tk keyfo" aria-hidden="true"></span><span data-slot="footer.ca.label">Token contract</span></span>
-          <span class="addr set" id="caAddr">live now on pump.fun</span>
+          <span class="addr set" id="caAddr" data-value="2LVMLvpjqt1pXQ2hWy8SSG38YXE79GUjvBTrLxmxpump" title="2LVMLvpjqt1pXQ2hWy8SSG38YXE79GUjvBTrLxmxpump"><span class="ca-full">2LVMLvpjqt1pXQ2hWy8SSG38YXE79GUjvBTrLxmxpump</span><span class="ca-short" aria-hidden="true">2LVMLv…pump</span></span>
           <button class="btn btn-sm btn-2 copy" id="caCopy" type="button" data-copy-target="caAddr"><span data-slot="connect.copy">Copy</span></button>
         </div>
       </div>

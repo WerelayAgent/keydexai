@@ -287,14 +287,13 @@
   /* ---------- /security: Verify block only when /health gives the addresses (W1-11, И-10) ---------- */
   if (page === "security") {
     api("/health").then((r) => {
-      const h = (r.ok && r.data) || {}, ok = (a) => typeof a === "string" && /^0x[0-9a-fA-F]{40}$/.test(a);
-      let any = false;
+      const h = (r.ok && r.data) || {}, ok = (a) => typeof a === "string" && (/^0x[0-9a-fA-F]{40}$/.test(a) || /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(a));
       [["treasury", "#sxTreasury"], ["token", "#sxToken"]].forEach(([k, id]) => {
-        if (!ok(h[k])) return; any = true;
+        if (!ok(h[k])) return;
         const li = $(`[data-addr="${k}"]`); li.hidden = false; $(id).textContent = h[k];
         $(".sx-ex", li).href = (k === "token" ? "https://solscan.io/token/" : "https://solscan.io/address/") + h[k];
+        $("#sxVerify").hidden = false;
       });
-      $("#sxVerify").hidden = !any;
     });
   }
 
